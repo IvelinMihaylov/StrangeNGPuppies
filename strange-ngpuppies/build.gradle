@@ -26,7 +26,7 @@ repositories {
 
 dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
-    compile group: 'com.mchange', name: 'c3po', version: '0.9.5.2'
+    compile group: 'com.mchange', name: 'c3p0', version: '0.9.5.2'
     compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.8.RELEASE'
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
