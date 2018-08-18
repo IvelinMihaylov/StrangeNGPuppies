@@ -22,25 +22,25 @@ public class AppConfiguration {
 
     @Bean
     public DataSource securityDataSource() {
-        ComboPooledDataSource securityDataSoure = new ComboPooledDataSource();
+        ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
 
         try {
-            securityDataSoure.setDriverClass(env.getProperty("database.driver"));
+            securityDataSource.setDriverClass(env.getProperty("database.driver"));
 
         } catch (PropertyVetoException e) {
             throw new RuntimeException(e);
         }
 
-        securityDataSoure.setJdbcUrl(env.getProperty("database.url"));
-        securityDataSoure.setUser(env.getProperty("database.username"));
-        securityDataSoure.setPassword(env.getProperty("database.password"));
+        securityDataSource.setJdbcUrl(env.getProperty("database.url"));
+        securityDataSource.setUser(env.getProperty("database.username"));
+        securityDataSource.setPassword(env.getProperty("database.password"));
 
-        securityDataSoure.setInitialPoolSize(Integer.parseInt(env.getProperty("connection.initialPoolSize")));
-        securityDataSoure.setMinPoolSize(Integer.parseInt(env.getProperty("connection.minPoolSize")));
-        securityDataSoure.setMaxPoolSize(Integer.parseInt(env.getProperty("connection.maxPoolSize")));
-        securityDataSoure.setMaxIdleTime(Integer.parseInt(env.getProperty("connection.maxIdleTime")));
+        securityDataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("connection.initialPoolSize")));
+        securityDataSource.setMinPoolSize(Integer.parseInt(env.getProperty("connection.minPoolSize")));
+        securityDataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("connection.maxPoolSize")));
+        securityDataSource.setMaxIdleTime(Integer.parseInt(env.getProperty("connection.maxIdleTime")));
 
-        return securityDataSoure;
+        return securityDataSource;
     }
 
     @Bean
