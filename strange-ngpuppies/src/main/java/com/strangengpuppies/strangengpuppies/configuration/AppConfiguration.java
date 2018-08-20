@@ -2,6 +2,8 @@ package com.strangengpuppies.strangengpuppies.configuration;
 
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.strangengpuppies.strangengpuppies.model.*;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,5 +51,18 @@ public class AppConfiguration {
         jdbcUserDetailsManager.setDataSource(securityDataSource());
 
         return jdbcUserDetailsManager;
+    }
+    
+    @Bean
+    public SessionFactory createFactory(){
+        return new org.hibernate.cfg.Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Authority.class)
+                .addAnnotatedClass(BillingRecord.class)
+                .addAnnotatedClass(Client.class)
+                .addAnnotatedClass(Service.class)
+                .addAnnotatedClass(Subscriber.class)
+                .addAnnotatedClass(User.class)
+                .buildSessionFactory();
     }
 }

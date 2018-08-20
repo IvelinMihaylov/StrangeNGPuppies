@@ -1,4 +1,4 @@
 package com.strangengpuppies.strangengpuppies.repository.base;
 
-public interface ClientRepositoryImpl {
+public interface AuthorityRepository {
 }

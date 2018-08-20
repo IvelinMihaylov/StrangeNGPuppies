@@ -1,4 +1,4 @@
 package com.strangengpuppies.strangengpuppies.repository.base;
 
-public interface ServiceRepositoryImpl {
+public interface SubscriberRepository {
 }
