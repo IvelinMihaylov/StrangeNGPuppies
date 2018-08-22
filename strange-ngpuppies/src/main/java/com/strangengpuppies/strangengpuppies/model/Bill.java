@@ -7,12 +7,15 @@ import javax.persistence.*;
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "billID")
     private int id;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "serviceID")
     private Service service;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "subscriberID", insertable = false)
     private Subscriber subscriber;
 
     @Column(name = "startdate")

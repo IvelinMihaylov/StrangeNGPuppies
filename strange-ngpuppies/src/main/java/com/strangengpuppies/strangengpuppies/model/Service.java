@@ -8,6 +8,7 @@ import java.util.List;
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "serviceID")
     private int id;
 
     @Column(name = "name")

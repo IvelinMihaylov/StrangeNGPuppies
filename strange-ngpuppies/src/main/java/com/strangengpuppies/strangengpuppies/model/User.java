@@ -8,6 +8,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userID")
     private int id;
 
     @Column(name = "username")
@@ -20,6 +21,7 @@ public class User {
     private String eik;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "roleID")
     private Role role;
 
     @OneToMany(cascade = CascadeType.ALL,
@@ -78,9 +80,9 @@ public class User {
         this.role = role;
     }
 
-    public List<Subscriber> getSubscribers() {
-        return subscribers;
-    }
+//    public List<Subscriber> getSubscribers() {
+//        return subscribers;
+//    }
 
     public void setSubscribers(List<Subscriber> subscribers) {
         this.subscribers = subscribers;

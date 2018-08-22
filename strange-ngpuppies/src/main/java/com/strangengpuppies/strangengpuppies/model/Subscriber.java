@@ -7,6 +7,11 @@ import java.util.List;
 @Table(name = "subscribers")
 public class Subscriber {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subscriberID")
+    private int id;
+
+    @Column(name = "phonenumber")
     private String phoneNumber;
 
     @Column(name = "firstname")
@@ -19,6 +24,7 @@ public class Subscriber {
     private String egn;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bankID")
     private User bank;
 
     @OneToMany(cascade = CascadeType.ALL,
@@ -84,5 +90,13 @@ public class Subscriber {
 
     public void setBills(List<Bill> bills) {
         this.bills = bills;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "roleID")
     private int id;
 
     @Column(name = "name")
@@ -42,9 +43,9 @@ public class Role {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
 
     public void setUsers(List<User> users) {
         this.users = users;

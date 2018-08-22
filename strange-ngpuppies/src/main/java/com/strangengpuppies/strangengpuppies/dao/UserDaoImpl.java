@@ -2,6 +2,7 @@ package com.strangengpuppies.strangengpuppies.dao;
 
 import com.strangengpuppies.strangengpuppies.dao.base.UserDao;
 import com.strangengpuppies.strangengpuppies.model.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,12 +18,16 @@ public class UserDaoImpl implements UserDao {
 
     @SuppressWarnings("unchecked")
     public User finUserByUsername(String username) {
-        List<User> users = new ArrayList<User>();
-
-        users = sessionFactory.getCurrentSession()
-                .createQuery("from User where username=?")
-                .setParameter(0, username)
-                .list();
+        List<User> users = new ArrayList<>();
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            users = session.createQuery("from User as U where U.userName = :username", User.class)
+                    .setParameter("username", username)
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
         if (users.size() > 0) {
             return users.get(0);
