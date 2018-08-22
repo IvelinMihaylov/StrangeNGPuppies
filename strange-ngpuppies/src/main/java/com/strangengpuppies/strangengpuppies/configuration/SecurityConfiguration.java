@@ -33,7 +33,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http.authorizeRequests()
+                .antMatchers("/").hasRole("USER")
+                .antMatchers("/admin").hasRole("ADMIN")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/authenticateUser")
+                .permitAll()
+                .and()
+                .logout().permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied");
+
     }
 
 
