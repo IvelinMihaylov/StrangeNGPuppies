@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 
@@ -57,9 +56,8 @@ public class AppConfiguration {
     public SessionFactory createFactory(){
         return new org.hibernate.cfg.Configuration()
                 .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Authority.class)
-                .addAnnotatedClass(BillingRecord.class)
-                .addAnnotatedClass(Client.class)
+                .addAnnotatedClass(Role.class)
+                .addAnnotatedClass(Bill.class)
                 .addAnnotatedClass(Service.class)
                 .addAnnotatedClass(Subscriber.class)
                 .addAnnotatedClass(User.class)
