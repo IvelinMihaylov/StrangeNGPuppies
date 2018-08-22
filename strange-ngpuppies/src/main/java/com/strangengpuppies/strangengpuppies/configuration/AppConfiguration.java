@@ -56,11 +56,11 @@ public class AppConfiguration {
     public SessionFactory createFactory(){
         return new org.hibernate.cfg.Configuration()
                 .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Role.class)
                 .addAnnotatedClass(Bill.class)
                 .addAnnotatedClass(Service.class)
                 .addAnnotatedClass(Subscriber.class)
-                .addAnnotatedClass(User.class)
                 .buildSessionFactory();
     }
 }
