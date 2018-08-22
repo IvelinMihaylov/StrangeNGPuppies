@@ -1,5 +1,6 @@
 package com.strangengpuppies.strangengpuppies.service;
 
+import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.UserRepository;
 import com.strangengpuppies.strangengpuppies.service.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
 package com.strangengpuppies.strangengpuppies.repository;
 
+import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
