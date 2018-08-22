@@ -22,4 +22,14 @@ public class UserServiceImpl implements UserService {
   public List<User> listAll() {
     return userRepository.listAll();
   }
+  
+  @Override
+  public void createClient(String username, String password, String eik) {
+    userRepository.createClient(username,password,eik);
+  }
+  
+  @Override
+  public void createAdministrator(String username, String password, String email) {
+    userRepository.createAdministrator(username,password,email);
+  }
 }

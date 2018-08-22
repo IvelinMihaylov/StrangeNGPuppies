@@ -16,7 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 //import java.beans.PropertyVetoException;
 
 @Configuration
-@PropertySource("classpath:application.properties")
+//@PropertySource("classpath:application.properties")
 public class AppConfiguration {
 //    @Autowired
 //    private Environment env;

@@ -1,5 +1,6 @@
 package com.strangengpuppies.strangengpuppies.repository;
 
+import com.strangengpuppies.strangengpuppies.model.Role;
 import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.UserRepository;
 import org.hibernate.Session;
@@ -32,4 +33,35 @@ public class UserRepositoryImpl implements UserRepository {
     }
     return users;
   }
+  
+  @Override
+  public void createClient(String username, String password, String eik) {
+    Role role = new Role();
+    role.setId(2);
+    role.setName("ROLE_CLIENT");
+    User client = new User(username, password, null, eik, role);
+    try (Session session = factory.openSession()) {
+	 session.beginTransaction();
+	 session.save(client);
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
+    }
+  }
+  
+  @Override
+  public void createAdministrator(String username, String password, String email) {
+    Role role = new Role();
+    role.setId(1);
+    role.setName("ROLE_USER");
+    User user = new User(username, password, email, null, role);
+    try (Session session = factory.openSession()) {
+	 session.beginTransaction();
+	 session.save(user);
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
+    }
+  }
+  
 }

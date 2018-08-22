@@ -22,7 +22,8 @@ public class User {
     
     @Column(name = "EIK")
     private String eik;
-
+    
+    
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "roleID")
     private Role role;
