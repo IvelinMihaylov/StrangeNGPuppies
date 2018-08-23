@@ -1,28 +1,36 @@
 package com.strangengpuppies.strangengpuppies.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
 @Table(name = "subscribers")
 public class Subscriber {
     @Id
+    @NotNull
     @Column(name = "phonenumber")
     private String phoneNumber;
-
+    
+    @NotNull
     @Column(name = "firstname")
     private String firstName;
-
+    
+    @NotNull
     @Column(name = "lastname")
     private String lastName;
-
+    
+    @NotNull
     @Column(name = "EGN")
     private String egn;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "bankID")
     private User bank;
-
+    
     @OneToMany(cascade = CascadeType.ALL,
     fetch = FetchType.EAGER,
     mappedBy = "subscriber")
@@ -72,18 +80,18 @@ public class Subscriber {
         this.egn = egn;
     }
     
-    public User getBank() {
-        return bank;
-    }
-    
-    public void setBank(User bank) {
-        this.bank = bank;
-    }
+//    public User getBank() {
+//        return bank;
+//    }
+//
+//    public void setBank(User bank) {
+//        this.bank = bank;
+//    }
     
     public List<Bill> getBills() {
         return bills;
     }
-    
+
     public void setBills(List<Bill> bills) {
         this.bills = bills;
     }

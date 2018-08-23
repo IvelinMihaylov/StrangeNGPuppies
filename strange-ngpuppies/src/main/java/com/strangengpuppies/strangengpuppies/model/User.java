@@ -1,6 +1,7 @@
 package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,9 +12,11 @@ public class User {
   @Column (name = "userID")
   private int id;
   
+  @NotNull
   @Column (name = "username")
   private String username;
   
+  @NotNull
   @Column (name = "password")
   private String password;
   
@@ -87,8 +90,16 @@ public class User {
   public List<Subscriber> getSubscribers() {
     return subscribers;
   }
-  
+
   public void setSubscribers(List<Subscriber> subscribers) {
     this.subscribers = subscribers;
+  }
+  
+  public Role getRole() {
+    return role;
+  }
+  
+  public void setRole(Role role) {
+    this.role = role;
   }
 }

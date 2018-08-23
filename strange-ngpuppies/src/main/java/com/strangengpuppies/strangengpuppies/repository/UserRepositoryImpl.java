@@ -35,6 +35,44 @@ public class UserRepositoryImpl implements UserRepository {
   }
   
   @Override
+  public User getUserById(int id) {
+    User user = new User();
+    try (Session session = factory.openSession()) {
+	 session.beginTransaction();
+	 user = session.get(User.class, id);
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
+    }
+    return user;
+  }
+  
+  @Override
+  public void updateUser(User user) {
+    try (Session session = factory.openSession()) {
+	 session.beginTransaction();
+	 session.update(user);
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
+    }
+    
+  }
+  
+  @Override
+  public void deleteUser(User user) {
+    user.setEik(null);
+    user.setRole(null);
+    try (Session session = factory.openSession()) {
+	 session.beginTransaction();
+	 session.delete(user);
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
+    }
+  }
+  
+  @Override
   public void createClient(String username, String password, String eik) {
     Role role = new Role();
     role.setId(2);

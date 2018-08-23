@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 public class BillingRecordRepositoryImpl implements BillingRecordRepository {
   private static SessionFactory factory;
@@ -36,11 +37,36 @@ public class BillingRecordRepositoryImpl implements BillingRecordRepository {
     Bill bill = new Bill();
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
-	 bill = session.get(Bill.class,id);
+	 bill = session.get(Bill.class, id);
 	 session.getTransaction().commit();
     } catch (Exception ex) {
 	 System.out.println(ex.getMessage());
     }
     return bill;
   }
+  
+  @Override
+  public void updateBills(List<Bill> bills) {
+    try (Session session = factory.openSession()) {
+	 session.beginTransaction();
+	 for(Bill bill : bills) {
+	   session.update(bill);
+	 }
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
+    }
+  }
+  
+  @Override
+  public void updateBill(Bill bill) {
+    try (Session session = factory.openSession()) {
+	 session.beginTransaction();
+	 session.update(bill);
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
+    }
+  }
+  
 }

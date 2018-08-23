@@ -26,4 +26,37 @@ public class BillServiceImpl implements BillService {
   public Bill getBillById(int id) {
     return billRepository.getBillById(id);
   }
+  
+  @Override
+  public void updateBillsAccept() {
+    List<Bill> bills = billRepository.getAllBills();
+    for(Bill bill: bills) {
+      bill.setStatus("approved");
+    }
+    billRepository.updateBills(bills);
+  }
+  
+  @Override
+  public void updateBillsCancel() {
+    List<Bill> bills = billRepository.getAllBills();
+    for(Bill bill: bills) {
+      bill.setStatus("refused");
+    }
+    billRepository.updateBills(bills);
+  }
+  
+  @Override
+  public void updateBillByIdAccept(int id) {
+  Bill bill = billRepository.getBillById(id);
+  bill.setStatus("approved");
+  billRepository.updateBill(bill);
+  }
+  
+  @Override
+  public void updateBillByIdCancel(int id) {
+    Bill bill = billRepository.getBillById(id);
+    bill.setStatus("refused");
+    billRepository.updateBill(bill);
+  }
+  
 }

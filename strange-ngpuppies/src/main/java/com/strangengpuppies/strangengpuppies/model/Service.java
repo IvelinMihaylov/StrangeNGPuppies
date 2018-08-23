@@ -1,6 +1,7 @@
 package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,8 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "serviceID")
     private int id;
-
+    
+    @NotNull
     @Column(name = "name")
     private String name;
 
@@ -43,11 +45,11 @@ public class Service {
         this.name = name;
     }
     
-    public List<Bill> getBills() {
-        return bills;
-    }
-    
-    public void setBills(List<Bill> bills) {
-        this.bills = bills;
-    }
+//    public List<Bill> getBills() {
+//        return bills;
+//    }
+//
+//    public void setBills(List<Bill> bills) {
+//        this.bills = bills;
+//    }
 }

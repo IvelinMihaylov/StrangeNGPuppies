@@ -7,4 +7,8 @@ import java.util.List;
 public interface BillService {
   List<Bill> getAllBills();
   Bill getBillById(int id);
+  void updateBillsAccept();
+  void updateBillsCancel();
+  void updateBillByIdAccept(int id);
+  void updateBillByIdCancel(int id);
 }

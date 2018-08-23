@@ -1,6 +1,7 @@
 package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table (name = "bills")
@@ -10,23 +11,29 @@ public class Bill {
   @Column (name = "billID")
   private int id;
   
-  @ManyToOne (cascade = CascadeType.ALL)
+  @NotNull
+  @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn (name = "serviceID")
   private Service service;
   
-  @ManyToOne (cascade = CascadeType.ALL)
+  @NotNull
+  @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn (name = "subscriberID")
   private Subscriber subscriber;
   
+  @NotNull
   @Column (name = "startdate")
   private String startDate;
   
+  @NotNull
   @Column (name = "enddate")
   private String endDate;
   
+  @NotNull
   @Column (name = "amount")
   private double amount;
   
+  @NotNull
   @Column (name = "currency")
   private String currency;
   
@@ -93,4 +100,20 @@ public class Bill {
   public void setStatus(String status) {
     this.status = status;
   }
+  
+  public Service getService() {
+    return service;
+  }
+
+  public void setService(Service service) {
+    this.service = service;
+  }
+
+//  public Subscriber getSubscriber() {
+//    return subscriber;
+//  }
+//
+//  public void setSubscriber(Subscriber subscriber) {
+//    this.subscriber = subscriber;
+//  }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface UserService {
   List<User> listAll();
+  void updateUserById(int id, String username,String password,String eik, String email);
+  void deleteUserById(int id);
   void createClient(String username,String password,String eik);
   void createAdministrator(String username,String password,String email);
 }

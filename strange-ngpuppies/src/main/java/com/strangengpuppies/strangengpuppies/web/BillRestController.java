@@ -30,4 +30,24 @@ public class BillRestController {
   public Bill getByID(@PathVariable("id") String id) {
     return service.getBillById(Integer.parseInt(id));
   }
+  
+  @GetMapping ("/AllBillsStatusAccept")
+  public void updateAllBillsStatusAccept() {
+     service.updateBillsAccept();
+  }
+  
+  @GetMapping ("/AllBillsStatusCancel")
+  public void updateAllBillsStatusCancel() {
+     service.updateBillsCancel();
+  }
+  
+  @GetMapping ("/BillStatusAccept/{id}")
+  public void updateBillStatusAcceptById(@PathVariable("id") String id) {
+     service.updateBillByIdAccept(Integer.parseInt(id));
+  }
+  
+  @GetMapping ("/BillStatusCancel/{id}")
+  public void updateBillStatusCancelById(@PathVariable("id") String id) {
+     service.updateBillByIdCancel(Integer.parseInt(id));
+  }
 }
