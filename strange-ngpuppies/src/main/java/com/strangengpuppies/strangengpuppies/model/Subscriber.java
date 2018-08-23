@@ -39,13 +39,12 @@ public class Subscriber {
     public Subscriber() {
     }
     
-    public Subscriber(String phoneNumber, String firstName, String lastName, String egn, User bank, List<Bill> bills) {
+    public Subscriber(String phoneNumber, String firstName, String lastName, String egn, User bank) {
         this.phoneNumber = phoneNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.egn = egn;
         this.bank = bank;
-        this.bills = bills;
     }
     
     public String getPhoneNumber() {
@@ -84,9 +83,9 @@ public class Subscriber {
 //        return bank;
 //    }
 //
-//    public void setBank(User bank) {
-//        this.bank = bank;
-//    }
+    public void setBank(User bank) {
+        this.bank = bank;
+    }
     
     public List<Bill> getBills() {
         return bills;
