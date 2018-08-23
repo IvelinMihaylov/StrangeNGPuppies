@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao {
     private SessionFactory sessionFactory;
 
     @SuppressWarnings("unchecked")
-    public User finUserByUsername(String username) {
+    public User findUserByUsername(String username) {
         List<User> users = new ArrayList<>();
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();

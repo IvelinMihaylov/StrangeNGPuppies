@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -18,7 +19,7 @@
     Role(s):<span sec:authentication="principal.authorities" />
 </p>
 
-<p sec:authorize="hasRole('ROLE_ADMIN')">
+<p sec:authorize="hasAuthority('ADMIN')">
     <a th:href="@{/admin}">Admin Portal</a>
 </p>
 

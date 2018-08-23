@@ -13,8 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("userDetailsService")
 public class MyUserDetailsService implements UserDetailsService {
@@ -25,20 +26,21 @@ public class MyUserDetailsService implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.finUserByUsername(username);
-        List<GrantedAuthority> authorities = buildUserAuthority(user.getRole());
+        User user = userDao.findUserByUsername(username);
+        Collection<? extends GrantedAuthority> authorities = buildUserAuthority(user.getRole());
 
 
         return buildUserForAuthentication(user, authorities);
     }
 
-    private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
+    private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user, Collection<? extends GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Role role) {
-        List<GrantedAuthority> auths;
-        auths = new ArrayList<>(Collections.singleton(new SimpleGrantedAuthority(role.getName())));
-        return auths;
+    private Collection<? extends GrantedAuthority> buildUserAuthority(Role role) {
+        List<String> roles = new ArrayList<>();
+        roles.add("ROLE_" + role.getName());
+
+        return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 }
