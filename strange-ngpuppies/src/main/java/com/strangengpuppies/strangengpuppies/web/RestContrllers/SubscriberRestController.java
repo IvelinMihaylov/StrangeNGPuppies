@@ -1,4 +1,4 @@
-package com.strangengpuppies.strangengpuppies.web;
+package com.strangengpuppies.strangengpuppies.web.RestContrllers;
 
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
