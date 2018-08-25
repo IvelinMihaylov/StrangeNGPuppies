@@ -24,31 +24,28 @@ public class SubscriberRepositoryImpl implements SubscriberRepository {
   
   @Override
   public List<Subscriber> getAllSubscriber() {
-    List<Subscriber> subscriber = new ArrayList<>();
+    List<Subscriber> subscribers = new ArrayList<>();
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
-	 subscriber = session.createQuery("from subscribers", Subscriber.class).list();
+	 subscribers = session.createQuery("from Subscriber", Subscriber.class).list();
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
+    }
+    return subscribers;
+  }
+  
+  @Override
+  public Subscriber getById(String phonenumber) {
+    Subscriber subscriber = new Subscriber();
+    try (Session session = factory.openSession()) {
+	 session.beginTransaction();
+	 subscriber = session.get(Subscriber.class,phonenumber);
 	 session.getTransaction().commit();
     } catch (Exception ex) {
 	 System.out.println(ex.getMessage());
     }
     return subscriber;
-  }
-  
-  @Override
-  public Subscriber getById(String phonenumber) {
-    List<Subscriber> subscriber = new ArrayList<>();
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 subscriber = session.createQuery("from subscribers where phonenumber = " + phonenumber, Subscriber.class).list();
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
-    }
-    if(subscriber.size() == 0) {
-	 return null;
-    }
-    return subscriber.get(0);
   }
   
   @Override

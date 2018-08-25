@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class SubscriberServiceImpl  implements SubscriberService {
+public class SubscriberServiceImpl implements SubscriberService {
   private final SubscriberRepository subscriberRepository;
   
   @Autowired
-  public SubscriberServiceImpl(SubscriberRepository subscriberRepository){
+  public SubscriberServiceImpl(SubscriberRepository subscriberRepository) {
     this.subscriberRepository = subscriberRepository;
   }
   
@@ -29,23 +30,33 @@ public class SubscriberServiceImpl  implements SubscriberService {
   
   @Override
   public void createSubscriber(String phonenumber, String firstName, String lastName, String egn) {
-    subscriberRepository.createSubscriber(phonenumber,firstName,lastName,egn);
+    subscriberRepository.createSubscriber(phonenumber, firstName, lastName, egn);
   }
   
   @Override
   public void updateSubscriberByPhonenumber(String idPhonenumber, String phonenumber, String firstName, String lastName, String egn) {
     Subscriber subscriber = subscriberRepository.getById(idPhonenumber);
-    if(phonenumber != null){
-    subscriber.setPhoneNumber(phonenumber);
+    if(phonenumber != null) {
+	 if(phonenumber.length() > 0) {
+	   subscriber.setPhoneNumber(phonenumber);
+	 }
     }
-    if(firstName != null){
-	 subscriber.setFirstName(firstName);
+    if(firstName != null) {
+	 if(firstName.length() > 0) {
+	   subscriber.setFirstName(firstName);
+	 }
     }
-    if(lastName != null){
-	 subscriber.setLastName(lastName);
+    if(lastName != null) {
+	 if(lastName.length() > 0) {
+	   subscriber.setLastName(lastName);
+	 }
+	 
     }
-    if(egn != null){
-	 subscriber.setEgn(egn);
+    if(egn != null) {
+	 if(egn.length() > 0) {
+	   subscriber.setEgn(egn);
+	 }
+	 
     }
     subscriberRepository.updateSubscriber(subscriber);
   }
@@ -53,6 +64,7 @@ public class SubscriberServiceImpl  implements SubscriberService {
   @Override
   public void deleteSubscriberByPhonenumber(String phonenumber) {
     Subscriber subscriber = subscriberRepository.getById(phonenumber);
+    subscriber.se
     subscriberRepository.deleteSubscriber(subscriber);
   }
 }

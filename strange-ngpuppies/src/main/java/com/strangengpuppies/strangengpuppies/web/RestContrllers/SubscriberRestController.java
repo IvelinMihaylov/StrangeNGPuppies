@@ -3,10 +3,7 @@ package com.strangengpuppies.strangengpuppies.web.RestContrllers;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,12 +33,12 @@ public class SubscriberRestController {
   service.createSubscriber(subscriber.getPhoneNumber(),subscriber.getFirstName(),subscriber.getLastName(),subscriber.getEgn());
   }
   
-  @GetMapping ("/update")
-  public void updateSubscriber(String idPhonenumber, Subscriber subscriber) {
-  service.updateSubscriberByPhonenumber(idPhonenumber,subscriber.getPhoneNumber(),subscriber.getFirstName(),subscriber.getLastName(),subscriber.getEgn());
+  @PostMapping ("/update")
+  public void updateSubscriber(String currentlyPhonenumber, String newPhonenumber, String firstname, String lastname, String egn ) {
+  service.updateSubscriberByPhonenumber(currentlyPhonenumber, newPhonenumber, firstname, lastname, egn);
   }
   
-  @GetMapping ("/delete/{phonenumber}")
+  @PostMapping ("/delete/{phonenumber}")
   public void deleteSubscriber(@PathVariable ("phonenumber") String phonenumber) {
   service.deleteSubscriberByPhonenumber(phonenumber);
   }
