@@ -28,7 +28,12 @@ public class SubscriberRestController {
     return service.getByPhonenumber(phonenumber);
   }
   
-  @GetMapping ("/create")
+  @GetMapping ("/getTopTenPayer")
+  public List<Subscriber> getTopTenPayer(){
+    return service.getTopTenPayer();
+  }
+  
+  @PostMapping ("/create")
   public void createSubscriber(Subscriber subscriber) {
   service.createSubscriber(subscriber.getPhoneNumber(),subscriber.getFirstName(),subscriber.getLastName(),subscriber.getEgn());
   }

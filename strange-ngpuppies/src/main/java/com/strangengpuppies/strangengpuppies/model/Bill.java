@@ -43,14 +43,13 @@ public class Bill {
   public Bill() {
   }
   
-  public Bill(Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency, String status) {
+  public Bill(Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
     this.service = service;
     this.subscriber = subscriber;
     this.startDate = startDate;
     this.endDate = endDate;
     this.amount = amount;
     this.currency = currency;
-    this.status = status;
   }
   
   public int getId() {

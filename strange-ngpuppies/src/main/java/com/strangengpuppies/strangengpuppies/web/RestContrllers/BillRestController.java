@@ -1,13 +1,13 @@
 package com.strangengpuppies.strangengpuppies.web.RestContrllers;
 
 import com.strangengpuppies.strangengpuppies.model.Bill;
+import com.strangengpuppies.strangengpuppies.model.Service;
+import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.service.base.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -49,5 +49,10 @@ public class BillRestController {
   @GetMapping ("/BillStatusCancel/{id}")
   public void updateBillStatusCancelById(@PathVariable("id") String id) {
      service.updateBillByIdCancel(Integer.parseInt(id));
+  }
+  
+  @PostMapping ("/create")
+  public void updateBillStatusCancelById(Service product, Subscriber subscriber, String startDate,String endDate, String amount, String currency) {
+    service.createBill(product,subscriber,startDate,endDate,Double.parseDouble(amount),currency);
   }
 }

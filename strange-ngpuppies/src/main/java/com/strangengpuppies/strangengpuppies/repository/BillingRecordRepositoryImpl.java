@@ -1,6 +1,8 @@
 package com.strangengpuppies.strangengpuppies.repository;
 
 import com.strangengpuppies.strangengpuppies.model.Bill;
+import com.strangengpuppies.strangengpuppies.model.Service;
+import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.repository.base.BillingRecordRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,6 +45,18 @@ public class BillingRecordRepositoryImpl implements BillingRecordRepository {
 	 System.out.println(ex.getMessage());
     }
     return bill;
+  }
+  
+  @Override
+  public void createBill(Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
+    Bill bill = new Bill(service,subscriber,startDate,endDate,amount,currency);
+    try (Session session = factory.openSession()) {
+	 session.beginTransaction();
+	 session.save(bill);
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
+    }
   }
   
   @Override
