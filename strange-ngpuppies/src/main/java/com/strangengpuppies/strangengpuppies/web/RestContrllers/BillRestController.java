@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,15 @@ public class BillRestController {
     return service.getAllBills();
   }
   
+  @GetMapping ("/history")
+  List<Bill> getReadyBills(){
+    return service.getReadyBills();
+  }
+  @GetMapping ("/nonReady")
+  List<Bill> getNonReadyBills(){
+    return service.getNonReadyBills();
+  }
+
   @GetMapping ("/byID/{id}")
   public Bill getByID(@PathVariable("id") String id) {
     return service.getBillById(Integer.parseInt(id));
@@ -52,7 +62,7 @@ public class BillRestController {
   }
   
   @PostMapping ("/create")
-  public void updateBillStatusCancelById(Service product, Subscriber subscriber, String startDate,String endDate, String amount, String currency) {
+  public void updateBillStatusCancelById(Service product, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, String amount, String currency) {
     service.createBill(product,subscriber,startDate,endDate,Double.parseDouble(amount),currency);
   }
 }

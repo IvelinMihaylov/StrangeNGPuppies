@@ -7,6 +7,7 @@ import com.strangengpuppies.strangengpuppies.service.base.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,12 +27,22 @@ public class BillServiceImpl implements BillService {
   }
   
   @Override
+  public List<Bill> getReadyBills() {
+    return billRepository.getReadyBills();
+  }
+  
+  @Override
+  public List<Bill> getNonReadyBills() {
+    return billRepository.getNonReadyBills();
+  }
+  
+  @Override
   public Bill getBillById(int id) {
     return billRepository.getBillById(id);
   }
   
   @Override
-  public void createBill(com.strangengpuppies.strangengpuppies.model.Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
+  public void createBill(com.strangengpuppies.strangengpuppies.model.Service service, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, double amount, String currency) {
     HashSet<String> listOfCurrencies= new HashSet<>();
     listOfCurrencies.add("USD");
     listOfCurrencies.add("EUR");

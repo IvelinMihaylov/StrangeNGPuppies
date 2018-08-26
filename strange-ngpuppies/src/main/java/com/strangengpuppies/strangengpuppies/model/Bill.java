@@ -1,7 +1,11 @@
 package com.strangengpuppies.strangengpuppies.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAmount;
 
 @Entity
 @Table (name = "bills")
@@ -21,13 +25,15 @@ public class Bill {
   @JoinColumn (name = "subscriberID")
   private Subscriber subscriber;
   
+  @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
   @NotNull
   @Column (name = "startdate")
-  private String startDate;
+  private LocalDateTime startDate;
   
+  @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
   @NotNull
   @Column (name = "enddate")
-  private String endDate;
+  private LocalDateTime endDate;
   
   @NotNull
   @Column (name = "amount")
@@ -43,7 +49,7 @@ public class Bill {
   public Bill() {
   }
   
-  public Bill(Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
+  public Bill(Service service, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, double amount, String currency) {
     this.service = service;
     this.subscriber = subscriber;
     this.startDate = startDate;
@@ -60,19 +66,19 @@ public class Bill {
     this.id = id;
   }
   
-  public String getStartDate() {
+  public LocalDateTime getStartDate() {
     return startDate;
   }
   
-  public void setStartDate(String startDate) {
+  public void setStartDate(LocalDateTime startDate) {
     this.startDate = startDate;
   }
   
-  public String getEndDate() {
+  public LocalDateTime getEndDate() {
     return endDate;
   }
   
-  public void setEndDate(String endDate) {
+  public void setEndDate(LocalDateTime endDate) {
     this.endDate = endDate;
   }
   

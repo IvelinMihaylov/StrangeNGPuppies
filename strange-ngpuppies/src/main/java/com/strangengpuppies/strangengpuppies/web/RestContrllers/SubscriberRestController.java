@@ -33,6 +33,11 @@ public class SubscriberRestController {
     return service.getTopTenPayer();
   }
   
+  @GetMapping ("/getTopTenLastPayment")
+  public List<Subscriber> getTopTenLastPayment(){
+    return service.getTopTenLastPayment();
+  }
+  
   @PostMapping ("/create")
   public void createSubscriber(Subscriber subscriber) {
   service.createSubscriber(subscriber.getPhoneNumber(),subscriber.getFirstName(),subscriber.getLastName(),subscriber.getEgn());
