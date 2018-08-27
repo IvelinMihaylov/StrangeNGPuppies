@@ -6,4 +6,15 @@ import java.util.List;
 
 public interface UserRepository {
   List<User> listAll();
+  
+  User getUserById(int id);
+  
+  void updateUser(User user);
+  
+  void deleteUser(User user);
+  
+  void createClient(String username, String password, String eik);
+  
+  void createAdministrator(String username, String password, String email);
+  
 }

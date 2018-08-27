@@ -25,6 +25,11 @@
         </property>
 
         <mapping class="com.strangengpuppies.strangengpuppies.model.Subscriber"/>
+<<<<<<< HEAD
+=======
+        <mapping class="com.strangengpuppies.strangengpuppies.model.Role"/>
+        <mapping class="com.strangengpuppies.strangengpuppies.model.Bill"/>
+>>>>>>> branch-ivelin
         <mapping class="com.strangengpuppies.strangengpuppies.model.Service"/>
         <mapping class="com.strangengpuppies.strangengpuppies.model.User"/>
         <mapping class="com.strangengpuppies.strangengpuppies.model.Role"/>
