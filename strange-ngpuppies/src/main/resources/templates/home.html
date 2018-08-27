@@ -14,14 +14,14 @@
 <p>Hello to the home page!</p>
 
 <p>
-    User:<span sec:authentication="name" />
+    User:<th:block sec:authentication="name" />
     <br />
-    Role(s):<span sec:authentication="principal.authorities" />
+    Role(s):<th:block sec:authentication="principal.authorities" />
 </p>
 
-<p sec:authorize="hasAuthority('ADMIN')">
+<th:block sec:authorize="hasAuthority('ADMIN')">
     <a th:href="@{/admin}">Admin Portal</a>
-</p>
+</th:block>
 
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout" />

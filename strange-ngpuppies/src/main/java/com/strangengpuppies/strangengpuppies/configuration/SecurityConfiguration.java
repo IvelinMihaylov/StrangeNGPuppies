@@ -25,7 +25,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         configureGlobal(auth);
-//        auth.inMemoryAuthentication().withUser("user1").password(passwordEncoder().encode("user1")).authorities("ROLE_USER");
     }
 
     @Autowired
@@ -45,6 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("../static/**").permitAll()
+                .antMatchers("/js/**").permitAll()
                 .antMatchers("/").hasRole("USER")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .and()
