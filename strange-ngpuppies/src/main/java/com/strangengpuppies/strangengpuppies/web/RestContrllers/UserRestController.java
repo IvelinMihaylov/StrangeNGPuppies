@@ -41,6 +41,6 @@ public class UserRestController {
   
   @PostMapping (value = "/createAdministator", headers = "Accept=application/json")
   public void createAdministrator(User admin) {
-    service.createAdministrator(admin.getUsername(), admin.getPassword(), admin.getEmail());
+    service.createAdministrator(admin.getUsername(), admin.getPassword(), null);
   }
 }

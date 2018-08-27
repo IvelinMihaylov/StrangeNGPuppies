@@ -1,9 +1,7 @@
 package com.strangengpuppies.strangengpuppies.repository;
 
-<<<<<<< HEAD
-=======
 import com.strangengpuppies.strangengpuppies.model.Role;
->>>>>>> branch-ivelin
+
 import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.UserRepository;
 import org.hibernate.Session;
@@ -35,10 +33,6 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return users;
     }
-<<<<<<< HEAD
-=======
-    return users;
-  }
   
   @Override
   public User getUserById(int id) {
@@ -83,7 +77,7 @@ public class UserRepositoryImpl implements UserRepository {
     Role role = new Role();
     role.setId(2);
     role.setName("ROLE_CLIENT");
-    User client = new User(username, password, null, eik, role);
+    User client = new User(username, password, eik, role);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
 	 session.save(client);
@@ -98,7 +92,7 @@ public class UserRepositoryImpl implements UserRepository {
     Role role = new Role();
     role.setId(1);
     role.setName("ROLE_USER");
-    User user = new User(username, password, email, null, role);
+    User user = new User(username, password, null, role);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
 	 session.save(user);
@@ -107,6 +101,4 @@ public class UserRepositoryImpl implements UserRepository {
 	 System.out.println(ex.getMessage());
     }
   }
-  
->>>>>>> branch-ivelin
 }

@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user, Collection<? extends GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 
     private Collection<? extends GrantedAuthority> buildUserAuthority(Role role) {

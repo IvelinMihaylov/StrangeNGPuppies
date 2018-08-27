@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
         List<User> users = new ArrayList<>();
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            users = session.createQuery("from User as U where U.userName = :username", User.class)
+            users = session.createQuery("from User as U where U.username = :username", User.class)
                     .setParameter("username", username)
                     .list();
             session.getTransaction().commit();

@@ -45,23 +45,12 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
-<<<<<<< HEAD
 
-//    public List<User> getUsers() {
-//        return users;
-//    }
+    public List<User> getUsers() {
+        return users;
+    }
 
     public void setUsers(List<User> users) {
         this.users = users;
     }
-=======
-    
-//    public List<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(List<User> users) {
-//        this.users = users;
-//    }
->>>>>>> branch-ivelin
 }

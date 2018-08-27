@@ -37,9 +37,9 @@ public class UserServiceImpl implements UserService {
     if(eik != null) {
 	 user.setEik(eik);
     }
-    if(email != null) {
-	 user.setEmail(email);
-    }
+//    if(email != null) {
+//	 user.setEmail(email);
+//    }
     userRepository.updateUser(user);
   }
   
