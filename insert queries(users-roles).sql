@@ -1,0 +1,23 @@
+use `drstrange-ngpuppies`;
+ insert into roles(name) values("USER");
+ insert into roles(name) values("ADMIN");
+
+insert into users (userID, username, password, EIK, roleID) values (2, 'mpantone1', 'T0oAIve6UjU', 'FR34 8177 7976 51ZG EPRJ DUM0 D86', 1);
+insert into users (userID, username, password, EIK, roleID) values (3, 'shulkes2', 'f8dbFGiCaMe', 'ME95 6343 2523 7035 6006 78', 1);
+insert into users (userID, username, password, EIK, roleID) values (4, 'hkordas3', 'B3k7faVjJ9hR', 'FR35 3362 6316 71WZ NRB3 V3DO 817', 1);
+insert into users (userID, username, password, EIK, roleID) values (5, 'mlebel4', 'QezLjH', 'AZ49 WZCL GZP3 RSVF T8NE CWAX KHQG', 1);
+insert into users (userID, username, password, EIK, roleID) values (6, 'dmatthewson5', 'jrOPDcYLvQ', 'DO24 8F7R 5249 3839 3820 5490 8133', 1);
+insert into users (userID, username, password, EIK, roleID) values (7, 'catcheson6', 'yxwwzxr4znAY', 'MR75 3787 8386 5128 9168 5077 841', 1);
+insert into users (userID, username, password, EIK, roleID) values (8, 'ecantle7', 'kssshv', 'IS70 6412 6754 7454 5906 3605 18', 1);
+insert into users (userID, username, password, EIK, roleID) values (9, 'edevon8', 'Wx1Ms5mJUuN', 'RS27 3972 6678 5767 5479 10', 1);
+insert into users (userID, username, password, EIK, roleID) values (10, 'lmacmillan9', 'zu6gLzUgU', 'AD91 8091 5400 JQMS RP4A M4DX', 1);
+insert into users (userID, username, password, EIK, roleID) values (11, 'ebridgesa', 'bavMkU', 'IT94 Y919 6618 928W 54W2 4GAM ROA', 1);
+insert into users (userID, username, password, EIK, roleID) values (12, 'ociepluchb', 'XdguFt1', 'AL45 7215 7764 U83S T4TR IERM ZZ8J', 1);
+insert into users (userID, username, password, EIK, roleID) values (13, 'jalsfordc', 'qffkI1FdjBQ', 'CR04 9115 6976 1643 3629 8', 1);
+insert into users (userID, username, password, EIK, roleID) values (14, 'dpetryd', '314fhNp', 'MC79 3121 8591 89DB 939B EQFM 658', 1);
+insert into users (userID, username, password, EIK, roleID) values (15, 'jberkowitze', '88bcppb', 'FR17 0792 6352 01JZ EY0Y RURR S08', 1);
+insert into users (userID, username, password, EIK, roleID) values (16, 'hbyresf', '6RR8Fn', 'BA35 1054 0782 4072 8112', 1);
+insert into users (userID, username, password, EIK, roleID) values (17, 'mgosseling', 'ebf6me8emSzo', 'PT54 7171 1673 5811 9300 9075 2', 1);
+insert into users (userID, username, password, EIK, roleID) values (18, 'lscollardh', 'gHKaabHoMfK', 'FR35 0471 5172 45QP N4KI DAK1 B00', 1);
+insert into users (userID, username, password, EIK, roleID) values (19, 'tlohdei', 'MYNc6Rj9M', 'MR44 6475 1042 8664 9098 6697 377', 1);
+insert into users (userID, username, password, EIK, roleID) values (20, 'asherrumj', 'bZZCqZdaC1I3', 'MK69 900R NNRO WWUF Z57', 1);

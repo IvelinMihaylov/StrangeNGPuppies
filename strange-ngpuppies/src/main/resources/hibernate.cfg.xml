@@ -13,7 +13,7 @@
         </property>
 
         <property name = "hibernate.connection.url">
-            jdbc:mysql://localhost:3306/ngpuppies
+            jdbc:mysql://localhost:3306/drstrange-ngpuppies
         </property>
 
         <property name = "hibernate.connection.username">
@@ -25,11 +25,10 @@
         </property>
 
         <mapping class="com.strangengpuppies.strangengpuppies.model.Subscriber"/>
-        <mapping class="com.strangengpuppies.strangengpuppies.model.Client"/>
-        <mapping class="com.strangengpuppies.strangengpuppies.model.BillingRecord"/>
-        <mapping class="com.strangengpuppies.strangengpuppies.model.Authority"/>
         <mapping class="com.strangengpuppies.strangengpuppies.model.Service"/>
         <mapping class="com.strangengpuppies.strangengpuppies.model.User"/>
+        <mapping class="com.strangengpuppies.strangengpuppies.model.Role"/>
+        <mapping class="com.strangengpuppies.strangengpuppies.model.Bill"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -12,24 +12,23 @@ import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-  
-  private static SessionFactory factory;
-  
-  @Autowired
-  public UserRepositoryImpl(SessionFactory factory) {
-    this.factory = factory;
-  }
-  
-  @Override
-  public List<User> listAll() {
-    List<User> users = new ArrayList<>();
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 users = session.createQuery("from User", User.class).list();
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
+    private SessionFactory factory;
+
+    @Autowired
+    public UserRepositoryImpl(SessionFactory factory) {
+        this.factory = factory;
     }
-    return users;
-  }
+
+    @Override
+    public List<User> listAll() {
+        List<User> users = new ArrayList<>();
+        try(Session session = factory.openSession()){
+            session.beginTransaction();
+            users = session.createQuery("from User", User.class).list();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return users;
+    }
 }

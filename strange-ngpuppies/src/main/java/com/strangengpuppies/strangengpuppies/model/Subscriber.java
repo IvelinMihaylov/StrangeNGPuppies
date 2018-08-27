@@ -1,78 +1,102 @@
 package com.strangengpuppies.strangengpuppies.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table (name = "subscriber")
+@Table(name = "subscribers")
 public class Subscriber {
-  
-  @Id
-  @Column (name = "phonenumber")
-  private String phonenumber;
-  
-  @Column (name = "firstname")
-  private String firstname;
-  
-  @Column (name = "lastname")
-  private String lastname;
-  
-  @Column (name = "egn")
-  private String egn;
-  
-  @Column (name = "address")
-  private String address;
-  
-  public Subscriber() {
-  }
-  
-  public Subscriber(String phonenumber, String firstname, String lastname, String egn, String address) {
-    this.phonenumber = phonenumber;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.egn = egn;
-    this.address = address;
-  }
-  
-  public String getPhonenumber() {
-    return phonenumber;
-  }
-  
-  public void setPhonenumber(String phonenumber) {
-    this.phonenumber = phonenumber;
-  }
-  
-  public String getFirstname() {
-    return firstname;
-  }
-  
-  public void setFirstname(String firstname) {
-    this.firstname = firstname;
-  }
-  
-  public String getLastname() {
-    return lastname;
-  }
-  
-  public void setLastname(String lastname) {
-    this.lastname = lastname;
-  }
-  
-  public String getEgn() {
-    return egn;
-  }
-  
-  public void setEgn(String egn) {
-    this.egn = egn;
-  }
-  
-  public String getAddress() {
-    return address;
-  }
-  
-  public void setAddress(String address) {
-    this.address = address;
-  }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subscriberID")
+    private int id;
+
+    @Column(name = "phonenumber")
+    private String phoneNumber;
+
+    @Column(name = "firstname")
+    private String firstName;
+
+    @Column(name = "lastname")
+    private String lastName;
+
+    @Column(name = "EGN")
+    private String egn;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bankID")
+    private User bank;
+
+    @OneToMany(cascade = CascadeType.ALL,
+    fetch = FetchType.EAGER,
+    mappedBy = "subscriber")
+    private List<Bill> bills;
+
+    public Subscriber() {
+    }
+
+    public Subscriber(String phoneNumber, String firstName, String lastName, String egn, User bank, List<Bill> bills) {
+        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.egn = egn;
+        this.bank = bank;
+        this.bills = bills;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEgn() {
+        return egn;
+    }
+
+    public void setEgn(String egn) {
+        this.egn = egn;
+    }
+
+    public User getBank() {
+        return bank;
+    }
+
+    public void setBank(User bank) {
+        this.bank = bank;
+    }
+
+    public List<Bill> getBills() {
+        return bills;
+    }
+
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
