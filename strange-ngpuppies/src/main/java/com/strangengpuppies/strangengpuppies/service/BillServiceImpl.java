@@ -42,7 +42,7 @@ public class BillServiceImpl implements BillService {
   }
   
   @Override
-  public void createBill(com.strangengpuppies.strangengpuppies.model.Service service, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, double amount, String currency) {
+  public void createBill(com.strangengpuppies.strangengpuppies.model.Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
     HashSet<String> listOfCurrencies= new HashSet<>();
     listOfCurrencies.add("USD");
     listOfCurrencies.add("EUR");

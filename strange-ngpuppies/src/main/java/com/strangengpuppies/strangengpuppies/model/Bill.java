@@ -25,28 +25,28 @@ public class Bill {
     @JoinColumn(name = "subscriberID")
     private Subscriber subscriber;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NotNull
     @Column(name = "startdate")
-    private LocalDateTime startDate;
+    private String startDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NotNull
     @Column(name = "enddate")
-    private LocalDateTime endDate;
+    private String endDate;
 
     @NotNull
     @Column(name = "amount")
     private double amount;
 
     @NotNull
-//    @Column(name = "currency")
+    @Column(name = "currency")
     private String currency;
 
-//    @Column(name = "status")
+    @Column(name = "status")
     private String status;
 
-    public Bill(Service service, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, double amount, String currency) {
+    public Bill(Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
         this.service = service;
         this.subscriber = subscriber;
         this.startDate = startDate;

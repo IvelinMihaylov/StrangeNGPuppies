@@ -62,7 +62,7 @@ public class BillRestController {
   }
   
   @PostMapping ("/create")
-  public void updateBillStatusCancelById(Service product, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, String amount, String currency) {
+  public void updateBillStatusCancelById(Service product, Subscriber subscriber, String startDate, String endDate, String amount, String currency) {
     service.createBill(product,subscriber,startDate,endDate,Double.parseDouble(amount),currency);
   }
 }

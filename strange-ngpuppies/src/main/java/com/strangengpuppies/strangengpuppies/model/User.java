@@ -19,7 +19,10 @@ public class User {
   @NotNull
   @Column (name = "password")
   private String password;
-  
+
+  @Column(name = "email")
+  private String email;
+
   @Column (name = "EIK")
   private String eik;
   
@@ -36,9 +39,10 @@ public class User {
   public User() {
   }
   
-  public User(String username, String password, String eik, Role role) {
+  public User(String username, String password, String email, String eik, Role role) {
     this.username = username;
     this.password = password;
+    this.email = email;
     this.eik = eik;
     this.role = role;
   }
@@ -92,4 +96,11 @@ public class User {
   }
 
 
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
 }

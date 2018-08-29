@@ -13,7 +13,7 @@ public interface BillingRecordRepository {
   List<Bill> getNonReadyBills();
   Bill getBillById(int id);
   
-  void createBill(Service service, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, double amount, String currency);
+  void createBill(Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency);
   void updateBills(List<Bill> bills);
   void updateBill(Bill bill);
   

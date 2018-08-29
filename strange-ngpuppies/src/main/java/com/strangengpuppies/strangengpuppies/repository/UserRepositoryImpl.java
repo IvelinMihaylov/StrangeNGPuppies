@@ -77,7 +77,7 @@ public class UserRepositoryImpl implements UserRepository {
     Role role = new Role();
     role.setId(2);
     role.setName("USER");
-    User client = new User(username, password, eik, role);
+    User client = new User(username, password, "", eik, role);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
 	 session.save(client);
@@ -92,7 +92,7 @@ public class UserRepositoryImpl implements UserRepository {
     Role role = new Role();
     role.setId(1);
     role.setName("ADMIN");
-    User user = new User(username, password, null, role);
+    User user = new User(username, password, email, "",role);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
 	 session.save(user);
