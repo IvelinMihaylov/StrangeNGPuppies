@@ -31,6 +31,7 @@ public class BillRestController {
   List<Bill> getReadyBills(){
     return service.getReadyBills();
   }
+
   @GetMapping ("/nonReady")
   List<Bill> getNonReadyBills(){
     return service.getNonReadyBills();

@@ -3,12 +3,14 @@ package com.strangengpuppies.strangengpuppies.web.RestContrllers;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.List;
 
 @RestController
-@RequestMapping ("api/subscriber")
+@RequestMapping (value = "api/subscriber", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SubscriberRestController {
   
   private final SubscriberService service;

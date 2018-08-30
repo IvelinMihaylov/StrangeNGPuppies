@@ -26,5 +26,28 @@
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout" />
 </form>
+
+<table class="table">
+
+    <tr>
+        <th>First name</th>
+        <th>Last Name</th>
+        <th>Phone</th>
+        <th>Bills</th>
+    </tr>
+
+    <tr th:each="sub : ${subs}">
+        <td th:text="${sub.firstName}"></td>
+        <td th:text="${sub.lastName}"></td>
+        <td th:text="${sub.phoneNumber}"></td>
+        <td>
+            <div th:each="bill: ${bills}">
+                <p th:text="${bill.service}"></p>
+            </div>
+        </td>
+    </tr>
+
+</table>
+
 </body>
 </html>

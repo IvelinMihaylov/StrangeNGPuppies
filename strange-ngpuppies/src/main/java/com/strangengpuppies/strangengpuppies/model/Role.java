@@ -1,13 +1,16 @@
 package com.strangengpuppies.strangengpuppies.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "roleID")
@@ -20,6 +23,7 @@ public class Role {
     @OneToMany(cascade = CascadeType.ALL,
     fetch = FetchType.EAGER,
     mappedBy = "role")
+    @JsonIgnore
     private List<User> users;
 
     public Role() {
@@ -46,11 +50,11 @@ public class Role {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 }
