@@ -6,6 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 </head>
 
 <body>
@@ -14,9 +17,11 @@
 <p>Hello to the home page!</p>
 
 <p>
-    User:<th:block sec:authentication="name" />
-    <br />
-    Role(s):<th:block sec:authentication="principal.authorities" />
+    User:
+    <th:block sec:authentication="name"/>
+    <br/>
+    Role(s):
+    <th:block sec:authentication="principal.authorities"/>
 </p>
 
 <th:block sec:authorize="hasAuthority('ADMIN')">
@@ -24,30 +29,31 @@
 </th:block>
 
 <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout" />
+    <input type="submit" value="Logout"/>
 </form>
 
+<div class="container-fluid">
 <table class="table">
 
+    <thead class="thead-dark">
     <tr>
-        <th>First name</th>
-        <th>Last Name</th>
-        <th>Phone</th>
-        <th>Bills</th>
+        <th scope="col" >First name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Bills</th>
     </tr>
-
+    </thead>
+    <tbody>
     <tr th:each="sub : ${subs}">
         <td th:text="${sub.firstName}"></td>
         <td th:text="${sub.lastName}"></td>
         <td th:text="${sub.phoneNumber}"></td>
-        <td>
-            <div th:each="bill: ${bills}">
-                <p th:text="${bill.service}"></p>
-            </div>
-        </td>
     </tr>
-
+    </tbody>
 </table>
+</div>
 
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

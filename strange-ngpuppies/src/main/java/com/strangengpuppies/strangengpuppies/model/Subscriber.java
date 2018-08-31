@@ -55,10 +55,6 @@ public class Subscriber implements Serializable {
         this.bills = new ArrayList<>();
     }
 
-    public User getBank() {
-        return bank;
-    }
-    
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -90,13 +86,9 @@ public class Subscriber implements Serializable {
     public void setEgn(String egn) {
         this.egn = egn;
     }
-    
-//    public User getBank() {
-//        return bank;
-//    }
-//
-    public void setBank(User bank) {
-        this.bank = bank;
+
+    public List<Bill> getBills() {
+        return bills;
     }
 
     public void setBills(List<Bill> bills) {
@@ -111,7 +103,12 @@ public class Subscriber implements Serializable {
         this.id = id;
     }
 
-    public List<Bill> getBills() {
-        return bills;
+    @JsonIgnore
+    public User getBank() {
+        return bank;
+    }
+
+    public void setBank(User bank) {
+        this.bank = bank;
     }
 }

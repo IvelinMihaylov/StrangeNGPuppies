@@ -1,5 +1,6 @@
 package com.strangengpuppies.strangengpuppies.configuration;
 
+import com.strangengpuppies.strangengpuppies.UrlHandler.MySimpleUrlAuthenticationSuccessHandler;
 import com.strangengpuppies.strangengpuppies.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +23,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailsService")
     private final UserDetailsService userDetailsService = new MyUserDetailsService();
 
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new MySimpleUrlAuthenticationSuccessHandler();
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -52,6 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticateUser")
+                .successHandler(myAuthenticationSuccessHandler())
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll()

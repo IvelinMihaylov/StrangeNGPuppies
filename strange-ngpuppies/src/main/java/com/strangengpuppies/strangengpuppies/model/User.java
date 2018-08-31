@@ -37,7 +37,6 @@ public class User implements Serializable {
   @OneToMany (cascade = CascadeType.ALL,
 		fetch = FetchType.EAGER,
 		mappedBy = "bank")
-  @JsonIgnore
   private List<Subscriber> subscribers;
   
   public User() {
@@ -91,10 +90,6 @@ public class User implements Serializable {
     this.role = role;
   }
 
-  public void setSubscribers(List<Subscriber> subscribers) {
-    this.subscribers = subscribers;
-  }
-
 
   public String getEmail() {
     return email;
@@ -106,5 +101,9 @@ public class User implements Serializable {
 
   public List<Subscriber> getSubscribers() {
     return subscribers;
+  }
+
+  public void setSubscribers(List<Subscriber> subscribers) {
+    this.subscribers = subscribers;
   }
 }

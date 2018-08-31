@@ -1,5 +1,6 @@
 package com.strangengpuppies.strangengpuppies.web.RestContrllers;
 
+import com.strangengpuppies.strangengpuppies.dao.base.UserDao;
 import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.service.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +14,24 @@ public class UserRestController {
   
   
   private final UserService service;
+  private final UserDao userDao;
   
   @Autowired
-  public UserRestController(UserService service) {
+  public UserRestController(UserService service, UserDao userDao) {
     this.service = service;
+    this.userDao = userDao;
   }
   
   @GetMapping ("/listAll")
   public List<User> getAll() {
     return service.listAll();
   }
-  
+
+  @GetMapping("/getUserByUsername/{username}")
+  public User getUserByUsername(@PathVariable String username) {
+      return userDao.findUserByUsername(username);
+  }
+
   @PostMapping (value = "/updateUser", headers = "Accept=application/json")
   public void updateUser(String id, String username, String password, String eik, String email) {
     service.updateUserById(Integer.parseInt(id), username, password, eik, email);

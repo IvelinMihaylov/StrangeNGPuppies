@@ -29,7 +29,7 @@ public class StrangeNgpuppiesApplication {
 //                "bZZCqZdaC1I3"};
 //        for (String s:
 //             strings) {
-//            System.out.println(new BCryptPasswordEncoder().encode(s));
+//            System.out.println(new BCryptPasswordEncoder().encode("123456789"));
 //        }
     }
 }
