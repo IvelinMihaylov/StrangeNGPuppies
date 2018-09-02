@@ -2,27 +2,31 @@ package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
 @Table (name = "users")
 public class User {
   @Id
+  @NotNull
   @GeneratedValue (strategy = GenerationType.IDENTITY)
   @Column (name = "userID")
   private int id;
   
   @NotNull
+  @Size(min = 1)
   @Column (name = "username")
   private String username;
   
   @NotNull
+  @Size(min = 1)
   @Column (name = "password")
   private String password;
-
-  @Column(name = "email")
+  
+  @Column (name = "email")
   private String email;
-
+  
   @Column (name = "EIK")
   private String eik;
   
@@ -70,7 +74,15 @@ public class User {
   public void setPassword(String password) {
     this.password = password;
   }
-
+  
+  public String getEmail() {
+    return email;
+  }
+  
+  public void setEmail(String email) {
+    this.email = email;
+  }
+  
   public String getEik() {
     return eik;
   }
@@ -78,15 +90,7 @@ public class User {
   public void setEik(String eik) {
     this.eik = eik;
   }
-
-  public Role getRole() {
-    return role;
-  }
   
-  public void setRole(Role role) {
-    this.role = role;
-  }
-
   public List<Subscriber> getSubscribers() {
     return subscribers;
   }
@@ -94,13 +98,12 @@ public class User {
   public void setSubscribers(List<Subscriber> subscribers) {
     this.subscribers = subscribers;
   }
-
-
-  public String getEmail() {
-    return email;
+  
+  public Role getRole() {
+    return role;
   }
-
-  public void setEmail(String email) {
-    this.email = email;
+  
+  public void setRole(Role role) {
+    this.role = role;
   }
 }
