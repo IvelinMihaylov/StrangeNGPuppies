@@ -3,7 +3,6 @@ package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -15,15 +14,14 @@ public class Role {
     private int id;
     
     @NotNull
-    @Size(min = 1)
     @Column(name = "name")
     private String name;
-
+    
     @OneToMany(cascade = CascadeType.ALL,
-    fetch = FetchType.EAGER,
-    mappedBy = "role")
+            fetch = FetchType.EAGER,
+            mappedBy = "role")
     private List<User> users;
-
+    
     public Role() {
     }
     
@@ -47,7 +45,7 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 //    public List<User> getUsers() {
 //        return users;
 //    }

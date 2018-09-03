@@ -4,9 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalAmount;
 
 @Entity
 @Table (name = "bills")
@@ -29,12 +27,12 @@ public class Bill {
   @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
   @NotNull
   @Column (name = "startdate")
-  private LocalDate startDate;
+  private LocalDateTime startDate;
   
-  @DateTimeFormat(pattern="yyyy-MM-dd")
+  @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
   @NotNull
   @Column (name = "enddate")
-  private LocalDate endDate;
+  private LocalDateTime endDate;
   
   @NotNull
   @Column (name = "amount")
@@ -50,7 +48,7 @@ public class Bill {
   public Bill() {
   }
   
-  public Bill(Service service, Subscriber subscriber, LocalDate startDate, LocalDate endDate, double amount, String currency) {
+  public Bill(Service service, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, double amount, String currency) {
     this.service = service;
     this.subscriber = subscriber;
     this.startDate = startDate;
@@ -67,19 +65,19 @@ public class Bill {
     this.id = id;
   }
   
-  public LocalDate getStartDate() {
+  public LocalDateTime getStartDate() {
     return startDate;
   }
   
-  public void setStartDate(LocalDate startDate) {
+  public void setStartDate(LocalDateTime startDate) {
     this.startDate = startDate;
   }
   
-  public LocalDate getEndDate() {
+  public LocalDateTime getEndDate() {
     return endDate;
   }
   
-  public void setEndDate(LocalDate endDate) {
+  public void setEndDate(LocalDateTime endDate) {
     this.endDate = endDate;
   }
   
@@ -110,7 +108,7 @@ public class Bill {
   public Service getService() {
     return service;
   }
-
+  
   public void setService(Service service) {
     this.service = service;
   }

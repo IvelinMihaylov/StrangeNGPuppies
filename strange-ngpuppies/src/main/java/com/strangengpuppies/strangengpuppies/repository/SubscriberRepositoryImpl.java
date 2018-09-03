@@ -1,6 +1,5 @@
 package com.strangengpuppies.strangengpuppies.repository;
 
-import com.strangengpuppies.strangengpuppies.model.Bill;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.SubscriberRepository;
@@ -8,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +75,7 @@ public class BillingRecordRepositoryImpl implements BillingRecordRepository {
   }
   
   @Override
-  public void createBill(Service service, Subscriber subscriber, LocalDate startDate, LocalDate endDate, double amount, String currency) {
+  public void createBill(Service service, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, double amount, String currency) {
     Bill bill = new Bill(service,subscriber,startDate,endDate,amount,currency);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
@@ -110,5 +109,4 @@ public class BillingRecordRepositoryImpl implements BillingRecordRepository {
 	 System.out.println(ex.getMessage());
     }
   }
-  
 }

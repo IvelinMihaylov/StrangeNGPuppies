@@ -2,7 +2,6 @@ package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -14,13 +13,12 @@ public class Service {
     private int id;
     
     @NotNull
-    @Size(min = 1)
     @Column(name = "name")
     private String name;
-
+    
     @OneToMany(cascade = CascadeType.ALL,
-    fetch = FetchType.EAGER,
-    mappedBy = "service")
+            fetch = FetchType.EAGER,
+            mappedBy = "service")
     private List<Bill> bills;
     
     public Service() {
@@ -46,7 +44,7 @@ public class Service {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 //    public List<Bill> getBills() {
 //        return bills;
 //    }

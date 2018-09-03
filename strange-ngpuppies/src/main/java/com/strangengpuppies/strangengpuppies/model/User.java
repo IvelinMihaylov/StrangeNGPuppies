@@ -2,25 +2,21 @@ package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
 @Table (name = "users")
 public class User {
   @Id
-  @NotNull
   @GeneratedValue (strategy = GenerationType.IDENTITY)
   @Column (name = "userID")
   private int id;
   
   @NotNull
-  @Size(min = 1)
   @Column (name = "username")
   private String username;
   
   @NotNull
-  @Size(min = 1)
   @Column (name = "password")
   private String password;
   
@@ -36,8 +32,8 @@ public class User {
   private Role role;
   
   @OneToMany (cascade = CascadeType.ALL,
-		fetch = FetchType.EAGER,
-		mappedBy = "bank")
+          fetch = FetchType.EAGER,
+          mappedBy = "bank")
   private List<Subscriber> subscribers;
   
   public User() {
@@ -94,7 +90,7 @@ public class User {
   public List<Subscriber> getSubscribers() {
     return subscribers;
   }
-
+  
   public void setSubscribers(List<Subscriber> subscribers) {
     this.subscribers = subscribers;
   }
