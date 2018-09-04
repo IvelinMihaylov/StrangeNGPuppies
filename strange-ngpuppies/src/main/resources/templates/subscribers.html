@@ -58,7 +58,7 @@
         </thead>
         <tbody>
         <tr th:each="sub : ${subs}">
-            <td><a th:text="${sub.firstName} "></a></td>
+            <td><a th:href="@{/payBills/{phonenumber}(phonenumber = ${sub.phoneNumber})}" th:text="${sub.firstName} "></a></td>
             <td th:text="${sub.lastName}"></td>
             <td th:text="${sub.phoneNumber}"></td>
         </tr>

@@ -57,9 +57,6 @@ public class Bill implements Serializable {
         this.currency = currency;
     }
 
-    @Column(name = "paymentdate")
-    private String paymentDate;
-
     public Bill() {
     }
 
@@ -94,14 +91,6 @@ public class Bill implements Serializable {
 
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public String getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(String paymentDate) {
-        this.paymentDate = paymentDate;
     }
 
     public String getStatus() {

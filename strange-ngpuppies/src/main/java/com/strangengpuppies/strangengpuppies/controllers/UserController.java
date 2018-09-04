@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,6 +45,15 @@ public class UserController {
             bills.addAll(sub.getBills());
         }
         mav.addObject("bills", bills);
+        return mav;
+    }
+
+    @GetMapping("/payBills/{phonenumber}")
+    public ModelAndView showSubBills(@PathVariable("phonenumber") String phonenumber) {
+        ModelAndView mav = new ModelAndView("payBill");
+        RestTemplate restTemplate = new RestTemplate();
+        Subscriber subscriber = restTemplate.getForObject("http://localhost:8080/api/subscriber/byID/"+ phonenumber, Subscriber.class);
+        mav.addObject("bills", subscriber.getBills());
         return mav;
     }
 }

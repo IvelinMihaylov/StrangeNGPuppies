@@ -12,10 +12,6 @@ import java.util.List;
 @Table(name = "subscribers")
 public class Subscriber implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "subscriberID")
-    private int id;
-
     @NotNull
     @Column(name = "phonenumber")
     private String phoneNumber;
@@ -92,14 +88,6 @@ public class Subscriber implements Serializable {
 
     public void setBills(List<Bill> bills) {
         this.bills = bills;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @JsonIgnore
