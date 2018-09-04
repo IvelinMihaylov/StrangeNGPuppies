@@ -2,6 +2,8 @@ package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,28 +11,32 @@ import java.util.List;
 public class Subscriber {
     @Id
     @NotNull
+    @Size(min = 10, max = 10)
     @Column(name = "phonenumber")
     private String phoneNumber;
     
     @NotNull
+    @Size(min = 1)
     @Column(name = "firstname")
     private String firstName;
     
     @NotNull
+    @Size(min = 1)
     @Column(name = "lastname")
     private String lastName;
     
     @NotNull
+    @Size(min = 1)
     @Column(name = "EGN")
     private String egn;
-    
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "bankID")
     private User bank;
     
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            mappedBy = "subscriber")
+    fetch = FetchType.EAGER,
+    mappedBy = "subscriber")
     private List<Bill> bills;
     
     public Subscriber() {
@@ -76,10 +82,11 @@ public class Subscriber {
         this.egn = egn;
     }
     
-    //    public User getBank() {
+//    public User getBank() {
 //        return bank;
 //    }
 //
+
     public void setBank(User bank) {
         this.bank = bank;
     }
@@ -87,8 +94,21 @@ public class Subscriber {
     public List<Bill> getBills() {
         return bills;
     }
-    
+
     public void setBills(List<Bill> bills) {
         this.bills = bills;
     }
+
+    @Override
+    public Subscriber clone(){
+        Subscriber newSubscriber = new Subscriber();
+        newSubscriber.setPhoneNumber(phoneNumber);
+        newSubscriber.setFirstName(firstName);
+        newSubscriber.setLastName(lastName);
+        newSubscriber.setEgn(egn);
+        newSubscriber.setBills(new ArrayList<>());
+        newSubscriber.setBank(bank);
+        return newSubscriber;
+    }
+
 }

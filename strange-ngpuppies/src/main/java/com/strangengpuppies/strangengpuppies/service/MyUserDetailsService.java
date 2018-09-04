@@ -19,28 +19,28 @@ import java.util.stream.Collectors;
 
 @Service("userDetailsService")
 public class MyUserDetailsService implements UserDetailsService {
-
-    @Autowired
-    private UserDao userDao;
-
-    @Transactional(readOnly = true)
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findUserByUsername(username);
-        Collection<? extends GrantedAuthority> authorities = buildUserAuthority(user.getRole());
-
-
-        return buildUserForAuthentication(user, authorities);
-    }
-
-    private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user, Collection<? extends GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
-    }
-
-    private Collection<? extends GrantedAuthority> buildUserAuthority(Role role) {
-        List<String> roles = new ArrayList<>();
-        roles.add("ROLE_" + role.getName());
-
-        return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-    }
+  
+  @Autowired
+  private UserDao userDao;
+  
+  @Transactional(readOnly = true)
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    User user = userDao.findUserByUsername(username);
+    Collection<? extends GrantedAuthority> authorities = buildUserAuthority(user.getRole());
+    
+    
+    return buildUserForAuthentication(user, authorities);
+  }
+  
+  private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user, Collection<? extends GrantedAuthority> authorities) {
+    return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+  }
+  
+  private Collection<? extends GrantedAuthority> buildUserAuthority(Role role) {
+    List<String> roles = new ArrayList<>();
+    roles.add("ROLE_" + role.getName());
+    
+    return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+  }
 }

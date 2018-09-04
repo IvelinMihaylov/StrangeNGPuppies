@@ -1,4 +1,4 @@
-package com.strangengpuppies.strangengpuppies.web.RestContrllers;
+package com.strangengpuppies.strangengpuppies.web.RestControllers;
 
 import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.service.base.UserService;
@@ -41,6 +41,6 @@ public class UserRestController {
   
   @PostMapping (value = "/createAdministator", headers = "Accept=application/json")
   public void createAdministrator(User admin) {
-    service.createAdministrator(admin.getUsername(), admin.getPassword(), null);
+    service.createAdministrator(admin.getUsername(), admin.getPassword(), admin.getEmail());
   }
 }

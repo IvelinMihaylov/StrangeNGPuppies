@@ -1,4 +1,4 @@
-package com.strangengpuppies.strangengpuppies.controllers;
+package com.strangengpuppies.strangengpuppies.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

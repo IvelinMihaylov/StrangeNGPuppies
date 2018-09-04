@@ -1,4 +1,4 @@
-package com.strangengpuppies.strangengpuppies.web.RestContrllers;
+package com.strangengpuppies.strangengpuppies.web.RestControllers;
 
 import com.strangengpuppies.strangengpuppies.model.Bill;
 import com.strangengpuppies.strangengpuppies.model.Service;
@@ -7,8 +7,6 @@ import com.strangengpuppies.strangengpuppies.service.base.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController

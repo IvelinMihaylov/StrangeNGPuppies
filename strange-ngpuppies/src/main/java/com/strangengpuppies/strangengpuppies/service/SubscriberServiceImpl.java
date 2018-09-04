@@ -6,8 +6,12 @@ import com.strangengpuppies.strangengpuppies.repository.base.SubscriberRepositor
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class SubscriberServiceImpl implements SubscriberService {
@@ -60,7 +64,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 		subscribers.add(sub);
 	   }
 	   result.remove(((TreeMap<Double, List<Subscriber>>) result).lastKey());
-	 }else {
+	 } else {
 	   return subscribers;
 	 }
     }
@@ -69,44 +73,43 @@ public class SubscriberServiceImpl implements SubscriberService {
   
   @Override
   public List<Subscriber> getTopTenLastPayment() {
-
+    
     List<Subscriber> subscribers = subscriberRepository.getAllSubscriber();
     Map<Double, List<Subscriber>> result = new TreeMap<>();
-
+    
     for(Subscriber subscriber : subscribers) {
-
-        LocalDate today = LocalDate.now();
-
-
-        for (Bill bill: subscriber.getBills()) {
-            double score = 0;
-            //maybe should to fix later.
-            score = (today.getDayOfYear() - bill.getEndDate().getDayOfYear()) + (today.getDayOfMonth() - bill.getEndDate().getDayOfMonth());
-
-            Subscriber sub = subscriber.clone();
-
-            sub.getBills().add(bill);
-
-            if(!result.containsKey(score)) {
-                result.put(score, new ArrayList<>());
-            }
-            result.get(score).add(sub);
-        }
-
+	 
+	 LocalDate today = LocalDate.now();
+	 
+	 
+	 for(Bill bill : subscriber.getBills()) {
+	   double score = 0;
+	   score = ((int) (bill.getEndDate().getYear() * 365.2425) + bill.getEndDate().getMonthValue() * 50 + bill.getEndDate().getDayOfMonth());
+	   
+	   Subscriber sub = subscriber.clone();
+	   
+	   sub.getBills().add(bill);
+	   
+	   if(!result.containsKey(score)) {
+		result.put(score, new ArrayList<>());
+	   }
+	   result.get(score).add(sub);
+	 }
+	 
     }
     subscribers.clear();
-
-      while(subscribers.size() <= 10) {
-          if(result.size() != 0) {
-              for(Subscriber sub : ((TreeMap<Double, List<Subscriber>>) result).lastEntry().getValue()) {
-                  subscribers.add(sub);
-              }
-              result.remove(((TreeMap<Double, List<Subscriber>>) result).lastKey());
-          }else {
-              return subscribers;
-          }
-      }
-
+    
+    while(subscribers.size() <= 10) {
+	 if(result.size() != 0) {
+	   for(Subscriber sub : ((TreeMap<Double, List<Subscriber>>) result).lastEntry().getValue()) {
+		subscribers.add(sub);
+	   }
+	   result.remove(((TreeMap<Double, List<Subscriber>>) result).lastKey());
+	 } else {
+	   return subscribers;
+	 }
+    }
+    
     return subscribers;
   }
   
@@ -154,3 +157,4 @@ public class SubscriberServiceImpl implements SubscriberService {
     subscriberRepository.deleteSubscriber(subscriber);
   }
 }
+

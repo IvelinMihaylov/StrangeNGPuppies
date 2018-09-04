@@ -29,24 +29,24 @@ public class UserServiceImpl implements UserService {
     User user = userRepository.getUserById(id);
     
     if(username != null) {
-      if (username.length() > 0){
-	 user.setUsername(username);
-      }
+	 if (username.length() > 0){
+	   user.setUsername(username);
+	 }
     }
     if(password != null) {
-      if (password.length() > 0) {
-        user.setPassword(password);
-      }
+	 if (password.length() > 0) {
+	   user.setPassword(password);
+	 }
     }
     if(eik != null) {
-      if (eik.length() > 0) {
-        user.setEik(eik);
-      }
+	 if (eik.length() > 0) {
+	   user.setEik(eik);
+	 }
     }
     if(email != null) {
-      if (email.length()>0) {
-        user.setEmail(email);
-      }
+	 if (email.length()>0) {
+	   user.setEmail(email);
+	 }
     }
     userRepository.updateUser(user);
   }
@@ -60,19 +60,19 @@ public class UserServiceImpl implements UserService {
   @Override
   public void createClient(String username, String password, String eik) {
     if(username != null && password != null && eik != null && username.length() > 0 && password.length() > 0 && eik.length() > 0) {
-      userRepository.createClient(username, password, eik);
+	 userRepository.createClient(username, password, eik);
     }else {
-      System.out.println("Incorrect data for create client.");
+	 System.out.println("Incorrect data for create client.");
     }
   }
   
   @Override
   public void createAdministrator(String username, String password, String email) {
     if(username != null || password != null || email != null && username.length() > 0 && password.length() > 0 && email.length() > 0) {
-      userRepository.createAdministrator(username, password, email);
+	 userRepository.createAdministrator(username, password, email);
     }else {
-      System.out.println("Incorrect data for create admin.");
+	 System.out.println("Incorrect data for create admin.");
     }
-
+    
   }
 }

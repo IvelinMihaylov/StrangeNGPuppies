@@ -6,7 +6,9 @@ import com.strangengpuppies.strangengpuppies.repository.base.BillingRecordReposi
 import com.strangengpuppies.strangengpuppies.service.base.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class BillServiceImpl implements BillService {
   }
   
   @Override
-  public void createBill(com.strangengpuppies.strangengpuppies.model.Service service, Subscriber subscriber, LocalDateTime startDate, LocalDateTime endDate, double amount, String currency) {
+  public void createBill(com.strangengpuppies.strangengpuppies.model.Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
     HashSet<String> listOfCurrencies= new HashSet<>();
     listOfCurrencies.add("USD");
     listOfCurrencies.add("EUR");
@@ -52,7 +54,14 @@ public class BillServiceImpl implements BillService {
     if(!listOfCurrencies.contains(currency)){
       System.out.println("incorrect currency");
     }else {
-      billRepository.createBill(service, subscriber, startDate, endDate, amount, currency);
+      
+      try {
+        LocalDate sDate = LocalDate.parse(startDate);
+        LocalDate eDate = LocalDate.parse(endDate);
+        billRepository.createBill(service, subscriber, sDate, eDate, amount, currency);
+      }catch (DateTimeParseException dateParseEx){
+        System.out.println(dateParseEx.getStackTrace());
+      }
     }
   }
   

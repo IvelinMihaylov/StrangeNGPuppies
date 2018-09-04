@@ -1,6 +1,7 @@
 package com.strangengpuppies.strangengpuppies.repository.base;
 
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
+
 import java.util.List;
 
 public interface SubscriberRepository {
