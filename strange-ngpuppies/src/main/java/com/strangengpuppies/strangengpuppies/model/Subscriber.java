@@ -39,7 +39,6 @@ public class Subscriber implements Serializable {
     @OneToMany(cascade = CascadeType.ALL,
     fetch = FetchType.EAGER,
     mappedBy = "subscriber")
-    @JsonIgnore
     private List<Bill> bills;
 
     public Subscriber() {

@@ -1,5 +1,6 @@
 package com.strangengpuppies.strangengpuppies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -78,7 +79,7 @@ public class Bill implements Serializable {
     public void setService(Service service) {
         this.service = service;
     }
-
+    @JsonIgnore
     public Subscriber getSubscriber() {
         return subscriber;
     }
