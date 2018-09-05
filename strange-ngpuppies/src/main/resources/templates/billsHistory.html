@@ -54,13 +54,15 @@
             <th scope="col">Service</th>
             <th scope="col">Amount</th>
             <th scope="col">Currency</th>
+            <th scope="col">Status</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="bill : ${bills}">
-            <td><a th:text="${bill.service.name} "></a></td>
+            <td th:text="${bill.service.name} "></td>
             <td th:text="${bill.amount}"></td>
             <td th:text="${bill.currency}"></td>
+            <td th:text="${bill.status}"></td>
         </tr>
         </tbody>
     </table>
