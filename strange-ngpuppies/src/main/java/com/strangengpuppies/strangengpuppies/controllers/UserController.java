@@ -3,15 +3,20 @@ package com.strangengpuppies.strangengpuppies.controllers;
 import com.strangengpuppies.strangengpuppies.model.Bill;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.model.User;
+import com.strangengpuppies.strangengpuppies.model.formControl.FormCommand;
+import org.springframework.http.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -53,7 +58,31 @@ public class UserController {
         ModelAndView mav = new ModelAndView("payBill");
         RestTemplate restTemplate = new RestTemplate();
         Subscriber subscriber = restTemplate.getForObject("http://localhost:8080/api/subscriber/byID/"+ phonenumber, Subscriber.class);
+        mav.addObject("command", new FormCommand());
         mav.addObject("bills", subscriber.getBills());
         return mav;
+    }
+
+    @GetMapping(value = "/paybillsform")
+    public String payBills(@ModelAttribute("command") FormCommand command,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()){
+            return "redirect:/billsHistory";
+        }
+        redirectAttributes.addFlashAttribute("command", command);
+        RestTemplate restTemplate = new RestTemplate();
+
+        for (String strId: command.getMultiCheckboxSelectedValues()) {
+            restTemplate.getForObject("http://localhost:8080/api/bill/BillStatusAccept/"+ strId, Void.class);
+        }
+
+
+        return "redirect:/payBillsResult";
+    }
+
+    @GetMapping("/payBillsResult")
+    public String payBillsResult(@ModelAttribute("command") FormCommand command, Model model){
+        return "redirect:/billsHistory";
     }
 }

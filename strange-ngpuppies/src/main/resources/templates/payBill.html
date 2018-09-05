@@ -48,7 +48,10 @@
     </div><!-- /.container-fluid -->
 </nav>
 
+<input form="myForm" type="submit" value="Pay Bills"/>
+<input form="myForm" type="submit" value="Reject Bills"/>
 <div class="container-fluid table-resposive">
+    <form id="myForm" action="#" th:action="@{/paybillsform}" th:object="${command}" method="get">
     <table class="table">
 
         <thead>
@@ -56,16 +59,24 @@
             <th scope="col">Service</th>
             <th scope="col">Amount</th>
             <th scope="col">Currency</th>
+            <th scope="col">Status</th>
+            <th scope="col">Choose</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="bill : ${bills}">
-            <td><a th:text="${bill.service.name} "></a></td>
+            <td th:text="${bill.service.name}"></td>
             <td th:text="${bill.amount}"></td>
             <td th:text="${bill.currency}"></td>
+            <td th:text="${bill.status}"></td>
+            <td>
+                <input type="checkbox" th:field="*{multiCheckboxSelectedValues}" th:value="${bill.id}"/>
+                <label th:for="${#ids.prev('multiCheckboxSelectedValues')}"></label>
+            </td>
         </tr>
         </tbody>
     </table>
+    </form>
 </div>
 
 <script
