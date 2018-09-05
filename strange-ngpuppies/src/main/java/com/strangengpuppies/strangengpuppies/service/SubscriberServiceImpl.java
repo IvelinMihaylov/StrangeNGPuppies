@@ -63,9 +63,9 @@ public class SubscriberServiceImpl implements SubscriberService {
 	 }
   
     }
-    subscribers.clear();
-  
-    while(subscribers.size() <= 10) {
+//    subscribers.clear();
+   subscribers = new ArrayList<>();
+    while(subscribers.size() < 10) {
 	 if(result.size() != 0) {
 	   for(Subscriber sub : ((TreeMap<Double, List<Subscriber>>) result).lastEntry().getValue()) {
 		subscribers.add(sub);
@@ -102,9 +102,9 @@ public class SubscriberServiceImpl implements SubscriberService {
 	 }
 	 
     }
-    subscribers.clear();
-    
-    while(subscribers.size() <= 10) {
+//    subscribers.clear();
+    subscribers = new ArrayList<>();
+    while(subscribers.size() < 10) {
 	 if(result.size() != 0) {
 	   for(Subscriber sub : ((TreeMap<Double, List<Subscriber>>) result).lastEntry().getValue()) {
 		subscribers.add(sub);

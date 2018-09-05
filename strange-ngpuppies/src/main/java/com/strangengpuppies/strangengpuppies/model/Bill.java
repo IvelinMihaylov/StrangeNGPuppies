@@ -1,5 +1,6 @@
 package com.strangengpuppies.strangengpuppies.model;
 
+import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -42,19 +43,29 @@ public class Bill {
   @Column (name = "currency")
   private String currency;
   
-  @Column (name = "status")
+  @Column (name = "status", columnDefinition="String default waiting")
   private String status;
   
   public Bill() {
   }
   
-  public Bill(Service service, Subscriber subscriber, LocalDate startDate, LocalDate endDate, double amount, String currency) {
+  public Bill(@NotNull Service service, @NotNull Subscriber subscriber, @NotNull LocalDate startDate, @NotNull LocalDate endDate, @NotNull double amount, @NotNull String currency) {
     this.service = service;
     this.subscriber = subscriber;
     this.startDate = startDate;
     this.endDate = endDate;
     this.amount = amount;
     this.currency = currency;
+  }
+  
+  public Bill(@NotNull Service service, @NotNull Subscriber subscriber, @NotNull LocalDate startDate, @NotNull LocalDate endDate, @NotNull double amount, @NotNull String currency, String status) {
+    this.service = service;
+    this.subscriber = subscriber;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.amount = amount;
+    this.currency = currency;
+    this.status = status;
   }
   
   public int getId() {

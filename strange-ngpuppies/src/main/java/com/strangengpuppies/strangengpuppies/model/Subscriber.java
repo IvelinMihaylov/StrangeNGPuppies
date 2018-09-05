@@ -50,6 +50,15 @@ public class Subscriber {
         this.bank = bank;
     }
     
+    public Subscriber(@NotNull @Size (min = 10, max = 10) String phoneNumber, @NotNull @Size (min = 1) String firstName, @NotNull @Size (min = 1) String lastName, @NotNull @Size (min = 1) String egn, User bank, List<Bill> bills) {
+        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.egn = egn;
+        this.bank = bank;
+        this.bills = bills;
+    }
+    
     public String getPhoneNumber() {
         return phoneNumber;
     }

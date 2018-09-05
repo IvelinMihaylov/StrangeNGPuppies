@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
   }
   
   @Override
+  public User getUserById(int id) {
+    return userRepository.getUserById(id);
+  }
+  
+  @Override
   public void updateUserById(int id, String username, String password, String eik, String email) {
     User user = userRepository.getUserById(id);
     

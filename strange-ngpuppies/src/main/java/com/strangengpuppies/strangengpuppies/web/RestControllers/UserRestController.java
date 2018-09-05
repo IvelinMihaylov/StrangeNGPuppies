@@ -24,6 +24,12 @@ public class UserRestController {
     return service.listAll();
   }
   
+  @GetMapping ("/getByID/{id}")
+  public User getByID(@PathVariable ("id") String id) {
+    return service.getUserById(Integer.parseInt(id));
+  }
+  
+  
   @PostMapping (value = "/updateUser", headers = "Accept=application/json")
   public void updateUser(String id, String username, String password, String eik, String email) {
     service.updateUserById(Integer.parseInt(id), username, password, eik, email);

@@ -1,18 +1,19 @@
 package com.strangengpuppies.strangengpuppies.service;
 
+import com.strangengpuppies.strangengpuppies.model.Service;
 import com.strangengpuppies.strangengpuppies.model.Bill;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.repository.base.BillingRecordRepository;
 import com.strangengpuppies.strangengpuppies.service.base.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.List;
 
-@Service
+@org.springframework.stereotype.Service
 public class BillServiceImpl implements BillService {
   
   private final BillingRecordRepository billRepository;
@@ -43,7 +44,7 @@ public class BillServiceImpl implements BillService {
   }
   
   @Override
-  public void createBill(com.strangengpuppies.strangengpuppies.model.Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
+  public void createBill(Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
     HashSet<String> listOfCurrencies= new HashSet<>();
     listOfCurrencies.add("USD");
     listOfCurrencies.add("EUR");
