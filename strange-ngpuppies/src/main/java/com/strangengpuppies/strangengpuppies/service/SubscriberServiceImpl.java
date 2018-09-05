@@ -50,14 +50,21 @@ public class SubscriberServiceImpl implements SubscriberService {
     for(Subscriber subscriber : subscribers) {
 	 double amount = 0;
 	 for(Bill bill : subscriber.getBills()) {
-	   amount += bill.getAmount() * changerCurrency(bill.getCurrency());
+	   amount = bill.getAmount() * changerCurrency(bill.getCurrency());
+	   
+	   Subscriber sub = subscriber.clone();
+	   
+	   sub.getBills().add(bill);
+	   
+	   if(!result.containsKey(amount)) {
+		result.put(amount, new ArrayList<>());
+	   }
+	   result.get(amount).add(sub);
 	 }
-	 if(!result.containsKey(amount)) {
-	   result.put(amount, new ArrayList<>());
-	 }
-	 result.get(amount).add(subscriber);
+  
     }
     subscribers.clear();
+  
     while(subscribers.size() <= 10) {
 	 if(result.size() != 0) {
 	   for(Subscriber sub : ((TreeMap<Double, List<Subscriber>>) result).lastEntry().getValue()) {
@@ -68,6 +75,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 	   return subscribers;
 	 }
     }
+  
     return subscribers;
   }
   
@@ -78,10 +86,7 @@ public class SubscriberServiceImpl implements SubscriberService {
     Map<Double, List<Subscriber>> result = new TreeMap<>();
     
     for(Subscriber subscriber : subscribers) {
-	 
-	 LocalDate today = LocalDate.now();
-	 
-	 
+    
 	 for(Bill bill : subscriber.getBills()) {
 	   double score = 0;
 	   score = ((int) (bill.getEndDate().getYear() * 365.2425) + bill.getEndDate().getMonthValue() * 50 + bill.getEndDate().getDayOfMonth());
