@@ -48,8 +48,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<input form="myForm" type="submit" value="Pay Bills"/>
-<input form="myForm" type="submit" value="Reject Bills"/>
+<input class="btn btn-primary" form="myForm" type="submit" value="Pay Bills"/>
 <div class="container-fluid table-resposive">
     <form id="myForm" action="#" th:action="@{/paybillsform}" th:object="${command}" method="get">
     <table class="table">
