@@ -2,14 +2,22 @@ package com.strangengpuppies.strangengpuppies.web.RestContrllers;
 
 import com.strangengpuppies.strangengpuppies.dao.base.UserDao;
 import com.strangengpuppies.strangengpuppies.model.User;
+import com.strangengpuppies.strangengpuppies.model.formControl.FormCommand;
 import com.strangengpuppies.strangengpuppies.service.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
 @RestController
-@RequestMapping ("api/user")
+@RequestMapping ( value = "api/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestController {
   
   
@@ -42,9 +50,9 @@ public class UserRestController {
     service.deleteUserById(Integer.parseInt(id));
   }
   
-  @PostMapping (value = "/createClient", headers = "Accept=application/json")
-  public void createClient(User client) {
-    service.createClient(client.getUsername(), client.getPassword(), client.getEik());
+  @GetMapping (value = "/createClient")
+  public void createClient(@RequestBody User user) {
+      service.createClient(user.getUsername(), user.getPassword(), user.getEik());
   }
   
   @PostMapping (value = "/createAdministator", headers = "Accept=application/json")

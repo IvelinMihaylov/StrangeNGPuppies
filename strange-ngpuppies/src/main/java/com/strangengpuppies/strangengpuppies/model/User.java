@@ -1,11 +1,11 @@
 package com.strangengpuppies.strangengpuppies.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.List;
+
 
 @Entity
 @Table (name = "users")
