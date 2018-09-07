@@ -34,7 +34,7 @@
                         <li><a href="/createClient">Client profile</a></li>
                         <li><a href="/createAdmin">Admin profile</a></li>
                         <li role="separator" class="divider"></li>
-                        <li class="active"><a href="/">Subscriber</a></li>
+                        <li class="active"><a href="/createSubscriber">Subscriber</a></li>
                         <li><a href="#">Bill for a subscriber</a></li>
                     </ul>
                 </li>
@@ -54,34 +54,44 @@
     <div class="row main">
         <div class="main-login main-center">
 
-            <form th:action="@{/createAdminForm}" th:object="${command}" method="post" action="#" >
+            <form th:action="@{/createSubscriberForm}" th:object="${command}" method="post" action="#" >
 
                 <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Username</label>
+                    <label for="username" class="cols-sm-2 control-label">First Name</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input th:field="*{usernameField}" type="text" class="form-control" name="username" id="username"  placeholder="Enter a Username"/>
+                            <input th:field="*{firstName}" type="text" class="form-control" name="username" id="username"  placeholder="Enter First Name"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                    <label for="email" class="cols-sm-2 control-label">Last Name</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input th:field="*{emailField}" type="text" class="form-control" name="email" id="email"  placeholder="Enter a Email"/>
+                            <input th:field="*{lastName}" type="text" class="form-control" name="email" id="email"  placeholder="Enter Last Name"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="password" class="cols-sm-2 control-label">Password</label>
+                    <label for="password" class="cols-sm-2 control-label">Phone Number</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input th:field="*{passwordField}" type="password" class="form-control" name="password" id="password"  placeholder="Enter a Password"/>
+                            <input th:field="*{phonenumber}" type="text" class="form-control" name="password" id="password"  placeholder="Enter Phone Number"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">EGN</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input th:field="*{egn}" type="text" class="form-control" name="password" id="egn"  placeholder="Enter EGN"/>
                         </div>
                     </div>
                 </div>

@@ -52,7 +52,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/resources/static/css/**").permitAll()
                 .antMatchers( "/", "/home", "/subscribers", "/billsHistory", "/payBills/**", "/paybillsform", "/payBillsResult").hasRole("USER")
-                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/admin", "/createAdminForm",
+                        "/createClientForm", "/createSubscriberForm",
+                        "/createClient", "/createAdmin",
+                        "/createSubscriber").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
