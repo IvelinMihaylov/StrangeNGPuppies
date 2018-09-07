@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Client</title>
+    <title>Create Bill</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
@@ -31,8 +31,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li class="active"><a href="/createClient">Client profile</a></li>
-                        <li><a href="/createAdmin">Admin profile</a></li>
+                        <li><a href="/createClient">Client profile</a></li>
+                        <li class="active"><a href="/createAdmin">Admin profile</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/createSubscriber">Subscriber</a></li>
                         <li><a href="#">Bill for a subscriber</a></li>
@@ -54,24 +54,24 @@
     <div class="row main">
         <div class="main-login main-center">
 
-            <form th:action="@{/createClientForm}" th:object="${command}" method="post" action="#" >
+            <form th:action="@{/createAdminForm}" th:object="${command}" method="post" action="#" >
 
                 <div class="form-group">
                     <label for="username" class="cols-sm-2 control-label">Username</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
                             <input th:field="*{usernameField}" type="text" class="form-control" name="username" id="username"  placeholder="Enter a Username"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="email" class="cols-sm-2 control-label">Your EIK</label>
+                    <label for="email" class="cols-sm-2 control-label">Your Email</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-money-check-alt" aria-hidden="true"></i></span>
-                            <input th:field="*{EIK}" type="text" class="form-control" name="email" id="email"  placeholder="Enter a EIK"/>
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input th:field="*{emailField}" type="text" class="form-control" name="email" id="email"  placeholder="Enter a Email"/>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 package com.strangengpuppies.strangengpuppies.controllers;
 
 import com.strangengpuppies.strangengpuppies.model.formControl.FormCommand;
+import com.strangengpuppies.strangengpuppies.service.base.BillService;
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
 import com.strangengpuppies.strangengpuppies.service.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +12,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
+
 @Controller
 public class AdminController {
 
     private final SubscriberService subscriberService;
     private final UserService userService;
+    private final BillService billService;
 
     @Autowired
-    public AdminController(SubscriberService subscriberService, UserService userService) {
+    public AdminController(SubscriberService subscriberService, UserService userService, BillService billService) {
         this.subscriberService = subscriberService;
         this.userService = userService;
+        this.billService = billService;
     }
 
 
@@ -42,6 +47,13 @@ public class AdminController {
     public ModelAndView showCreateSubscriberForm(){
         ModelAndView mav = new ModelAndView("adminCreateSubscriber");
         mav.addObject("command", new FormCommand());
+        return mav;
+    }
+
+    @GetMapping("/createBill")
+    public ModelAndView showCreateBillForm() {
+        ModelAndView mav = new ModelAndView("adminCreateBill");
+        
         return mav;
     }
 
