@@ -47,18 +47,30 @@ public class UserServiceImplTest {
     Assert.assertEquals("panda",result.getUsername());
   }
   
-  @Test @Ignore
+  @Test
   public void updateUserById_Update_Entity() {
+    User user =  new User("panda", "panda123", "pandapower@gmail.com", null, new Role("ADMIN"));
+    Mockito.when(mockRepository.getUserById(1)).thenReturn(user);
+    service.updateUserById(1,"ilovepanda", "panda123", null ,"pandapower@gmail.com");
+    Mockito.verify(mockRepository).updateUser(user);
   }
   
-  @Test @Ignore
+  @Test
   public void deleteUserById_Delete_Entity() {
+    User user =  new User("panda", "panda123", "pandapower@gmail.com", null, new Role("ADMIN"));
+    Mockito.when(mockRepository.getUserById(1)).thenReturn(user);
+    service.deleteUserById(1);
+    Mockito.verify(mockRepository).deleteUser(user);
   }
   
-  @Test @Ignore
+  @Test
   public void createClient_Create_New_Client_Entity() {
+    service.createClient("panda", "panda123", "1232445423");
+    Mockito.verify(mockRepository).createClient("panda", "panda123", "1232445423");
   }
-  @Test @Ignore
+  @Test
   public void createAdministrator_Create_New_Admin_Entity() {
+    service.createAdministrator("panda", "panda123", "pandapower@gmail.com");
+    Mockito.verify(mockRepository).createAdministrator("panda", "panda123", "pandapower@gmail.com");
   }
 }

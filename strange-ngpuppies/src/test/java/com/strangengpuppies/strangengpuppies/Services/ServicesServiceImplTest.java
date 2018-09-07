@@ -4,14 +4,12 @@ import com.strangengpuppies.strangengpuppies.service.ServicesServiceImpl;
 import com.strangengpuppies.strangengpuppies.model.Service;
 import com.strangengpuppies.strangengpuppies.repository.base.ServiceRepository;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,18 +47,21 @@ public class ServicesServiceImplTest {
     Assert.assertEquals("Television", result.getName());
   }
   
-  @Test @Ignore
+  @Test
   public void createService_Create_New_Entity() {
-  
+    service.createService("Television");
+    Mockito.verify(mockRepository).createService("Television");
   }
   
-  @Test @Ignore
+  @Test
   public void updateService_Update_Entity() {
-  
+    service.updateService(0,"Phone");
+    Mockito.verify(mockRepository).updateService(0,"Phone");
   }
   
-  @Test @Ignore
+  @Test
   public void deleteService_Delete_Entity() {
-  
+    service.deleteService(0);
+    Mockito.verify(mockRepository).deleteService(0);
   }
 }

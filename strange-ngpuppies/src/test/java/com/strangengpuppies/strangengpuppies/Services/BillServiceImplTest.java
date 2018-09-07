@@ -5,6 +5,7 @@ import com.strangengpuppies.strangengpuppies.model.Service;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.repository.base.BillingRecordRepository;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +14,15 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 
 @RunWith (MockitoJUnitRunner.class)
 public class BillServiceImplTest {
@@ -23,9 +30,6 @@ public class BillServiceImplTest {
   BillingRecordRepository mockRepository;
   @InjectMocks
   com.strangengpuppies.strangengpuppies.service.BillServiceImpl service;
-  
-  public BillServiceImplTest() {
-  }
   
   @Test
   public void ListAllBills_Returns_Entities() {
@@ -89,33 +93,52 @@ public class BillServiceImplTest {
     Assert.assertEquals("Television", result.getService().getName());
     
   }
-  @Test @Ignore
+
+  @Test
   public void createBill_Returns_Entity() {
-  
-//    	Mockito.doNothing().(this.service.createBill(new Service("Television"),
-//		   new Subscriber(), "2017-08-02", "2018-08-06", 15.0, "BGN"));
-//  	Mockito.validateMockitoUsage();
-//    this.service.createBill(new Service("Television"), new Subscriber(), "2017-08-02", "2018-08-06", 15.0, "BGN");
-  
+    Service television = new Service("Television");
+    Subscriber subscriber = new Subscriber();
+    service.createBill(television, subscriber, "2017-08-02", "2018-08-06", 15.0, "BGN");
+    Mockito.verify(mockRepository).createBill(television, subscriber, LocalDate.of(2017,8,02), LocalDate.of(2018,8,06), 15.0, "BGN");
   }
   
-  @Test @Ignore
+  @Test
   public void updateBills_Update_Entities_With_AcceptStatus() {
-  
+    Service television = new Service("Television");
+    Subscriber subscriber = new Subscriber();
+    Bill bill = new Bill(television, subscriber, LocalDate.of(2018, 8, 2), LocalDate.of(2018, 12, 2), 15.0, "BGN");
+    Mockito.when(this.mockRepository.getAllBills()).thenReturn(Arrays.asList(bill));
+    service.updateBillsAccept();
+    Mockito.verify(mockRepository).updateBills(Arrays.asList(bill));
   }
   
-  @Test @Ignore
+  @Test
   public void updateBills_Update_Entities_With_CancelStatus() {
-  
+    Service television = new Service("Television");
+    Subscriber subscriber = new Subscriber();
+    Bill bill = new Bill(television, subscriber, LocalDate.of(2018, 8, 2), LocalDate.of(2018, 12, 2), 15.0, "BGN");
+    Mockito.when(this.mockRepository.getAllBills()).thenReturn(Arrays.asList(bill));
+    service.updateBillsCancel();
+    Mockito.verify(mockRepository).updateBills(Arrays.asList(bill));
   }
   
-  @Test @Ignore
+  @Test
   public void updateBill_Update_Entity_With_AcceptStatus() {
-  
+    Service television = new Service("Television");
+    Subscriber subscriber = new Subscriber();
+    Bill bill = new Bill(television, subscriber, LocalDate.of(2018, 8, 2), LocalDate.of(2018, 12, 2), 15.0, "BGN");
+    Mockito.when(this.mockRepository.getBillById(1)).thenReturn(bill);
+    service.updateBillByIdAccept(1);
+    Mockito.verify(mockRepository).updateBill(bill);
   }
   
-  @Test @Ignore
+  @Test
   public void updateBill_Update_Entity_With_CancelStatus() {
-  
+    Service television = new Service("Television");
+    Subscriber subscriber = new Subscriber();
+    Bill bill = new Bill(television, subscriber, LocalDate.of(2018, 8, 2), LocalDate.of(2018, 12, 2), 15.0, "BGN");
+    Mockito.when(this.mockRepository.getBillById(1)).thenReturn(bill);
+    service.updateBillByIdCancel(1);
+    Mockito.verify(mockRepository).updateBill(bill);
   }
 }

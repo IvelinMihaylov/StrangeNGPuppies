@@ -7,16 +7,12 @@ import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.SubscriberRepository;
 import com.strangengpuppies.strangengpuppies.service.SubscriberServiceImpl;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
-
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -175,13 +171,23 @@ public class SubscriberServiceImplTest {
     Assert.assertEquals("0893544850",result.getPhoneNumber());
   }
   
-  @Test @Ignore
+  @Test
   public void createSubscriber_Create_New_Entity() {
+    service.createSubscriber("0893544850", "Ivelin", "Mihaylov", "9604081485");
+    Mockito.verify(mockRepository).createSubscriber("0893544850", "Ivelin", "Mihaylov", "9604081485");
   }
-  @Test @Ignore
+  @Test
   public void updateSubscriberByPhonenumber_Update_Entity() {
+    Subscriber subscriber = new Subscriber("0893544850", "Ivelin", "Mihaylov", "9604081485",new User());
+    Mockito.when(mockRepository.getById("0893544850")).thenReturn(subscriber);
+    service.updateSubscriberByPhonenumber("0893544850", "0993544850", "Ivelin", "Mihaylov", "9604081485");
+    Mockito.verify(mockRepository).updateSubscriber(subscriber);
   }
-  @Test @Ignore
+  @Test
   public void deleteSubscriberByPhonenumber_Delete_Entity() {
+    Subscriber subscriber = new Subscriber("0893544850", "Ivelin", "Mihaylov", "9604081485",new User());
+    Mockito.when(mockRepository.getById("0893544850")).thenReturn(subscriber);
+    service.deleteSubscriberByPhonenumber("0893544850");
+    Mockito.verify(mockRepository).deleteSubscriber(subscriber);
   }
 }

@@ -127,8 +127,8 @@ public class Bill {
 //  public Subscriber getSubscriber() {
 //    return subscriber;
 //  }
-//
-//  public void setSubscriber(Subscriber subscriber) {
-//    this.subscriber = subscriber;
-//  }
+
+  public void setSubscriber(Subscriber subscriber) {
+    this.subscriber = subscriber;
+  }
 }
