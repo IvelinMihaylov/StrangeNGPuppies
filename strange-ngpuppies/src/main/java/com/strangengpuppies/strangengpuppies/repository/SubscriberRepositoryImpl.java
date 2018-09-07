@@ -49,8 +49,7 @@ public class SubscriberRepositoryImpl implements SubscriberRepository {
   }
   
   @Override
-  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn) {
-    User bank = new User();
+  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn, User bank) {
     Subscriber subscriber = new Subscriber(phonenumber, firstName, lastName, egn, bank);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();

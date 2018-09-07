@@ -11,11 +11,15 @@ public class FormCommand {
     private String lastName;
     private String egn;
     private String phonenumber;
+    private String dropdownSelectedValue;
+    private String billAmount;
+    private String startDate;
+    private String endDate;
 
     public FormCommand() {
     }
 
-    public FormCommand(String[] multiCheckboxSelectedValues, String usernameField, String passwordField, String emailField, String eik, String firstName, String lastName, String egn, String phonenumber) {
+    public FormCommand(String[] multiCheckboxSelectedValues, String usernameField, String passwordField, String emailField, String eik, String firstName, String lastName, String egn, String phonenumber, String dropdownSelectedValue, String billAmount, String startDate, String endDate) {
         this.multiCheckboxSelectedValues = multiCheckboxSelectedValues;
         this.usernameField = usernameField;
         this.passwordField = passwordField;
@@ -25,6 +29,10 @@ public class FormCommand {
         this.lastName = lastName;
         this.egn = egn;
         this.phonenumber = phonenumber;
+        this.dropdownSelectedValue = dropdownSelectedValue;
+        this.billAmount = billAmount;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public String[] getMultiCheckboxSelectedValues() {
@@ -97,5 +105,37 @@ public class FormCommand {
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
+    }
+
+    public String getDropdownSelectedValue() {
+        return dropdownSelectedValue;
+    }
+
+    public void setDropdownSelectedValue(String dropdownSelectedValue) {
+        this.dropdownSelectedValue = dropdownSelectedValue;
+    }
+
+    public String getBillAmount() {
+        return billAmount;
+    }
+
+    public void setBillAmount(String billAmount) {
+        this.billAmount = billAmount;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

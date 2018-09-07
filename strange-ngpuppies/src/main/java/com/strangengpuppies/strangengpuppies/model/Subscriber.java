@@ -28,11 +28,11 @@ public class Subscriber implements Serializable {
     @Column(name = "EGN")
     private String egn;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "bankID")
     private User bank;
     
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(cascade = CascadeType.MERGE,
     fetch = FetchType.EAGER,
     mappedBy = "subscriber")
     private List<Bill> bills;
@@ -98,4 +98,6 @@ public class Subscriber implements Serializable {
     public void setBank(User bank) {
         this.bank = bank;
     }
+
+    public User totalyNotGetBank(){ return bank;}
 }

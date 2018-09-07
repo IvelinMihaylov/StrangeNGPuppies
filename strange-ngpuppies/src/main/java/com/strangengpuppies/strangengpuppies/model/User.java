@@ -30,11 +30,11 @@ public class User implements Serializable {
   private String eik;
   
   
-  @ManyToOne (cascade = CascadeType.ALL)
+  @ManyToOne (cascade = CascadeType.MERGE)
   @JoinColumn (name = "roleID")
   private Role role;
   
-  @OneToMany (cascade = CascadeType.ALL,
+  @OneToMany (cascade = CascadeType.MERGE,
 		fetch = FetchType.EAGER,
 		mappedBy = "bank")
   private List<Subscriber> subscribers;

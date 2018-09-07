@@ -79,7 +79,7 @@ public class BillingRecordRepositoryImpl implements BillingRecordRepository {
     Bill bill = new Bill(service,subscriber,startDate,endDate,amount,currency);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
-	 session.save(bill);
+	 session.saveOrUpdate(bill);
 	 session.getTransaction().commit();
     } catch (Exception ex) {
 	 System.out.println(ex.getMessage());

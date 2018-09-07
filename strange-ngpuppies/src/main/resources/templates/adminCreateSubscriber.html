@@ -35,7 +35,7 @@
                         <li><a href="/createAdmin">Admin profile</a></li>
                         <li role="separator" class="divider"></li>
                         <li class="active"><a href="/createSubscriber">Subscriber</a></li>
-                        <li><a href="#">Bill for a subscriber</a></li>
+                        <li><a href="/createBill">Bill for a subscriber</a></li>
                     </ul>
                 </li>
             </ul>
@@ -92,6 +92,21 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fas fa-fingerprint" aria-hidden="true"></i></span>
                             <input th:field="*{egn}" type="text" class="form-control" name="password" id="egn"  placeholder="Enter EGN"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dropdown" class="cols-sm-2 control-label">Bank</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <select name="dropdown" id="dropdown" th:field="*{dropdownSelectedValue}" class="form-control">
+                                <option
+                                        th:each="bank: ${banks}"
+                                        th:value="${bank.id}"
+                                        th:text="${bank.username}" ></option>
+                            </select>
                         </div>
                     </div>
                 </div>

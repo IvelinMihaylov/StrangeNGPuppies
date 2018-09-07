@@ -4,13 +4,17 @@ package com.strangengpuppies.strangengpuppies.web.RestContrllers;
 import com.strangengpuppies.strangengpuppies.model.Service;
 import com.strangengpuppies.strangengpuppies.service.ServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.List;
 
-@RestController("api/service")
+@RestController
+@RequestMapping(value = "api/service", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ServiceRestController {
     private final ServicesService servicesService;
 

@@ -119,8 +119,8 @@ public class SubscriberServiceImpl implements SubscriberService {
   }
   
   @Override
-  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn) {
-    subscriberRepository.createSubscriber(phonenumber, firstName, lastName, egn);
+  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn, User bank) {
+    subscriberRepository.createSubscriber(phonenumber, firstName, lastName, egn, bank);
   }
   
   @Override

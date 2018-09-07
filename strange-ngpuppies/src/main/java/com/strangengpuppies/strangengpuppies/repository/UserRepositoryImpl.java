@@ -33,6 +33,20 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return users;
     }
+    @Override
+    public List<User> listAllBanks() {
+        List<User> users = new ArrayList<>();
+        try(Session session = factory.openSession()){
+            session.beginTransaction();
+            users = session.createQuery("from User u where u.role.id = :roleID", User.class)
+                    .setParameter("roleID", 2)
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return users;
+    }
   
   @Override
   public User getUserById(int id) {

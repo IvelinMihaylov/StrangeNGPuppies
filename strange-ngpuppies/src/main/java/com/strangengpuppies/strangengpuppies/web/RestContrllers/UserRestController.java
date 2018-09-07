@@ -35,6 +35,11 @@ public class UserRestController {
     return service.listAll();
   }
 
+  @GetMapping("/listAllBanks")
+  public List<User> listAllBanks() {
+    return service.listAllBanks();
+  }
+
   @GetMapping("/getUserByUsername/{username}")
   public User getUserByUsername(@PathVariable String username) {
       return userDao.findUserByUsername(username);

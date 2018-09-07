@@ -18,7 +18,7 @@ public class Bill implements Serializable {
     private int id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "serviceID")
     private Service service;
 
@@ -27,12 +27,12 @@ public class Bill implements Serializable {
     @JoinColumn(name = "subscriberID")
     private Subscriber subscriber;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     @Column(name = "startdate")
     private String startDate;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     @Column(name = "enddate")
     private String endDate;

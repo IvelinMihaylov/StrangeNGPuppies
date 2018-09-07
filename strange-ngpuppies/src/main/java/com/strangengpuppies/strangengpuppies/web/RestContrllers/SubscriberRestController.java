@@ -42,7 +42,7 @@ public class SubscriberRestController {
   
   @PostMapping ("/create")
   public void createSubscriber(Subscriber subscriber) {
-  service.createSubscriber(subscriber.getPhoneNumber(),subscriber.getFirstName(),subscriber.getLastName(),subscriber.getEgn());
+  service.createSubscriber(subscriber.getPhoneNumber(),subscriber.getFirstName(),subscriber.getLastName(),subscriber.getEgn(), subscriber.getBank());
   }
   
   @PostMapping ("/update")
