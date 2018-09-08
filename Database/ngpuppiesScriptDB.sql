@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: drstrange-ngpuppies
+-- Host: localhost    Database: ngpuppies
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.3.8-MariaDB
 
@@ -26,26 +26,19 @@ CREATE TABLE `bills` (
   `billID` int(11) NOT NULL,
   `serviceID` int(11) NOT NULL,
   `subscriberID` varchar(50) NOT NULL,
-  `startdate` varchar(255) NOT NULL,
-  `enddate` varchar(255) NOT NULL,
+  `startdate` datetime NOT NULL,
+  `enddate` datetime NOT NULL,
   `amount` double NOT NULL,
-  `paymentdate` varchar(255) NOT NULL,
+  `currency` varchar(10) NOT NULL,
+  `status` varchar(45) NOT NULL DEFAULT 'waiting',
   PRIMARY KEY (`billID`),
+  UNIQUE KEY `billID_UNIQUE` (`billID`),
   KEY `FK__services` (`serviceID`),
   KEY `FK__subscribers` (`subscriberID`),
   CONSTRAINT `FK__services` FOREIGN KEY (`serviceID`) REFERENCES `services` (`serviceID`),
   CONSTRAINT `FK__subscribers` FOREIGN KEY (`subscriberID`) REFERENCES `subscribers` (`phonenumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bills`
---
-
-LOCK TABLES `bills` WRITE;
-/*!40000 ALTER TABLE `bills` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bills` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `roles`
@@ -58,17 +51,8 @@ CREATE TABLE `roles` (
   `roleID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`roleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `roles`
---
-
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `services`
@@ -79,19 +63,10 @@ DROP TABLE IF EXISTS `services`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `services` (
   `serviceID` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
+  `name` varchar(65) NOT NULL,
   PRIMARY KEY (`serviceID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `services`
---
-
-LOCK TABLES `services` WRITE;
-/*!40000 ALTER TABLE `services` DISABLE KEYS */;
-/*!40000 ALTER TABLE `services` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `subscribers`
@@ -107,19 +82,11 @@ CREATE TABLE `subscribers` (
   `EGN` varchar(10) NOT NULL,
   `bankID` int(11) NOT NULL,
   PRIMARY KEY (`phonenumber`),
+  UNIQUE KEY `phonenumber_UNIQUE` (`phonenumber`),
   KEY `FK__users` (`bankID`),
   CONSTRAINT `FK__users` FOREIGN KEY (`bankID`) REFERENCES `users` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `subscribers`
---
-
-LOCK TABLES `subscribers` WRITE;
-/*!40000 ALTER TABLE `subscribers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `subscribers` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -132,22 +99,24 @@ CREATE TABLE `users` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `EIK` varchar(50) NOT NULL,
+  `EIK` varchar(50) DEFAULT NULL,
   `roleID` int(11) NOT NULL,
+  `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userID`),
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `roleID` (`roleID`),
   CONSTRAINT `FK_users_roles` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping events for database 'ngpuppies'
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
+--
+-- Dumping routines for database 'ngpuppies'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -158,4 +127,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-20 15:05:10
+-- Dump completed on 2018-09-08 17:16:05
