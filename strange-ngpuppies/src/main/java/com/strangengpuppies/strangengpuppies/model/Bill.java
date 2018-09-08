@@ -1,8 +1,6 @@
 package com.strangengpuppies.strangengpuppies.model;
 
-import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -25,12 +23,12 @@ public class Bill {
   @JoinColumn (name = "subscriberID")
   private Subscriber subscriber;
   
-  @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+  @DateTimeFormat (pattern = "yyyy-MM-dd HH:mm:ss")
   @NotNull
   @Column (name = "startdate")
   private LocalDate startDate;
   
-  @DateTimeFormat(pattern="yyyy-MM-dd")
+  @DateTimeFormat (pattern = "yyyy-MM-dd")
   @NotNull
   @Column (name = "enddate")
   private LocalDate endDate;
@@ -43,7 +41,7 @@ public class Bill {
   @Column (name = "currency")
   private String currency;
   
-  @Column (name = "status", columnDefinition="String default waiting")
+  @Column (name = "status", columnDefinition = "String default waiting")
   private String status;
   
   public Bill() {
@@ -119,7 +117,7 @@ public class Bill {
   public Service getService() {
     return service;
   }
-
+  
   public void setService(Service service) {
     this.service = service;
   }
@@ -127,7 +125,7 @@ public class Bill {
 //  public Subscriber getSubscriber() {
 //    return subscriber;
 //  }
-
+  
   public void setSubscriber(Subscriber subscriber) {
     this.subscriber = subscriber;
   }

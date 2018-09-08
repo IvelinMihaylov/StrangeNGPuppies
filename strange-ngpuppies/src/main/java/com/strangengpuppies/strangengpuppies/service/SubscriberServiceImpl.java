@@ -3,11 +3,12 @@ package com.strangengpuppies.strangengpuppies.service;
 import com.strangengpuppies.strangengpuppies.model.Bill;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.repository.base.SubscriberRepository;
+import com.strangengpuppies.strangengpuppies.service.Exception.InvalidDateException;
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
+import org.springframework.beans.InvalidPropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -61,10 +62,10 @@ public class SubscriberServiceImpl implements SubscriberService {
 	   }
 	   result.get(amount).add(sub);
 	 }
-  
+	 
     }
 //    subscribers.clear();
-   subscribers = new ArrayList<>();
+    subscribers = new ArrayList<>();
     while(subscribers.size() < 10) {
 	 if(result.size() != 0) {
 	   for(Subscriber sub : ((TreeMap<Double, List<Subscriber>>) result).lastEntry().getValue()) {
@@ -75,7 +76,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 	   return subscribers;
 	 }
     }
-  
+    
     return subscribers;
   }
   
@@ -86,7 +87,7 @@ public class SubscriberServiceImpl implements SubscriberService {
     Map<Double, List<Subscriber>> result = new TreeMap<>();
     
     for(Subscriber subscriber : subscribers) {
-    
+	 
 	 for(Bill bill : subscriber.getBills()) {
 	   double score = 0;
 	   score = ((int) (bill.getEndDate().getYear() * 365.2425) + bill.getEndDate().getMonthValue() * 50 + bill.getEndDate().getDayOfMonth());
@@ -124,7 +125,27 @@ public class SubscriberServiceImpl implements SubscriberService {
   }
   
   @Override
-  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn) {
+  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn) throws InvalidDateException {
+    if(phonenumber.length() < 10 || phonenumber.length() > 10) {
+	 if(phonenumber.length() == 0) {
+	   throw new NullPointerException("Empty phone number field.");
+	 } else {
+	   throw new InvalidDateException("Invalid phone number field.Phone number should be 10 digit number.");
+	 }
+    }
+    if(firstName.length() == 0) {
+	 throw new NullPointerException("Empty first name field.");
+    }
+    if(lastName.length() == 0) {
+	 throw new NullPointerException("Empty first name field.");
+    }
+    if(egn.length() < 10 || egn.length() > 10) {
+	 if(egn.length() == 0) {
+	   throw new NullPointerException("Empty first name field.");
+	 } else {
+	   throw new InvalidDateException("Invalid EGN field.EGN should be 10 digit number.");
+	 }
+    }
     subscriberRepository.createSubscriber(phonenumber, firstName, lastName, egn);
   }
   

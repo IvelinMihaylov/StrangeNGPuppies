@@ -1,6 +1,7 @@
 package com.strangengpuppies.strangengpuppies.web.RestControllers;
 
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
+import com.strangengpuppies.strangengpuppies.service.Exception.InvalidDateException;
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,28 +30,28 @@ public class SubscriberRestController {
   }
   
   @GetMapping ("/getTopTenPayer")
-  public List<Subscriber> getTopTenPayer(){
+  public List<Subscriber> getTopTenPayer() {
     return service.getTopTenPayer();
   }
   
   @GetMapping ("/getTopTenLastPayment")
-  public List<Subscriber> getTopTenLastPayment(){
+  public List<Subscriber> getTopTenLastPayment() {
     return service.getTopTenLastPayment();
   }
   
   @PostMapping ("/create")
-  public void createSubscriber(Subscriber subscriber) {
-  service.createSubscriber(subscriber.getPhoneNumber(),subscriber.getFirstName(),subscriber.getLastName(),subscriber.getEgn());
+  public void createSubscriber(Subscriber subscriber) throws InvalidDateException {
+    service.createSubscriber(subscriber.getPhoneNumber(), subscriber.getFirstName(), subscriber.getLastName(), subscriber.getEgn());
   }
   
   @PostMapping ("/update")
-  public void updateSubscriber(String currentlyPhonenumber, String newPhonenumber, String firstname, String lastname, String egn ) {
-  service.updateSubscriberByPhonenumber(currentlyPhonenumber, newPhonenumber, firstname, lastname, egn);
+  public void updateSubscriber(String currentlyPhonenumber, String newPhonenumber, String firstname, String lastname, String egn) {
+    service.updateSubscriberByPhonenumber(currentlyPhonenumber, newPhonenumber, firstname, lastname, egn);
   }
   
   @PostMapping ("/delete/{phonenumber}")
   public void deleteSubscriber(@PathVariable ("phonenumber") String phonenumber) {
-  service.deleteSubscriberByPhonenumber(phonenumber);
+    service.deleteSubscriberByPhonenumber(phonenumber);
   }
   
 }

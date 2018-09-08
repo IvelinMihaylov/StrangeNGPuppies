@@ -10,34 +10,34 @@ import java.util.List;
 
 @org.springframework.stereotype.Service
 public class ServicesServiceImpl implements ServicesService {
-
+  
   private final ServiceRepository serviceRepository;
-
+  
   @Autowired
-  public ServicesServiceImpl(ServiceRepository serviceRepository){
+  public ServicesServiceImpl(ServiceRepository serviceRepository) {
     this.serviceRepository = serviceRepository;
   }
-
+  
   @Override
   public List<Service> getAllService() {
     return serviceRepository.getAllService();
   }
-
+  
   @Override
   public com.strangengpuppies.strangengpuppies.model.Service getServiceByID(int id) {
     return serviceRepository.getServiceByID(id);
   }
-
+  
   @Override
   public void createService(String name) {
     serviceRepository.createService(name);
   }
-
+  
   @Override
   public void updateService(int id, String name) {
-    serviceRepository.updateService(id,name);
+    serviceRepository.updateService(id, name);
   }
-
+  
   @Override
   public void deleteService(int id) {
     serviceRepository.deleteService(id);

@@ -39,7 +39,7 @@ public class SubscriberRepositoryImpl implements SubscriberRepository {
     Subscriber subscriber = new Subscriber();
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
-	 subscriber = session.get(Subscriber.class,phonenumber);
+	 subscriber = session.get(Subscriber.class, phonenumber);
 	 session.getTransaction().commit();
     } catch (Exception ex) {
 	 System.out.println(ex.getMessage());

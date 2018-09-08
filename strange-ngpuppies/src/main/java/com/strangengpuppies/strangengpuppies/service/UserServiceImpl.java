@@ -34,22 +34,22 @@ public class UserServiceImpl implements UserService {
     User user = userRepository.getUserById(id);
     
     if(username != null) {
-	 if (username.length() > 0){
+	 if(username.length() > 0) {
 	   user.setUsername(username);
 	 }
     }
     if(password != null) {
-	 if (password.length() > 0) {
+	 if(password.length() > 0) {
 	   user.setPassword(password);
 	 }
     }
     if(eik != null) {
-	 if (eik.length() > 0) {
+	 if(eik.length() > 0) {
 	   user.setEik(eik);
 	 }
     }
     if(email != null) {
-	 if (email.length()>0) {
+	 if(email.length() > 0) {
 	   user.setEmail(email);
 	 }
     }
@@ -64,20 +64,29 @@ public class UserServiceImpl implements UserService {
   
   @Override
   public void createClient(String username, String password, String eik) {
-    if(username != null && password != null && eik != null && username.length() > 0 && password.length() > 0 && eik.length() > 0) {
-	 userRepository.createClient(username, password, eik);
-    }else {
-	 System.out.println("Incorrect data for create client.");
+    if(username == null && username.length() == 0) {
+	 throw new NullPointerException("Empty username field");
     }
+    if(password == null && password.length() == 0) {
+	 throw new NullPointerException("Empty password field");
+    }
+    if(eik == null && eik.length() == 0) {
+	 throw new NullPointerException("Empty eik field");
+    }
+    userRepository.createClient(username, password, eik);
   }
   
   @Override
   public void createAdministrator(String username, String password, String email) {
-    if(username != null || password != null || email != null && username.length() > 0 && password.length() > 0 && email.length() > 0) {
-	 userRepository.createAdministrator(username, password, email);
-    }else {
-	 System.out.println("Incorrect data for create admin.");
+    if(username == null && username.length() == 0) {
+	 throw new NullPointerException("Empty username field");
     }
-    
+    if(password == null && password.length() == 0) {
+	 throw new NullPointerException("Empty password field");
+    }
+    if(email == null && email.length() == 0) {
+	 throw new NullPointerException("Empty email field");
+    }
+    userRepository.createAdministrator(username, password, email);
   }
 }

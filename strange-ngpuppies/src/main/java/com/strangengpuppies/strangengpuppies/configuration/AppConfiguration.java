@@ -8,17 +8,17 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 
-@PropertySource("classpath:application.properties")
+@PropertySource ("classpath:application.properties")
 public class AppConfiguration {
-    @Bean
-    public SessionFactory createFactory(){
-        return new org.hibernate.cfg.Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(User.class)
-                .addAnnotatedClass(Role.class)
-                .addAnnotatedClass(Bill.class)
-                .addAnnotatedClass(Service.class)
-                .addAnnotatedClass(Subscriber.class)
-                .buildSessionFactory();
-    }
+  @Bean
+  public SessionFactory createFactory() {
+    return new org.hibernate.cfg.Configuration()
+		  .configure("hibernate.cfg.xml")
+		  .addAnnotatedClass(User.class)
+		  .addAnnotatedClass(Role.class)
+		  .addAnnotatedClass(Bill.class)
+		  .addAnnotatedClass(Service.class)
+		  .addAnnotatedClass(Subscriber.class)
+		  .buildSessionFactory();
+  }
 }

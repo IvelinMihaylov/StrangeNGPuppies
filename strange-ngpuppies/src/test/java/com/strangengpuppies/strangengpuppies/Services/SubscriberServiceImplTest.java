@@ -5,6 +5,7 @@ import com.strangengpuppies.strangengpuppies.model.Service;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.SubscriberRepository;
+import com.strangengpuppies.strangengpuppies.service.Exception.InvalidDateException;
 import com.strangengpuppies.strangengpuppies.service.SubscriberServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +28,7 @@ public class SubscriberServiceImplTest {
   
   @Test
   public void getAllSubscriber_Returns_Entities() {
+    // ARRANGE
     Mockito.when(mockRepository.getAllSubscriber()).thenReturn(
 		  Arrays.asList(
 				new Subscriber("0893544850", "Aleksandar", "Chuchendjiev", "9903027342", new User()),
@@ -33,7 +36,9 @@ public class SubscriberServiceImplTest {
 				new Subscriber("05478525479", "Minka", "Minkova", "8705228524", new User()),
 				new Subscriber("0951231457", "Qnko", "Beleliev", "7612034312", new User())
 		  ));
+    // ACT
     List<Subscriber> result = this.service.getAllSubscriber();
+    // ASSERT
     Assert.assertEquals(4, result.size());
     Assert.assertEquals("0893544850", (result.get(0)).getPhoneNumber());
     Assert.assertEquals("0889944552", (result.get(1)).getPhoneNumber());
@@ -43,6 +48,7 @@ public class SubscriberServiceImplTest {
   
   @Test
   public void getTopTenPayer_Returns_TopTenEntities() {
+    // ARRANGE
     Mockito.when(mockRepository.getAllSubscriber()).thenReturn(
 		  Arrays.asList(
 				new Subscriber("0893544850",
@@ -84,7 +90,9 @@ public class SubscriberServiceImplTest {
 							 new Bill(new Service(), new Subscriber(), LocalDate.now(), LocalDate.now(), 9.99, "BGN")
 					   ))
 		  ));
+    // ACT
     List<Subscriber> result = this.service.getTopTenPayer();
+    // ASSERT
     Assert.assertEquals(10, result.size());
     Assert.assertEquals(96.87, result.get(0).getBills().get(0).getAmount(), 0.001);
     Assert.assertEquals(95.99d, result.get(1).getBills().get(0).getAmount(), 0.001);
@@ -100,6 +108,7 @@ public class SubscriberServiceImplTest {
   
   @Test
   public void getTopTenLastPaymentr_Returns_TopTenEntities() {
+    // ARRANGE
     Mockito.when(mockRepository.getAllSubscriber()).thenReturn(
 		  Arrays.asList(
 				new Subscriber("0893544850",
@@ -143,7 +152,9 @@ public class SubscriberServiceImplTest {
 							 new Bill(new Service(), new Subscriber(), LocalDate.of(2017, 03, 03), LocalDate.of(2018, 07, 29), 9.99, "BGN")
 					   ))
 		  ));
+    // ACT
     List<Subscriber> result = this.service.getTopTenLastPayment();
+    // ASSERT
     Assert.assertEquals(10, result.size());
     Assert.assertEquals(LocalDate.of(2018, 07, 29), result.get(0).getBills().get(0).getEndDate());
     Assert.assertEquals(LocalDate.of(2018, 07, 25), result.get(1).getBills().get(0).getEndDate());
@@ -159,6 +170,7 @@ public class SubscriberServiceImplTest {
   
   @Test
   public void getTopTenLastPayment_Returns_Entity() {
+    // ARRANGE
     Mockito.when(mockRepository.getById("0893544850")).thenReturn(
 		  
 		  new Subscriber("0893544850",
@@ -167,27 +179,39 @@ public class SubscriberServiceImplTest {
 				"9903027342",
 				new User())
     );
+    // ACT
     Subscriber result = this.service.getByPhonenumber("0893544850");
-    Assert.assertEquals("0893544850",result.getPhoneNumber());
+    // ASSERT
+    Assert.assertEquals("0893544850", result.getPhoneNumber());
   }
   
   @Test
-  public void createSubscriber_Create_New_Entity() {
+  public void createSubscriber_Create_New_Entity() throws InvalidDateException {
+    // ACT
     service.createSubscriber("0893544850", "Ivelin", "Mihaylov", "9604081485");
+    // ASSERT
     Mockito.verify(mockRepository).createSubscriber("0893544850", "Ivelin", "Mihaylov", "9604081485");
   }
+  
   @Test
   public void updateSubscriberByPhonenumber_Update_Entity() {
-    Subscriber subscriber = new Subscriber("0893544850", "Ivelin", "Mihaylov", "9604081485",new User());
+    // ARRANGE
+    Subscriber subscriber = new Subscriber("0893544850", "Ivelin", "Mihaylov", "9604081485", new User());
     Mockito.when(mockRepository.getById("0893544850")).thenReturn(subscriber);
+    // ACT
     service.updateSubscriberByPhonenumber("0893544850", "0993544850", "Ivelin", "Mihaylov", "9604081485");
+    // ASSERT
     Mockito.verify(mockRepository).updateSubscriber(subscriber);
   }
+  
   @Test
   public void deleteSubscriberByPhonenumber_Delete_Entity() {
-    Subscriber subscriber = new Subscriber("0893544850", "Ivelin", "Mihaylov", "9604081485",new User());
+    // ARRANGE
+    Subscriber subscriber = new Subscriber("0893544850", "Ivelin", "Mihaylov", "9604081485", new User());
     Mockito.when(mockRepository.getById("0893544850")).thenReturn(subscriber);
+    // ACT
     service.deleteSubscriberByPhonenumber("0893544850");
+    // ASSERT
     Mockito.verify(mockRepository).deleteSubscriber(subscriber);
   }
 }

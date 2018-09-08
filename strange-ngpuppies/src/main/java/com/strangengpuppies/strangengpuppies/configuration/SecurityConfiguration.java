@@ -17,55 +17,55 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    @Qualifier("userDetailsService")
-    private final UserDetailsService userDetailsService = new MyUserDetailsService();
-
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        configureGlobal(auth);
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-        auth.authenticationProvider(authenticationProvider());
-    }
-
-    @Autowired
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("../static/**").permitAll()
-                .antMatchers("/static/js/**").permitAll()
-                .antMatchers("/").hasAnyRole("USER","ADMIN")
-                .antMatchers("/admin").hasRole("ADMIN")
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/authenticateUser")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .permitAll()
-                .and()
-                .logout().logoutSuccessUrl("/login?logout")
-                .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedPage("/access-denied");
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
+  @Autowired
+  @Qualifier ("userDetailsService")
+  private final UserDetailsService userDetailsService = new MyUserDetailsService();
+  
+  
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    configureGlobal(auth);
+  }
+  
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsService);
+    auth.authenticationProvider(authenticationProvider());
+  }
+  
+  @Autowired
+  public DaoAuthenticationProvider authenticationProvider() {
+    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+    authenticationProvider.setUserDetailsService(userDetailsService);
+    authenticationProvider.setPasswordEncoder(passwordEncoder());
+    return authenticationProvider;
+  }
+  
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests()
+		  .antMatchers("../static/**").permitAll()
+		  .antMatchers("/static/js/**").permitAll()
+		  .antMatchers("/").hasAnyRole("USER", "ADMIN")
+		  .antMatchers("/admin").hasRole("ADMIN")
+		  .and()
+		  .formLogin()
+		  .loginPage("/login")
+		  .loginProcessingUrl("/authenticateUser")
+		  .usernameParameter("username")
+		  .passwordParameter("password")
+		  .permitAll()
+		  .and()
+		  .logout().logoutSuccessUrl("/login?logout")
+		  .permitAll()
+		  .and()
+		  .exceptionHandling().accessDeniedPage("/access-denied");
+  }
+  
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
+  
+  
 }

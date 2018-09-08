@@ -12,27 +12,27 @@ import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    @SuppressWarnings("unchecked")
-    public User findUserByUsername(String username) {
-        List<User> users = new ArrayList<>();
-        try(Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            users = session.createQuery("from User as U where U.username = :username", User.class)
-                    .setParameter("username", username)
-                    .list();
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        if (users.size() > 0) {
-            return users.get(0);
-        } else {
-            return null;
-        }
+  
+  @Autowired
+  private SessionFactory sessionFactory;
+  
+  @SuppressWarnings ("unchecked")
+  public User findUserByUsername(String username) {
+    List<User> users = new ArrayList<>();
+    try (Session session = sessionFactory.openSession()) {
+	 session.beginTransaction();
+	 users = session.createQuery("from User as U where U.username = :username", User.class)
+		    .setParameter("username", username)
+		    .list();
+	 session.getTransaction().commit();
+    } catch (Exception ex) {
+	 System.out.println(ex.getMessage());
     }
+    
+    if(users.size() > 0) {
+	 return users.get(0);
+    } else {
+	 return null;
+    }
+  }
 }

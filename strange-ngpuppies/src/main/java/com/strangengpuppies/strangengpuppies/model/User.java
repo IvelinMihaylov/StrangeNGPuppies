@@ -15,12 +15,12 @@ public class User {
   private int id;
   
   @NotNull
-  @Size(min = 1)
+  @Size (min = 1)
   @Column (name = "username")
   private String username;
   
   @NotNull
-  @Size(min = 1)
+  @Size (min = 1)
   @Column (name = "password")
   private String password;
   
@@ -94,7 +94,7 @@ public class User {
   public List<Subscriber> getSubscribers() {
     return subscribers;
   }
-
+  
   public void setSubscribers(List<Subscriber> subscribers) {
     this.subscribers = subscribers;
   }

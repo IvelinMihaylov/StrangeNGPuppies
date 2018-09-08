@@ -9,12 +9,17 @@ import java.util.List;
 
 public interface BillingRecordRepository {
   List<Bill> getAllBills();
+  
   List<Bill> getReadyBills();
+  
   List<Bill> getNonReadyBills();
+  
   Bill getBillById(int id);
   
   void createBill(Service service, Subscriber subscriber, LocalDate startDate, LocalDate endDate, double amount, String currency);
+  
   void updateBills(List<Bill> bills);
+  
   void updateBill(Bill bill);
   
 }

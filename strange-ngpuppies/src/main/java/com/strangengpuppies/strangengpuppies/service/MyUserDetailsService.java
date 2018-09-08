@@ -17,13 +17,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service("userDetailsService")
+@Service ("userDetailsService")
 public class MyUserDetailsService implements UserDetailsService {
   
   @Autowired
   private UserDao userDao;
   
-  @Transactional(readOnly = true)
+  @Transactional (readOnly = true)
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userDao.findUserByUsername(username);
