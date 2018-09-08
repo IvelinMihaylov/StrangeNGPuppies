@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -57,7 +58,6 @@ public class AdminController {
         mav.addObject("command", new FormCommand());
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List<User>> responseEntity = restTemplate.exchange("http://localhost:8080/api/user/listAllBanks", HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>() {} );
-        responseEntity.getBody().stream().map(User::getUsername).forEach(System.out::println);
         mav.addObject("banks", responseEntity.getBody());
         return mav;
     }
@@ -70,61 +70,15 @@ public class AdminController {
         ResponseEntity<List<Service>> responseEntity = restTemplate.exchange("http://localhost:8080/api/service/allservices",
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Service>>() {});
         mav.addObject("services", responseEntity.getBody());
+        HashSet<String> listOfCurrencies= new HashSet<>();
+        listOfCurrencies.add("USD");
+        listOfCurrencies.add("EUR");
+        listOfCurrencies.add("GBP");
+        listOfCurrencies.add("RUB");
+        listOfCurrencies.add("BGN");
+
+        mav.addObject("currencies", listOfCurrencies);
+
         return mav;
-    }
-
-    @PostMapping("/createBillForm")
-    public String createBill(@ModelAttribute("command")FormCommand command,
-                             BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            return "redirect:/admin";
-        }
-        RestTemplate restTemplate = new RestTemplate();
-        String url;
-
-        Subscriber subscriber = subscriberService.getByPhonenumber(command.getPhonenumber());
-
-
-        url = String.format("http://localhost:8080/api/service/byId/%s", command.getDropdownSelectedValue());
-        Service service = restTemplate.getForObject(url,Service.class);
-
-
-
-        billService.createBill(service, subscriber, command.getStartDate(), command.getEndDate(), Double.parseDouble(command.getBillAmount()), "BGN");
-        return "redirect:/admin";
-    }
-
-    @PostMapping("/createClientForm")
-    public String createClient(@ModelAttribute("command")FormCommand command,
-                               BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            return "redirect:/admin";
-        }
-        userService.createClient(command.getUsernameField(), command.getPasswordField(), command.getEIK());
-        return "redirect:/admin";
-    }
-
-    @PostMapping("/createAdminForm")
-    public String createAdmin(@ModelAttribute("command")FormCommand command,
-                               BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            return "redirect:/admin";
-        }
-        userService.createAdministrator(command.getUsernameField(), command.getPasswordField(), command.getEmailField());
-        return "redirect:/admin";
-    }
-
-    @PostMapping("/createSubscriberForm")
-    public String createSubscriber(@ModelAttribute("command")FormCommand command,
-                              BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            return "redirect:/admin";
-        }
-
-        int id = Integer.parseInt(command.getDropdownSelectedValue());
-        User bank = userService.listAllBanks().stream().filter(x -> x.getId() == id).findFirst().orElse(null);
-
-        subscriberService.createSubscriber(command.getPhonenumber(), command.getFirstName(), command.getLastName(), command.getEgn(), bank);
-        return "redirect:/admin";
     }
 }

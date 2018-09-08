@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -56,12 +58,14 @@ public class UserRestController {
   }
   
   @GetMapping (value = "/createClient")
-  public void createClient(@RequestBody User user) {
-      service.createClient(user.getUsername(), user.getPassword(), user.getEik());
+  public void createClient(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
+      service.createClient(command.getUsernameField(), command.getPasswordField(), command.getEIK());
+      response.sendRedirect("/admin");
   }
   
-  @PostMapping (value = "/createAdministator", headers = "Accept=application/json")
-  public void createAdministrator(User admin) {
-    service.createAdministrator(admin.getUsername(), admin.getPassword(), null);
+  @PostMapping (value = "/createAdministrator", headers = "Accept=application/json")
+  public void createAdministrator(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
+    service.createAdministrator(command.getUsernameField(), command.getPasswordField(), command.getEmailField());
+    response.sendRedirect("/admin");
   }
 }

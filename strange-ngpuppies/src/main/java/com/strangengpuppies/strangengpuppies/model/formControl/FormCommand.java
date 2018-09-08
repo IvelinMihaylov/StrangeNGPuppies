@@ -15,11 +15,12 @@ public class FormCommand {
     private String billAmount;
     private String startDate;
     private String endDate;
+    private String currency;
 
     public FormCommand() {
     }
 
-    public FormCommand(String[] multiCheckboxSelectedValues, String usernameField, String passwordField, String emailField, String eik, String firstName, String lastName, String egn, String phonenumber, String dropdownSelectedValue, String billAmount, String startDate, String endDate) {
+    public FormCommand(String[] multiCheckboxSelectedValues, String usernameField, String passwordField, String emailField, String eik, String firstName, String lastName, String egn, String phonenumber, String dropdownSelectedValue, String billAmount, String startDate, String endDate, String currency) {
         this.multiCheckboxSelectedValues = multiCheckboxSelectedValues;
         this.usernameField = usernameField;
         this.passwordField = passwordField;
@@ -33,6 +34,7 @@ public class FormCommand {
         this.billAmount = billAmount;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.currency = currency;
     }
 
     public String[] getMultiCheckboxSelectedValues() {
@@ -137,5 +139,13 @@ public class FormCommand {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }
