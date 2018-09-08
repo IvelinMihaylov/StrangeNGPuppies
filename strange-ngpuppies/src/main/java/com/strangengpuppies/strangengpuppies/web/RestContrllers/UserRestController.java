@@ -48,8 +48,8 @@ public class UserRestController {
   }
 
   @PostMapping (value = "/updateUser", headers = "Accept=application/json")
-  public void updateUser(String id, String username, String password, String eik, String email) {
-    service.updateUserById(Integer.parseInt(id), username, password, eik, email);
+  public void updateUser(@ModelAttribute("command") FormCommand command, HttpServletResponse response) {
+    service.updateUserById(Integer.parseInt(command.getEgn()), command.getUsernameField(), command.getPasswordField(), command.getEIK(), command.getEmailField());
   }
   
   @PostMapping (value = "/deleteUser/{id}", headers = "Accept=application/json")

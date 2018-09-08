@@ -1,6 +1,6 @@
 package com.strangengpuppies.strangengpuppies.configuration;
 
-import com.strangengpuppies.strangengpuppies.UrlHandler.MySimpleUrlAuthenticationSuccessHandler;
+import com.strangengpuppies.strangengpuppies.configuration.UrlHandler.MySimpleUrlAuthenticationSuccessHandler;
 import com.strangengpuppies.strangengpuppies.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

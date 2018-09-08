@@ -1,22 +1,14 @@
 package com.strangengpuppies.strangengpuppies.controllers;
 
-import com.strangengpuppies.strangengpuppies.model.Bill;
 import com.strangengpuppies.strangengpuppies.model.Service;
-import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.model.formControl.FormCommand;
-import com.strangengpuppies.strangengpuppies.service.base.BillService;
-import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
-import com.strangengpuppies.strangengpuppies.service.base.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,19 +17,6 @@ import java.util.List;
 
 @Controller
 public class AdminController {
-
-    private final SubscriberService subscriberService;
-    private final UserService userService;
-    private final BillService billService;
-
-    @Autowired
-    public AdminController(SubscriberService subscriberService, UserService userService, BillService billService) {
-        this.subscriberService = subscriberService;
-        this.userService = userService;
-        this.billService = billService;
-    }
-
-
     @GetMapping("/createClient")
     public ModelAndView showCreateClientForm() {
         ModelAndView mav = new ModelAndView("adminCreateClient");
@@ -79,6 +58,16 @@ public class AdminController {
 
         mav.addObject("currencies", listOfCurrencies);
 
+        return mav;
+    }
+
+    @GetMapping("/updateUser/{username}")
+    public ModelAndView showUpdateUserForm(@PathVariable("username") String username) {
+        ModelAndView mav = new ModelAndView("adminUpdateUser");
+        mav.addObject("command", new FormCommand());
+        RestTemplate restTemplate = new RestTemplate();
+        User user = restTemplate.getForObject("http://localhost:8080/api/user/getUserByUsername/"+username, User.class);
+        mav.addObject("user", user);
         return mav;
     }
 }
