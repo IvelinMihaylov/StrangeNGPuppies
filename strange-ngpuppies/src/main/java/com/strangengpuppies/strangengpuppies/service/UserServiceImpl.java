@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
     if(password != null) {
 	 if(password.length() > 0) {
-	   user.setPassword(password);
+	   user.setPassword(new BCryptPasswordEncoder().encode(password));
 	 }
     }
     if(eik != null) {
