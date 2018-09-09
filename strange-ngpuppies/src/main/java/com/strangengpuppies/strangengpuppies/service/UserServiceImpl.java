@@ -4,6 +4,7 @@ import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.UserRepository;
 import com.strangengpuppies.strangengpuppies.service.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService {
     if(eik == null || eik.length() == 0) {
 	 throw new NullPointerException("Empty eik field");
     }
-    userRepository.createClient(username, password, eik);
+    userRepository.createClient(username, new BCryptPasswordEncoder().encode(password), eik);
   }
   
   @Override
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService {
     if(email == null || email.length() == 0) {
 	 throw new NullPointerException("Empty email field");
     }
-    userRepository.createAdministrator(username, password, email);
+    userRepository.createAdministrator(username, new BCryptPasswordEncoder().encode(password), email);
   }
 
   @Override
