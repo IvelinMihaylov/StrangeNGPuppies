@@ -2,17 +2,17 @@ package com.strangengpuppies.strangengpuppies.service;
 
 import com.strangengpuppies.strangengpuppies.model.Bill;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
-import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.SubscriberRepository;
+import com.strangengpuppies.strangengpuppies.service.Exception.InvalidDateException;
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
+import org.springframework.beans.InvalidPropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.PublicKey;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class SubscriberServiceImpl implements SubscriberService {
@@ -51,66 +51,72 @@ public class SubscriberServiceImpl implements SubscriberService {
     for(Subscriber subscriber : subscribers) {
 	 double amount = 0;
 	 for(Bill bill : subscriber.getBills()) {
-	   amount += bill.getAmount() * changerCurrency(bill.getCurrency());
+	   amount = bill.getAmount() * changerCurrency(bill.getCurrency());
+	   
+	   Subscriber sub = subscriber.clone();
+	   
+	   sub.getBills().add(bill);
+	   
+	   if(!result.containsKey(amount)) {
+		result.put(amount, new ArrayList<>());
+	   }
+	   result.get(amount).add(sub);
 	 }
-	 if(!result.containsKey(amount)) {
-	   result.put(amount, new ArrayList<>());
-	 }
-	 result.get(amount).add(subscriber);
+	 
     }
-    subscribers.clear();
-    while(subscribers.size() <= 10) {
+//    subscribers.clear();
+    subscribers = new ArrayList<>();
+    while(subscribers.size() < 10) {
 	 if(result.size() != 0) {
 	   for(Subscriber sub : ((TreeMap<Double, List<Subscriber>>) result).lastEntry().getValue()) {
 		subscribers.add(sub);
 	   }
 	   result.remove(((TreeMap<Double, List<Subscriber>>) result).lastKey());
-	 }else {
+	 } else {
 	   return subscribers;
 	 }
     }
+    
     return subscribers;
   }
   
   @Override
   public List<Subscriber> getTopTenLastPayment() {
-//    List<Subscriber> subscribers = subscriberRepository.getAllSubscriber();
-//    Map<LocalDateTime, List<Subscriber>> result = new TreeMap<>();
-//    for(Subscriber subscriber : subscribers) {
-//	 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//	 LocalDateTime bestDate = LocalDateTime.MAX;
-//	 for(Bill bill : subscriber.getBills()) {
-//	   LocalDateTime dateTime = LocalDateTime.now();
-//	   String dateNow = dateTime.format(formatter);
-//	   dateTime = LocalDateTime.parse(dateNow,formatter);
-//
-//	   LocalDateTime endDate = bill.getEndDate();
-//
-//	   dateTime.minusYears(endDate.getYear());
-//	   dateTime.minusMonths(endDate.getMonthValue());
-//	   dateTime.minusDays(endDate.getDayOfMonth());
-//	   dateTime.minusHours(endDate.getHour());
-//	   dateTime.minusMinutes(endDate.getMinute());
-//	   dateTime.minusSeconds(endDate.getSecond());
-//	 }
-//	 if(!result.containsKey(dateTime)) {
-//	   result.put(dateTime, new ArrayList<>());
-//	 }
-//	 result.get(dateTime).add(subscriber);
-//    }
+    
+    List<Subscriber> subscribers = subscriberRepository.getAllSubscriber();
+    Map<Double, List<Subscriber>> result = new TreeMap<>();
+    
+    for(Subscriber subscriber : subscribers) {
+	 
+	 for(Bill bill : subscriber.getBills()) {
+	   double score = 0;
+	   score = ((int) (bill.getEndDate().getYear() * 365.2425) + bill.getEndDate().getMonthValue() * 50 + bill.getEndDate().getDayOfMonth());
+	   
+	   Subscriber sub = subscriber.clone();
+	   
+	   sub.getBills().add(bill);
+	   
+	   if(!result.containsKey(score)) {
+		result.put(score, new ArrayList<>());
+	   }
+	   result.get(score).add(sub);
+	 }
+	 
+    }
 //    subscribers.clear();
-//    while(subscribers.size() <= 10) {
-//	 if(result.size() != 0) {
-//	   for(Subscriber sub : ((TreeMap<LocalDateTime, List<Subscriber>>) result).lastEntry().getValue()) {
-//		subscribers.add(sub);
-//	   }
-//	   result.remove(((TreeMap<LocalDateTime, List<Subscriber>>) result).lastKey());
-//	 }else {
-//	   return subscribers;
-//	 }
-//    }
-//    return subscribers;
-    return null;
+    subscribers = new ArrayList<>();
+    while(subscribers.size() < 10) {
+	 if(result.size() != 0) {
+	   for(Subscriber sub : ((TreeMap<Double, List<Subscriber>>) result).lastEntry().getValue()) {
+		subscribers.add(sub);
+	   }
+	   result.remove(((TreeMap<Double, List<Subscriber>>) result).lastKey());
+	 } else {
+	   return subscribers;
+	 }
+    }
+    
+    return subscribers;
   }
   
   @Override
@@ -119,8 +125,33 @@ public class SubscriberServiceImpl implements SubscriberService {
   }
   
   @Override
+<<<<<<< HEAD
   public void createSubscriber(String phonenumber, String firstName, String lastName, String egn, User bank) {
     subscriberRepository.createSubscriber(phonenumber, firstName, lastName, egn, bank);
+=======
+  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn) throws InvalidDateException {
+    if(phonenumber.length() < 10 || phonenumber.length() > 10) {
+	 if(phonenumber.length() == 0) {
+	   throw new NullPointerException("Empty phone number field.");
+	 } else {
+	   throw new InvalidDateException("Invalid phone number field.Phone number should be 10 digit number.");
+	 }
+    }
+    if(firstName.length() == 0) {
+	 throw new NullPointerException("Empty first name field.");
+    }
+    if(lastName.length() == 0) {
+	 throw new NullPointerException("Empty first name field.");
+    }
+    if(egn.length() < 10 || egn.length() > 10) {
+	 if(egn.length() == 0) {
+	   throw new NullPointerException("Empty first name field.");
+	 } else {
+	   throw new InvalidDateException("Invalid EGN field.EGN should be 10 digit number.");
+	 }
+    }
+    subscriberRepository.createSubscriber(phonenumber, firstName, lastName, egn);
+>>>>>>> branch-ivelin
   }
   
   @Override
@@ -157,3 +188,4 @@ public class SubscriberServiceImpl implements SubscriberService {
     subscriberRepository.deleteSubscriber(subscriber);
   }
 }
+

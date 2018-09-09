@@ -1,4 +1,4 @@
-package com.strangengpuppies.strangengpuppies.web.RestContrllers;
+package com.strangengpuppies.strangengpuppies.web.RestControllers;
 
 import com.strangengpuppies.strangengpuppies.dao.base.UserDao;
 import com.strangengpuppies.strangengpuppies.model.User;
@@ -36,6 +36,7 @@ public class UserRestController {
   public List<User> getAll() {
     return service.listAll();
   }
+<<<<<<< HEAD:strange-ngpuppies/src/main/java/com/strangengpuppies/strangengpuppies/web/RestContrllers/UserRestController.java
 
   @GetMapping("/listAllBanks")
   public List<User> listAllBanks() {
@@ -47,6 +48,14 @@ public class UserRestController {
       return userDao.findUserByUsername(username);
   }
 
+=======
+  
+  @GetMapping ("/getByID/{id}")
+  public User getByID(@PathVariable ("id") String id) {
+    return service.getUserById(Integer.parseInt(id));
+  }
+  
+>>>>>>> branch-ivelin:strange-ngpuppies/src/main/java/com/strangengpuppies/strangengpuppies/web/RestControllers/UserRestController.java
   @PostMapping (value = "/updateUser", headers = "Accept=application/json")
   public void updateUser(@ModelAttribute("command") FormCommand command, HttpServletResponse response) {
     service.updateUserById(Integer.parseInt(command.getEgn()), command.getUsernameField(), command.getPasswordField(), command.getEIK(), command.getEmailField());
@@ -63,9 +72,15 @@ public class UserRestController {
       response.sendRedirect("/admin");
   }
   
+<<<<<<< HEAD:strange-ngpuppies/src/main/java/com/strangengpuppies/strangengpuppies/web/RestContrllers/UserRestController.java
   @PostMapping (value = "/createAdministrator", headers = "Accept=application/json")
   public void createAdministrator(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
     service.createAdministrator(command.getUsernameField(), command.getPasswordField(), command.getEmailField());
     response.sendRedirect("/admin");
+=======
+  @PostMapping (value = "/createAdministator", headers = "Accept=application/json")
+  public void createAdministrator(User admin) {
+    service.createAdministrator(admin.getUsername(), admin.getPassword(), admin.getEmail());
+>>>>>>> branch-ivelin:strange-ngpuppies/src/main/java/com/strangengpuppies/strangengpuppies/web/RestControllers/UserRestController.java
   }
 }

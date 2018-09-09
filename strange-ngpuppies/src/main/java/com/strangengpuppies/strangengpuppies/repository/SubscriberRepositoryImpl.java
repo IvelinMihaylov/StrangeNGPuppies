@@ -1,6 +1,5 @@
 package com.strangengpuppies.strangengpuppies.repository;
 
-import com.strangengpuppies.strangengpuppies.model.Bill;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
 import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.SubscriberRepository;
@@ -40,7 +39,7 @@ public class SubscriberRepositoryImpl implements SubscriberRepository {
     Subscriber subscriber = new Subscriber();
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
-	 subscriber = session.get(Subscriber.class,phonenumber);
+	 subscriber = session.get(Subscriber.class, phonenumber);
 	 session.getTransaction().commit();
     } catch (Exception ex) {
 	 System.out.println(ex.getMessage());

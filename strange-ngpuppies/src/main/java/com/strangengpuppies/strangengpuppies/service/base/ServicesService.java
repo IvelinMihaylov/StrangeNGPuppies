@@ -1,18 +1,10 @@
-package com.strangengpuppies.strangengpuppies.repository.base;
+package com.strangengpuppies.strangengpuppies.service.base;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch-ivelin
 import com.strangengpuppies.strangengpuppies.model.Service;
 
 import java.util.List;
 
-public interface ServiceRepository {
-<<<<<<< HEAD
-    Service getById(int id);
-    List<Service> getAll();
-=======
+public interface ServicesService {
   List<Service> getAllService();
   
   Service getServiceByID(int id);
@@ -23,5 +15,4 @@ public interface ServiceRepository {
   
   void deleteService(int id);
   
->>>>>>> branch-ivelin
 }
