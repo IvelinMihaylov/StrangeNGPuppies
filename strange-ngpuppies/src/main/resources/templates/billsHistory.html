@@ -87,29 +87,29 @@
                                                 </tr>
                                         </thead>
                                     <tbody>
-                                        <tr data-status="success" th:each="bill : ${bills}">
-                                            <td th:text="${bill.service.name} ">TV extra</td>
-                                            <td th:text="${bill.startDate}">2007-08-12</td>
-                                            <td th:text="${bill.endDate}">2008-08-12</td>
-                                            <td th:text="${bill.amount}"> 20.00</td>
-                                            <td th:text="${bill.currency}">BGN</td>
-                                            <td th:text="${bill.status}">Approved</td>
+                                        <tr data-status="success" th:each="billA : ${billsApproved}">
+                                            <td th:text="${billA.service.name} ">TV extra</td>
+                                            <td th:text="${billA.startDate}">2007-08-12</td>
+                                            <td th:text="${billA.endDate}">2008-08-12</td>
+                                            <td th:text="${billA.amount}"> 20.00</td>
+                                            <td th:text="${billA.currency}">BGN</td>
+                                            <td th:text="${billA.status}">Approved</td>
                                         </tr>
-                                        <tr data-status="waiting" th:each="bill : ${bills}">
-                                            <td th:text="${bill.service.name} ">TV extra</td>
-                                            <td th:text="${bill.startDate}">2007-08-12</td>
-                                            <td th:text="${bill.endDate}">2008-08-12</td>
-                                            <td th:text="${bill.amount}"> 20.00</td>
-                                            <td th:text="${bill.currency}">BGN</td>
-                                            <td th:text="${bill.status}">wait</td>
+                                        <tr data-status="waiting" th:each="billNR : ${billsNonReady}">
+                                            <td th:text="${billNR.service.name} ">TV extra</td>
+                                            <td th:text="${billNR.startDate}">2007-08-12</td>
+                                            <td th:text="${billNR.endDate}">2008-08-12</td>
+                                            <td th:text="${billNR.amount}"> 20.00</td>
+                                            <td th:text="${billNR.currency}">BGN</td>
+                                            <td th:text="${billNR.status}">wait</td>
                                         </tr>
-                                        <tr data-status="cancel" th:each="bill : ${bills}">
-                                            <td th:text="${bill.service.name} ">TV extra</td>
-                                            <td th:text="${bill.startDate}">2007-08-12</td>
-                                            <td th:text="${bill.endDate}">2008-08-12</td>
-                                            <td th:text="${bill.amount}"> 20.00</td>
-                                            <td th:text="${bill.currency}">BGN</td>
-                                            <td th:text="${bill.status}">can</td>
+                                        <tr data-status="cancel" th:each="billC : ${billsCanceled}">
+                                            <td th:text="${billC.service.name} ">TV extra</td>
+                                            <td th:text="${billC.startDate}">2007-08-12</td>
+                                            <td th:text="${billC.endDate}">2008-08-12</td>
+                                            <td th:text="${billC.amount}"> 20.00</td>
+                                            <td th:text="${billC.currency}">BGN</td>
+                                            <td th:text="${billC.status}">can</td>
                                         </tr>
                                     </tbody>
                                 </table>

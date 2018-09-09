@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 //TODO complete the home page with top 10 payers and beautification
@@ -49,7 +50,15 @@ public class UserController {
         for (Subscriber sub: user.getSubscribers()) {
             bills.addAll(sub.getBills());
         }
-        mav.addObject("bills", bills);
+        mav.addObject("billsApproved", bills.stream()
+                .filter(x->x.getStatus().equals("approved"))
+                .collect(Collectors.toList()));
+        mav.addObject("billsNonReady", bills.stream()
+                .filter(x->x.getStatus().equals("waiting"))
+                .collect(Collectors.toList()));
+        mav.addObject("billsCanceled", bills.stream()
+        .filter(x->x.getStatus().equals("refused"))
+                .collect(Collectors.toList()));
         return mav;
     }
 
