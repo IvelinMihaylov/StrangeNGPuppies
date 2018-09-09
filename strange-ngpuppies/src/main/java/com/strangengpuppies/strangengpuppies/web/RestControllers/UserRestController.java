@@ -19,59 +19,61 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping ( value = "api/user", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestController {
 
 
-  private final UserService service;
-  private final UserDao userDao;
+    private final UserService service;
+    private final UserDao userDao;
 
-  @Autowired
-  public UserRestController(UserService service, UserDao userDao) {
-    this.service = service;
-    this.userDao = userDao;
-  }
+    @Autowired
+    public UserRestController(UserService service, UserDao userDao) {
+        this.service = service;
+        this.userDao = userDao;
+    }
 
-  @GetMapping("/listAll")
-  public List<User> getAll() {
-    return service.listAll();
-  }
+    @GetMapping("/listAll")
+    public List<User> getAll() {
+        return service.listAll();
+    }
 
-  @GetMapping("/listAllBanks")
-  public List<User> listAllBanks() {
-    return service.listAllBanks();
-  }
+    @GetMapping("/listAllBanks")
+    public List<User> listAllBanks() {
+        return service.listAllBanks();
+    }
 
-  @GetMapping("/getUserByUsername/{username}")
-  public User getUserByUsername(@PathVariable String username) {
-    return userDao.findUserByUsername(username);
-  }
+    @GetMapping("/getUserByUsername/{username}")
+    public User getUserByUsername(@PathVariable String username) {
+        return userDao.findUserByUsername(username);
+    }
 
-  @GetMapping("/getByID/{id}")
-  public User getByID(@PathVariable("id") String id) {
-    return service.getUserById(Integer.parseInt(id));
-  }
+    @GetMapping("/getByID/{id}")
+    public User getByID(@PathVariable("id") String id) {
+        return service.getUserById(Integer.parseInt(id));
+    }
 
-  @PostMapping(value = "/updateUser", headers = "Accept=application/json")
-  public void updateUser(@ModelAttribute("command") FormCommand command, HttpServletResponse response) {
-    service.updateUserById(Integer.parseInt(command.getEgn()), command.getUsernameField(), command.getPasswordField(), command.getEIK(), command.getEmailField());
-  }
+    @PostMapping(value = "/updateUser", headers = "Accept=application/json")
+    public void updateUser(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
+        service.updateUserById(Integer.parseInt(command.getEgn()), command.getUsernameField(), command.getPasswordField(), command.getEIK(), command.getEmailField());
+        response.sendRedirect("/admin");
+    }
 
-  @PostMapping(value = "/deleteUser/{id}", headers = "Accept=application/json")
-  public void updateUser(@PathVariable("id") String id) {
-    service.deleteUserById(Integer.parseInt(id));
-  }
+    @PostMapping(value = "/deleteUser/{id}", headers = "Accept=application/json")
+    public void updateUser(@PathVariable("id") String id, HttpServletResponse response) throws IOException {
+        service.deleteUserById(Integer.parseInt(id));
+        response.sendRedirect("/admin");
+    }
 
-  @PostMapping(value = "/createClient")
-  public void createClient(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
-    service.createClient(command.getUsernameField(), command.getPasswordField(), command.getEIK());
-    response.sendRedirect("/admin");
-  }
+    @PostMapping(value = "/createClient")
+    public void createClient(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
+        service.createClient(command.getUsernameField(), command.getPasswordField(), command.getEIK());
+        response.sendRedirect("/admin");
+    }
 
-  @PostMapping(value = "/createAdministrator", headers = "Accept=application/json")
-  public void createAdministrator(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
-    service.createAdministrator(command.getUsernameField(), command.getPasswordField(), command.getEmailField());
-    response.sendRedirect("/admin");
+    @PostMapping(value = "/createAdministrator", headers = "Accept=application/json")
+    public void createAdministrator(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
+        service.createAdministrator(command.getUsernameField(), command.getPasswordField(), command.getEmailField());
+        response.sendRedirect("/admin");
 
-  }
+    }
 }
