@@ -52,9 +52,9 @@ public class UserRestController {
         return service.getUserById(Integer.parseInt(id));
     }
 
-    @PostMapping(value = "/updateUser", headers = "Accept=application/json")
-    public void updateUser(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
-        service.updateUserById(Integer.parseInt(command.getEgn()), command.getUsernameField(), command.getPasswordField(), command.getEIK(), command.getEmailField());
+    @PostMapping(value = "/updateUser/{id}", headers = "Accept=application/json")
+    public void updateUser(@PathVariable("id") String id, @ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
+        service.updateUserById(Integer.parseInt(id), command.getUsernameField(), command.getPasswordField(), command.getEIK(), command.getEmailField());
         response.sendRedirect("/admin");
     }
 

@@ -60,10 +60,7 @@
     <div class="row main">
         <div class="main-login main-center">
 
-            <form th:action="@{/api/user/updateUser}" th:object="${command}" method="post" action="#">
-                <label style="display: none" for="id"></label>
-                    <input style="display: none" id="id" th:value="${user.id}" th:field="*{egn}" type="text" class="form-control"/>
-
+            <form th:action="@{/api/user/updateUser/{id} (id = ${user.id})}" th:object="${command}" method="post" action="#">
                 <div class="form-group">
                     <label for="username" class="cols-sm-2 control-label">Username</label>
                     <div class="cols-sm-10">
