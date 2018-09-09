@@ -48,12 +48,28 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<div>
-    User:
-    <th:block sec:authentication="name"/>
-    <br/>
-    Role(s):
-    <span sec:authorize="hasRole('ROLE_USER')">USER</span>
+<div class="container-fluid table-resposive">
+    <table class="table">
+
+        <thead>
+        <tr>
+            <th scope="col">First name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Payments</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person : ${top10}">
+            <td th:text="${person.firstName} "></td>
+            <td th:text="${person.lastName}"></td>
+            <td th:text="${person.phoneNumber}"></td>
+            <td th:each="bill : ${person.bills}">
+                <p th:text="${bill.amount}"></p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <script

@@ -70,7 +70,7 @@
                     <label for="dropdown" class="cols-sm-2 control-label">Services</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
                             <select name="dropdown" id="dropdown" th:field="*{dropdownSelectedValue}" class="form-control">
                                 <option
                                         th:each="service: ${services}"
@@ -85,7 +85,7 @@
                     <label for="billAmount" class="cols-sm-2 control-label">Amount</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="fas fa-dollar-sign" aria-hidden="true"></i></span>
                             <input th:field="*{billAmount}" type="text" class="form-control" name="billAmount" id="billAmount"  placeholder="Enter a Password"/>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     <label for="currency" class="cols-sm-2 control-label">Currency</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="fas fa-money-check-alt" aria-hidden="true"></i></span>
                             <select name="currency" id="currency" th:field="*{currency}" class="form-control">
                                 <option
                                         th:each="currency: ${currencies}"
@@ -110,7 +110,7 @@
                     <label for="startDate" class="cols-sm-2 control-label">Start Date</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="far fa-calendar-alt" aria-hidden="true"></i></span>
                             <input th:field="*{startDate}" type="text" class="form-control" name="startDate" id="startDate"  placeholder="Strat Date"/>
                         </div>
                     </div>
@@ -120,13 +120,13 @@
                     <label for="endDate" class="cols-sm-2 control-label">End Date</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
                             <input th:field="*{endDate}" type="text" class="form-control" name="endDate" id="endDate"  placeholder="End Date"/>
                         </div>
                     </div>
                 </div>
                 <div class="form-group ">
-                    <button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                    <button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Create</button>
                 </div>
 
             </form>

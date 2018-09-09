@@ -30,7 +30,8 @@
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background-color: #337ab7;
+  border-color: #2e6da4;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -41,7 +42,7 @@
   cursor: pointer;
 }
 .form input[type=submit]:hover,.form input[type=submit]:active,.form input[type=submit]:focus {
-  background: #43A047;
+  background: #2e6da4;
 }
 .form .message {
   margin: 15px 0 0;

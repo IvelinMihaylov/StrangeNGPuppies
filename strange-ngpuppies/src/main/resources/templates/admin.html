@@ -44,7 +44,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><p sec:authentication="name">profile</p></li>
+                <li><a sec:authentication="name">profile</a></li>
                 <li>
                     <form class="navbar-form" th:action="@{/logout}" method="post">
                         <button type="submit" class="btn btn-primary">Logout</button>
