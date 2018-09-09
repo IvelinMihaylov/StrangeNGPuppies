@@ -1,89 +1,116 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pay Bills</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+
 </head>
+
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><i class="fas fa-paw"></i> StrangePuppies</a>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-paw"></i> StrangePuppies</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/home">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/billsHistory">History</a>
+                    </li>
+                    <li class="active">
+                        <a href="/subscribers">Subscribers</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" sec:authentication="name">profile</a>
+                    </li>
+                    <li>
+                        <form class="navbar-form" th:action="@{/logout}" method="post">
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.container-collapse -->
         </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="/home">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="/billsHistory">History</a></li>
-                <li class="active"><a href="/subscribers">Subscribers</a></li>
-            </ul>
+                <input class="btn btn-primary" form="myForm" type="submit" value="Pay Bills" />
+                <a th:href="@{./../subscribers.html}" class="btn btn-default">Back</a>
+                <div class="container-fluid table-resposive">
+                    <form id="myForm" action="#" th:action="@{/paybillsform}" th:object="${command}" method="get">
+                        <div class="table-container">
+                            <table class="table">
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" sec:authentication="name">profile</a></li>
-                <li>
-                    <form class="navbar-form" th:action="@{/logout}" method="post">
-                        <button type="submit" class="btn btn-primary">Logout</button>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Service</th>
+                                        <th scope="col">Star Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Currency</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Choose</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="bill : ${bills}">
+                                        <td th:text="${bill.service.name}">TV extra</td>
+                                        <td th:text="${bill.startDate}">2007-08-12</td>
+                                        <td th:text="${bill.endDate}">2008-08-12</td>
+                                        <td th:text="${bill.amount}"> 20.00</td>
+                                        <td th:text="${bill.currency}">BGN</td>
+                                        <td th:text="${bill.status}" id="status-text">Approved</td>
+                                        <td>
+                                            <input type="checkbox" th:field="*{multiCheckboxSelectedValues}" th:value="${bill.id}" />
+                                            <label th:for="${#ids.prev('multiCheckboxSelectedValues')}"></label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </form>
-                </li>
-            </ul>
-        </div><!-- /.container-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/payBill.js}"></script>
 
-<input class="btn btn-primary" form="myForm" type="submit" value="Pay Bills"/>
-<div class="container-fluid table-resposive">
-    <form id="myForm" action="#" th:action="@{/paybillsform}" th:object="${command}" method="get">
-    <table class="table">
-
-        <thead>
-        <tr>
-            <th scope="col">Service</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Currency</th>
-            <th scope="col">Status</th>
-            <th scope="col">Choose</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="bill : ${bills}">
-            <td th:text="${bill.service.name}"></td>
-            <td th:text="${bill.amount}"></td>
-            <td th:text="${bill.currency}"></td>
-            <td th:text="${bill.status}"></td>
-            <td>
-                <input type="checkbox" th:field="*{multiCheckboxSelectedValues}" th:value="${bill.id}"/>
-                <label th:for="${#ids.prev('multiCheckboxSelectedValues')}"></label>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    </form>
-</div>
-
-<script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
 </body>
+
 </html>

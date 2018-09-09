@@ -8,6 +8,8 @@
     <title>Bills History</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{css/billsHistory.css}">
 </head>
 
@@ -59,10 +61,10 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <section class="content">
-                <h1 class="text-white display-3">History</h1>
+                <h1 class="display-4">History</h1>
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -76,16 +78,16 @@
                             </div>
                             <div class="table-container">
                                 <table class="table table-filter">
-                                        <thead>
-                                                <tr>
-                                                    <th scope="col">Service Name</th>
-                                                    <th scope="col">Star Date</th>
-                                                    <th scope="col">End Date</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">Currency</th>
-                                                    <th scope="col">Status</th>
-                                                </tr>
-                                        </thead>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Service Name</th>
+                                            <th scope="col">Star Date</th>
+                                            <th scope="col">End Date</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Currency</th>
+                                            <th  scope="col" id="status">Status</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr data-status="success" th:each="billA : ${billsApproved}">
                                             <td th:text="${billA.service.name} ">TV extra</td>
@@ -93,7 +95,7 @@
                                             <td th:text="${billA.endDate}">2008-08-12</td>
                                             <td th:text="${billA.amount}"> 20.00</td>
                                             <td th:text="${billA.currency}">BGN</td>
-                                            <td th:text="${billA.status}">Approved</td>
+                                            <td th:text="${billA.status}" id="status-text">Approved</td>
                                         </tr>
                                         <tr data-status="waiting" th:each="billNR : ${billsNonReady}">
                                             <td th:text="${billNR.service.name} ">TV extra</td>
@@ -101,7 +103,7 @@
                                             <td th:text="${billNR.endDate}">2008-08-12</td>
                                             <td th:text="${billNR.amount}"> 20.00</td>
                                             <td th:text="${billNR.currency}">BGN</td>
-                                            <td th:text="${billNR.status}">wait</td>
+                                            <td th:text="${billNR.status}" id="status-text">Waiting</td>
                                         </tr>
                                         <tr data-status="cancel" th:each="billC : ${billsCanceled}">
                                             <td th:text="${billC.service.name} ">TV extra</td>
@@ -109,7 +111,7 @@
                                             <td th:text="${billC.endDate}">2008-08-12</td>
                                             <td th:text="${billC.amount}"> 20.00</td>
                                             <td th:text="${billC.currency}">BGN</td>
-                                            <td th:text="${billC.status}">can</td>
+                                            <td th:text="${billC.status}" id="status-text">Refused</td>
                                         </tr>
                                     </tbody>
                                 </table>

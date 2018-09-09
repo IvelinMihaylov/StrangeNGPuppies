@@ -1,76 +1,108 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Subscribers</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{css/subscribers.css}">
+
 </head>
+
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><i class="fas fa-paw"></i> StrangePuppies</a>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-paw"></i> StrangePuppies</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/home">Home</a>
+                    </li>
+                    <li>
+                        <a href="/billsHistory">History</a>
+                    </li>
+                    <li class="active">
+                        <a href="/subscribers">Subscribers
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" sec:authentication="name">profile</a>
+                    </li>
+                    <li>
+                        <form class="navbar-form" th:action="@{/logout}" method="post">
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.container-collapse -->
         </div>
+        <!-- /.container-fluid -->
+    </nav>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="/home">Home</a></li>
-                <li><a href="/billsHistory">History</a></li>
-                <li class="active"><a href="/subscribers">Subscribers <span class="sr-only">(current)</span></a></li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" sec:authentication="name">profile</a></li>
-                <li>
-                    <form class="navbar-form" th:action="@{/logout}" method="post">
-                        <button type="submit" class="btn btn-primary">Logout</button>
-                    </form>
-                </li>
-            </ul>
-        </div><!-- /.container-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-<div class="container-fluid table-resposive">
-    <table class="table">
-
-        <thead>
-        <tr>
-            <th scope="col">First name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Phone</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="sub : ${subs}">
-            <td><a th:href="@{/payBills/{phonenumber}(phonenumber = ${sub.phoneNumber})}" th:text="${sub.firstName} "></a></td>
-            <td th:text="${sub.lastName}"></td>
-            <td th:text="${sub.phoneNumber}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    <div class="container">
+        <h1 class="text-white display-3 text-center">Strange Puppies Application</h1>
+        <div class="row">
+            <div class="panel filterable">
+                <div class="pull-right">
+                    <button class="btn btn-default btn-md btn-filter">
+                        <span class="glyphicon glyphicon-filter"></span>Filter</button>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr class="filters">
+                            <th>
+                                <input type="text" class="form-control" placeholder="First Name" disabled>
+                            </th>
+                            <th>
+                                <input type="text" class="form-control" placeholder="Last Name" disabled>
+                            </th>
+                            <th>
+                                <input type="text" class="form-control" placeholder="Phone Number" disabled>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="sub : ${subs}">
+                            <td>
+                                <a th:href="@{/payBills/{phonenumber}(phonenumber = ${sub.phoneNumber})}" th:text="${sub.firstName}"></a>
+                            </td>
+                            <td th:text="${sub.lastName}"></td>
+                            <td th:text="${sub.phoneNumber}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+    <script th:src="@{js/subscribers.js}"></script>
+
 </body>
+
 </html>

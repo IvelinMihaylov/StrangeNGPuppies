@@ -1,4 +1,4 @@
-package com.strangengpuppies.strangengpuppies.controllers;
+package com.strangengpuppies.strangengpuppies.web;
 
 import com.strangengpuppies.strangengpuppies.model.Service;
 import com.strangengpuppies.strangengpuppies.model.User;
