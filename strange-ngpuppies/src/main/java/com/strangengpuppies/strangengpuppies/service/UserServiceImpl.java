@@ -64,13 +64,13 @@ public class UserServiceImpl implements UserService {
   
   @Override
   public void createClient(String username, String password, String eik) {
-    if(username == null && username.length() == 0) {
+    if(username == null || username.length() == 0) {
 	 throw new NullPointerException("Empty username field");
     }
-    if(password == null && password.length() == 0) {
+    if(password == null || password.length() == 0) {
 	 throw new NullPointerException("Empty password field");
     }
-    if(eik == null && eik.length() == 0) {
+    if(eik == null || eik.length() == 0) {
 	 throw new NullPointerException("Empty eik field");
     }
     userRepository.createClient(username, password, eik);
@@ -78,13 +78,13 @@ public class UserServiceImpl implements UserService {
   
   @Override
   public void createAdministrator(String username, String password, String email) {
-    if(username == null && username.length() == 0) {
+    if(username == null || username.length() == 0) {
 	 throw new NullPointerException("Empty username field");
     }
-    if(password == null && password.length() == 0) {
+    if(password == null || password.length() == 0) {
 	 throw new NullPointerException("Empty password field");
     }
-    if(email == null && email.length() == 0) {
+    if(email == null || email.length() == 0) {
 	 throw new NullPointerException("Empty email field");
     }
     userRepository.createAdministrator(username, password, email);

@@ -1,4 +1,4 @@
-package com.strangengpuppies.strangengpuppies.web.RestContrllers;
+package com.strangengpuppies.strangengpuppies.web.RestControllers;
 
 
 import com.strangengpuppies.strangengpuppies.model.Service;

@@ -20,24 +20,24 @@ public class ServicesServiceImpl implements ServicesService {
   
   @Override
   public List<Service> getAllService() {
-    return serviceRepository.getAllService();
+    return serviceRepository.getAll();
   }
   
   @Override
   public com.strangengpuppies.strangengpuppies.model.Service getServiceByID(int id) {
-    return serviceRepository.getServiceByID(id);
+    return serviceRepository.getById(id);
   }
-  
+
   @Override
   public void createService(String name) {
     serviceRepository.createService(name);
   }
-  
+
   @Override
   public void updateService(int id, String name) {
     serviceRepository.updateService(id, name);
   }
-  
+
   @Override
   public void deleteService(int id) {
     serviceRepository.deleteService(id);

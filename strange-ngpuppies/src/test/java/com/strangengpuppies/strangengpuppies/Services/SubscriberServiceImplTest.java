@@ -188,9 +188,9 @@ public class SubscriberServiceImplTest {
   @Test
   public void createSubscriber_Create_New_Entity() throws InvalidDateException {
     // ACT
-    service.createSubscriber("0893544850", "Ivelin", "Mihaylov", "9604081485");
+    service.createSubscriber("0893544850", "Ivelin", "Mihaylov", "9604081485", new User());
     // ASSERT
-    Mockito.verify(mockRepository).createSubscriber("0893544850", "Ivelin", "Mihaylov", "9604081485");
+    Mockito.verify(mockRepository).createSubscriber("0893544850", "Ivelin", "Mihaylov", "9604081485", new User());
   }
   
   @Test

@@ -2,6 +2,7 @@ package com.strangengpuppies.strangengpuppies.service;
 
 import com.strangengpuppies.strangengpuppies.model.Bill;
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
+import com.strangengpuppies.strangengpuppies.model.User;
 import com.strangengpuppies.strangengpuppies.repository.base.SubscriberRepository;
 import com.strangengpuppies.strangengpuppies.service.Exception.InvalidDateException;
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
@@ -66,15 +67,11 @@ public class SubscriberServiceImpl implements SubscriberService {
     }
 //    subscribers.clear();
     subscribers = new ArrayList<>();
-    while(subscribers.size() < 10) {
-	 if(result.size() != 0) {
+    while(result.size() != 0) {
 	   for(Subscriber sub : ((TreeMap<Double, List<Subscriber>>) result).lastEntry().getValue()) {
 		subscribers.add(sub);
 	   }
 	   result.remove(((TreeMap<Double, List<Subscriber>>) result).lastKey());
-	 } else {
-	   return subscribers;
-	 }
     }
     
     return subscribers;
@@ -125,11 +122,7 @@ public class SubscriberServiceImpl implements SubscriberService {
   }
   
   @Override
-<<<<<<< HEAD
-  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn, User bank) {
-    subscriberRepository.createSubscriber(phonenumber, firstName, lastName, egn, bank);
-=======
-  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn) throws InvalidDateException {
+  public void createSubscriber(String phonenumber, String firstName, String lastName, String egn, User bank)  throws InvalidDateException {
     if(phonenumber.length() < 10 || phonenumber.length() > 10) {
 	 if(phonenumber.length() == 0) {
 	   throw new NullPointerException("Empty phone number field.");
@@ -150,8 +143,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 	   throw new InvalidDateException("Invalid EGN field.EGN should be 10 digit number.");
 	 }
     }
-    subscriberRepository.createSubscriber(phonenumber, firstName, lastName, egn);
->>>>>>> branch-ivelin
+    subscriberRepository.createSubscriber(phonenumber, firstName, lastName, egn, bank);
   }
   
   @Override

@@ -27,7 +27,7 @@ public class ServicesServiceImplTest {
   @Test
   public void getAllService_Returns_Entities() {
     // ARRANGE
-    Mockito.when(mockRepository.getAllService()).thenReturn(
+    Mockito.when(mockRepository.getAll()).thenReturn(
 		  Arrays.asList(
 				new Service("Television"),
 				new Service("Internet"),
@@ -47,7 +47,7 @@ public class ServicesServiceImplTest {
   @Test
   public void getServiceByID_Returns_Entity() {
     // ARRANGE
-    Mockito.when(mockRepository.getServiceByID(1)).thenReturn(new Service("Television"));
+    Mockito.when(mockRepository.getById(1)).thenReturn(new Service("Television"));
     // ACT
     Service result = this.service.getServiceByID(1);
     // ASSERT

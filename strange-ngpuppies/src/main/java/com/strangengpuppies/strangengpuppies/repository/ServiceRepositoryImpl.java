@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 @Repository
 public class ServiceRepositoryImpl implements ServiceRepository {
     private static SessionFactory factory;
@@ -45,44 +44,7 @@ public class ServiceRepositoryImpl implements ServiceRepository {
         }
         return serviceList;
     }
-=======
 
-@Repository
-public class ServiceRepositoryImpl implements ServiceRepository {
-  
-  private static SessionFactory factory;
-  
-  @Autowired
-  public ServiceRepositoryImpl(SessionFactory factory) {
-    this.factory = factory;
-  }
-  
-  @Override
-  public List<Service> getAllService() {
-    List<Service> services = new ArrayList<>();
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 services = session.createQuery("from Service", Service.class).list();
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
-    }
-    return services;
-  }
-  
-  @Override
-  public Service getServiceByID(int id) {
-    Service services = new Service();
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 services = session.get(Service.class, id);
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
-    }
-    return services;
-  }
-  
   @Override
   public void createService(String name) {
     Service services = new Service(name);
@@ -94,10 +56,10 @@ public class ServiceRepositoryImpl implements ServiceRepository {
 	 System.out.println(ex.getMessage());
     }
   }
-  
+
   @Override
   public void updateService(int id, String name) {
-    Service services = getServiceByID(id);
+    Service services = getById(id);
     services.setName(name);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
@@ -107,10 +69,10 @@ public class ServiceRepositoryImpl implements ServiceRepository {
 	 System.out.println(ex.getMessage());
     }
   }
-  
+
   @Override
   public void deleteService(int id) {
-    Service service = getServiceByID(id);
+    Service service = getById(id);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
 	 session.delete(service);
@@ -119,5 +81,4 @@ public class ServiceRepositoryImpl implements ServiceRepository {
 	 System.out.println(ex.getMessage());
     }
   }
->>>>>>> branch-ivelin
 }

@@ -13,29 +13,31 @@ import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-  
-  private static SessionFactory factory;
-  
-  @Autowired
-  public UserRepositoryImpl(SessionFactory factory) {
-    this.factory = factory;
-  }
-  
-  @Override
-  public List<User> listAll() {
-    List<User> users = new ArrayList<>();
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 users = session.createQuery("from User", User.class).list();
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
+
+    private static SessionFactory factory;
+
+    @Autowired
+    public UserRepositoryImpl(SessionFactory factory) {
+        this.factory = factory;
     }
-<<<<<<< HEAD
+
+    @Override
+    public List<User> listAll() {
+        List<User> users = new ArrayList<>();
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            users = session.createQuery("from User", User.class).list();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return users;
+    }
+
     @Override
     public List<User> listAllBanks() {
         List<User> users = new ArrayList<>();
-        try(Session session = factory.openSession()){
+        try (Session session = factory.openSession()) {
             session.beginTransaction();
             users = session.createQuery("from User u where u.role.id = :roleID", User.class)
                     .setParameter("roleID", 2)
@@ -46,83 +48,76 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return users;
     }
-=======
-    return users;
-  }
->>>>>>> branch-ivelin
-  
-  @Override
-  public User getUserById(int id) {
-    User user = new User();
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 user = session.get(User.class, id);
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
+
+
+    @Override
+    public User getUserById(int id) {
+        User user = new User();
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            user = session.get(User.class, id);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return user;
     }
-    return user;
-  }
-  
-  @Override
-  public void updateUser(User user) {
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 session.update(user);
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
+
+    @Override
+    public void updateUser(User user) {
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            session.update(user);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
-    
-  }
-  
-  @Override
-  public void deleteUser(User user) {
-    user.setEik(null);
-    user.setRole(null);
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 session.delete(user);
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
+
+    @Override
+    public void deleteUser(User user) {
+        user.setEik(null);
+        user.setRole(null);
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            session.delete(user);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
-  }
-  
-  @Override
-  public void createClient(String username, String password, String eik) {
+
+    @Override
+    public void createClient(String username, String password, String eik) {
         List<User> users = new ArrayList<>(listAll());
         Role role = new Role();
-    role.setId(2);
-<<<<<<< HEAD
-    role.setName("USER");
-    User client = new User(username, password, ""+(users.get(users.size() - 1).getId()), eik, role);
-=======
-    role.setName("ROLE_CLIENT");
-    User client = new User(username, password, null, eik, role);
->>>>>>> branch-ivelin
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 session.save(client);
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
+        role.setId(2);
+        role.setName("USER");
+        User client = new User(username, password, "" + (users.get(users.size() - 1).getId()), eik, role);
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            session.save(client);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
-  }
-  
-  @Override
-  public void createAdministrator(String username, String password, String email) {
-    Role role = new Role();
-    role.setId(1);
-    role.setName("ROLE_USER");
-    User user = new User(username, password, email, null, role);
-    try (Session session = factory.openSession()) {
-	 session.beginTransaction();
-	 session.save(user);
-	 session.getTransaction().commit();
-    } catch (Exception ex) {
-	 System.out.println(ex.getMessage());
+
+    @Override
+    public void createAdministrator(String username, String password, String email) {
+        Role role = new Role();
+        role.setId(1);
+        role.setName("ROLE_USER");
+        User user = new User(username, password, email, null, role);
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            session.save(user);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
-  }
-  
+
 }
+

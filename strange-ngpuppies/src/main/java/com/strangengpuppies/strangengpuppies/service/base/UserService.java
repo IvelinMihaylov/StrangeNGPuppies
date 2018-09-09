@@ -12,14 +12,9 @@ public interface UserService {
   void updateUserById(int id, String username, String password, String eik, String email);
   
   void deleteUserById(int id);
-<<<<<<< HEAD
+
   void createClient(String username,String password,String eik);
   void createAdministrator(String username,String password,String email);
   List<User> listAllBanks();
-=======
-  
-  void createClient(String username, String password, String eik);
-  
-  void createAdministrator(String username, String password, String email);
->>>>>>> branch-ivelin
+
 }

@@ -21,22 +21,21 @@ import java.util.List;
 @RestController
 @RequestMapping ( value = "api/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestController {
-  
-  
+
+
   private final UserService service;
   private final UserDao userDao;
-  
+
   @Autowired
   public UserRestController(UserService service, UserDao userDao) {
     this.service = service;
     this.userDao = userDao;
   }
-  
-  @GetMapping ("/listAll")
+
+  @GetMapping("/listAll")
   public List<User> getAll() {
     return service.listAll();
   }
-<<<<<<< HEAD:strange-ngpuppies/src/main/java/com/strangengpuppies/strangengpuppies/web/RestContrllers/UserRestController.java
 
   @GetMapping("/listAllBanks")
   public List<User> listAllBanks() {
@@ -45,42 +44,34 @@ public class UserRestController {
 
   @GetMapping("/getUserByUsername/{username}")
   public User getUserByUsername(@PathVariable String username) {
-      return userDao.findUserByUsername(username);
+    return userDao.findUserByUsername(username);
   }
 
-=======
-  
-  @GetMapping ("/getByID/{id}")
-  public User getByID(@PathVariable ("id") String id) {
+  @GetMapping("/getByID/{id}")
+  public User getByID(@PathVariable("id") String id) {
     return service.getUserById(Integer.parseInt(id));
   }
-  
->>>>>>> branch-ivelin:strange-ngpuppies/src/main/java/com/strangengpuppies/strangengpuppies/web/RestControllers/UserRestController.java
-  @PostMapping (value = "/updateUser", headers = "Accept=application/json")
+
+  @PostMapping(value = "/updateUser", headers = "Accept=application/json")
   public void updateUser(@ModelAttribute("command") FormCommand command, HttpServletResponse response) {
     service.updateUserById(Integer.parseInt(command.getEgn()), command.getUsernameField(), command.getPasswordField(), command.getEIK(), command.getEmailField());
   }
-  
-  @PostMapping (value = "/deleteUser/{id}", headers = "Accept=application/json")
-  public void updateUser(@PathVariable ("id") String id) {
+
+  @PostMapping(value = "/deleteUser/{id}", headers = "Accept=application/json")
+  public void updateUser(@PathVariable("id") String id) {
     service.deleteUserById(Integer.parseInt(id));
   }
-  
-  @GetMapping (value = "/createClient")
+
+  @PostMapping(value = "/createClient")
   public void createClient(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
-      service.createClient(command.getUsernameField(), command.getPasswordField(), command.getEIK());
-      response.sendRedirect("/admin");
+    service.createClient(command.getUsernameField(), command.getPasswordField(), command.getEIK());
+    response.sendRedirect("/admin");
   }
-  
-<<<<<<< HEAD:strange-ngpuppies/src/main/java/com/strangengpuppies/strangengpuppies/web/RestContrllers/UserRestController.java
-  @PostMapping (value = "/createAdministrator", headers = "Accept=application/json")
+
+  @PostMapping(value = "/createAdministrator", headers = "Accept=application/json")
   public void createAdministrator(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
     service.createAdministrator(command.getUsernameField(), command.getPasswordField(), command.getEmailField());
     response.sendRedirect("/admin");
-=======
-  @PostMapping (value = "/createAdministator", headers = "Accept=application/json")
-  public void createAdministrator(User admin) {
-    service.createAdministrator(admin.getUsername(), admin.getPassword(), admin.getEmail());
->>>>>>> branch-ivelin:strange-ngpuppies/src/main/java/com/strangengpuppies/strangengpuppies/web/RestControllers/UserRestController.java
+
   }
 }

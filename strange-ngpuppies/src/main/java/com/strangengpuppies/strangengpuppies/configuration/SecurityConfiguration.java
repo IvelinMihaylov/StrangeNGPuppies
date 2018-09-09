@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-<<<<<<< HEAD
+
     @Autowired
     @Qualifier("userDetailsService")
     private final UserDetailsService userDetailsService = new MyUserDetailsService();

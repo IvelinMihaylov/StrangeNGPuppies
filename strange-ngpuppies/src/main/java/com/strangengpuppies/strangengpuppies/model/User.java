@@ -2,12 +2,8 @@ package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-<<<<<<< HEAD
-
 import java.io.Serializable;
-=======
 import javax.validation.constraints.Size;
->>>>>>> branch-ivelin
 import java.util.List;
 
 
@@ -96,38 +92,34 @@ public class User implements Serializable {
   public void setEik(String eik) {
     this.eik = eik;
   }
-  
-<<<<<<< HEAD
+
   public void setRole(Role role) {
     this.role = role;
   }
 
 
-  public String getEmail() {
-    return email;
-=======
   public List<Subscriber> getSubscribers() {
     return subscribers;
   }
-  
+
   public void setSubscribers(List<Subscriber> subscribers) {
     this.subscribers = subscribers;
   }
-  
+
   public Role getRole() {
     return role;
->>>>>>> branch-ivelin
   }
-  
-  public void setRole(Role role) {
-    this.role = role;
-  }
-
-  public List<Subscriber> getSubscribers() {
-    return subscribers;
-  }
-
-  public void setSubscribers(List<Subscriber> subscribers) {
-    this.subscribers = subscribers;
-  }
+//>>>>>>> branch-ivelin
+//
+//  public void setRole(Role role) {
+//    this.role = role;
+//  }
+//
+//  public List<Subscriber> getSubscribers() {
+//    return subscribers;
+//  }
+//
+//  public void setSubscribers(List<Subscriber> subscribers) {
+//    this.subscribers = subscribers;
+//  }
 }

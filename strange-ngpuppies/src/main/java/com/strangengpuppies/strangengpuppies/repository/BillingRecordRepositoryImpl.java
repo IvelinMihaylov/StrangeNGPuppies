@@ -75,14 +75,9 @@ public class BillingRecordRepositoryImpl implements BillingRecordRepository {
   }
   
   @Override
-<<<<<<< HEAD
-  public void createBill(Service service, Subscriber subscriber, String startDate, String endDate, double amount, String currency) {
-    Bill bill = new Bill(service,subscriber,startDate,endDate,amount,currency);
-    bill.setStatus("waiting");
-=======
   public void createBill(Service service, Subscriber subscriber, LocalDate startDate, LocalDate endDate, double amount, String currency) {
     Bill bill = new Bill(service, subscriber, startDate, endDate, amount, currency);
->>>>>>> branch-ivelin
+    bill.setStatus("waiting");
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
 	 session.saveOrUpdate(bill);
