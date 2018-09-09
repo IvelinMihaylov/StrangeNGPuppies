@@ -76,16 +76,16 @@
                             </div>
                             <div class="table-container">
                                 <table class="table table-filter">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Service Name</th>
-                                            <th scope="col">Star Date</th>
-                                            <th scope="col">End Date</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col">Currency</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
-                                    </thead>
+                                        <thead>
+                                                <tr>
+                                                    <th scope="col">Service Name</th>
+                                                    <th scope="col">Star Date</th>
+                                                    <th scope="col">End Date</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Currency</th>
+                                                    <th scope="col">Status</th>
+                                                </tr>
+                                        </thead>
                                     <tbody>
                                         <tr data-status="success" th:each="bill : ${bills}">
                                             <td th:text="${bill.service.name} ">TV extra</td>
