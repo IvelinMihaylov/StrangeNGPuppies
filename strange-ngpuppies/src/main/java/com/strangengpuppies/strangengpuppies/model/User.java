@@ -2,11 +2,14 @@ package com.strangengpuppies.strangengpuppies.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.io.Serializable;
 import java.util.List;
+
 
 @Entity
 @Table (name = "users")
-public class User {
+public class User implements Serializable {
   @Id
   @GeneratedValue (strategy = GenerationType.IDENTITY)
   @Column (name = "userID")
@@ -27,11 +30,11 @@ public class User {
   private String eik;
   
   
-  @ManyToOne (cascade = CascadeType.ALL)
+  @ManyToOne (cascade = CascadeType.MERGE)
   @JoinColumn (name = "roleID")
   private Role role;
   
-  @OneToMany (cascade = CascadeType.ALL,
+  @OneToMany (cascade = CascadeType.MERGE,
 		fetch = FetchType.EAGER,
 		mappedBy = "bank")
   private List<Subscriber> subscribers;
@@ -87,14 +90,6 @@ public class User {
     this.role = role;
   }
 
-  public List<Subscriber> getSubscribers() {
-    return subscribers;
-  }
-
-  public void setSubscribers(List<Subscriber> subscribers) {
-    this.subscribers = subscribers;
-  }
-
 
   public String getEmail() {
     return email;
@@ -102,5 +97,13 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public List<Subscriber> getSubscribers() {
+    return subscribers;
+  }
+
+  public void setSubscribers(List<Subscriber> subscribers) {
+    this.subscribers = subscribers;
   }
 }

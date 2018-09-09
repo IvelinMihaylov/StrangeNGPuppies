@@ -1,17 +1,17 @@
 package com.strangengpuppies.strangengpuppies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "subscribers")
-public class Subscriber {
+public class Subscriber implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "subscriberID")
-    private int id;
-
     @NotNull
     @Column(name = "phonenumber")
     private String phoneNumber;
@@ -28,11 +28,11 @@ public class Subscriber {
     @Column(name = "EGN")
     private String egn;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "bankID")
     private User bank;
     
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(cascade = CascadeType.MERGE,
     fetch = FetchType.EAGER,
     mappedBy = "subscriber")
     private List<Bill> bills;
@@ -47,13 +47,9 @@ public class Subscriber {
         this.lastName = lastName;
         this.egn = egn;
         this.bank = bank;
-        this.bills = bills;
+        this.bills = new ArrayList<>();
     }
 
-    public User getBank() {
-        return bank;
-    }
-    
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -85,14 +81,6 @@ public class Subscriber {
     public void setEgn(String egn) {
         this.egn = egn;
     }
-    
-//    public User getBank() {
-//        return bank;
-//    }
-//
-    public void setBank(User bank) {
-        this.bank = bank;
-    }
 
     public List<Bill> getBills() {
         return bills;
@@ -102,11 +90,14 @@ public class Subscriber {
         this.bills = bills;
     }
 
-    public int getId() {
-        return id;
+    @JsonIgnore
+    public User getBank() {
+        return bank;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBank(User bank) {
+        this.bank = bank;
     }
+
+    public User totalyNotGetBank(){ return bank;}
 }

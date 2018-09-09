@@ -58,4 +58,9 @@ public class UserServiceImpl implements UserService {
   public void createAdministrator(String username, String password, String email) {
     userRepository.createAdministrator(username, password, email);
   }
+
+  @Override
+  public List<User> listAllBanks() {
+    return userRepository.listAllBanks();
+  }
 }

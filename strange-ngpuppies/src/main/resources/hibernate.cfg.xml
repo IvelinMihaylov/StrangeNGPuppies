@@ -13,7 +13,7 @@
         </property>
 
         <property name = "hibernate.connection.url">
-            jdbc:mysql://localhost:3306/drstrange-ngpuppies
+            jdbc:mysql://localhost:3306/ngpuppies
         </property>
 
         <property name = "hibernate.connection.username">

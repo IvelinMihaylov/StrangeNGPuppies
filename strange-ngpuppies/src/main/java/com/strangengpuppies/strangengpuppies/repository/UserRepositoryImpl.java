@@ -33,6 +33,20 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return users;
     }
+    @Override
+    public List<User> listAllBanks() {
+        List<User> users = new ArrayList<>();
+        try(Session session = factory.openSession()){
+            session.beginTransaction();
+            users = session.createQuery("from User u where u.role.id = :roleID", User.class)
+                    .setParameter("roleID", 2)
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return users;
+    }
   
   @Override
   public User getUserById(int id) {
@@ -74,10 +88,11 @@ public class UserRepositoryImpl implements UserRepository {
   
   @Override
   public void createClient(String username, String password, String eik) {
-    Role role = new Role();
+        List<User> users = new ArrayList<>(listAll());
+        Role role = new Role();
     role.setId(2);
     role.setName("USER");
-    User client = new User(username, password, "", eik, role);
+    User client = new User(username, password, ""+(users.get(users.size() - 1).getId()), eik, role);
     try (Session session = factory.openSession()) {
 	 session.beginTransaction();
 	 session.save(client);

@@ -1,5 +1,6 @@
 package com.strangengpuppies.strangengpuppies.configuration;
 
+import com.strangengpuppies.strangengpuppies.configuration.UrlHandler.MySimpleUrlAuthenticationSuccessHandler;
 import com.strangengpuppies.strangengpuppies.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +23,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailsService")
     private final UserDetailsService userDetailsService = new MyUserDetailsService();
 
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new MySimpleUrlAuthenticationSuccessHandler();
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -44,14 +50,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("../static/**").permitAll()
-                .antMatchers("/js/**").permitAll()
-                .antMatchers("/").hasRole("USER")
-                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/resources/static/css/**").permitAll()
+                .antMatchers( "/", "/home", "/subscribers", "/billsHistory", "/payBills/**", "/paybillsform", "/payBillsResult").hasRole("USER")
+                .antMatchers("/admin", "/createClient", "/createAdmin",
+                        "/createSubscriber", "/createBill").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticateUser")
+                .successHandler(myAuthenticationSuccessHandler())
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll()

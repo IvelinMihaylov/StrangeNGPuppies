@@ -1,12 +1,15 @@
 package com.strangengpuppies.strangengpuppies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "services")
-public class Service {
+public class Service implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "serviceID")
@@ -19,6 +22,7 @@ public class Service {
     @OneToMany(cascade = CascadeType.ALL,
     fetch = FetchType.EAGER,
     mappedBy = "service")
+    @JsonIgnore
     private List<Bill> bills;
 
     public Service() {
@@ -44,12 +48,13 @@ public class Service {
     public void setName(String name) {
         this.name = name;
     }
-    
-//    public List<Bill> getBills() {
-//        return bills;
-//    }
-//
-//    public void setBills(List<Bill> bills) {
-//        this.bills = bills;
-//    }
+
+    public List<Bill> getBills() {
+        return bills;
+    }
+
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
+    }
+
 }

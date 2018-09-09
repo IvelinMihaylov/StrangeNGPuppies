@@ -1,22 +1,24 @@
 package com.strangengpuppies.strangengpuppies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAmount;
 
 @Entity
 @Table(name = "bills")
-public class Bill {
+public class Bill implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "billID")
     private int id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "serviceID")
     private Service service;
 
@@ -25,12 +27,12 @@ public class Bill {
     @JoinColumn(name = "subscriberID")
     private Subscriber subscriber;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     @Column(name = "startdate")
     private String startDate;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     @Column(name = "enddate")
     private String endDate;
@@ -55,9 +57,6 @@ public class Bill {
         this.currency = currency;
     }
 
-    @Column(name = "paymentdate")
-    private String paymentDate;
-
     public Bill() {
     }
 
@@ -77,7 +76,7 @@ public class Bill {
     public void setService(Service service) {
         this.service = service;
     }
-
+    @JsonIgnore
     public Subscriber getSubscriber() {
         return subscriber;
     }
@@ -92,14 +91,6 @@ public class Bill {
 
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public String getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(String paymentDate) {
-        this.paymentDate = paymentDate;
     }
 
     public String getStatus() {

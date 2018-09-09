@@ -7,11 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Portal</title>
-
+    <title>Bills History</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -31,8 +30,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/home">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="/billsHistory">History</a></li>
+                <li><a href="/">Home <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/billsHistory">History</a></li>
                 <li><a href="/subscribers">Subscribers</a></li>
             </ul>
 
@@ -47,15 +46,27 @@
         </div><!-- /.container-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<div class="container-fluid table-resposive">
+    <table class="table">
 
-<div>
-    User:
-    <th:block sec:authentication="name"/>
-    <br/>
-    Role(s):
-    <span sec:authorize="hasRole('ROLE_USER')">USER</span>
+        <thead>
+        <tr>
+            <th scope="col">Service</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bill : ${bills}">
+            <td th:text="${bill.service.name} "></td>
+            <td th:text="${bill.amount}"></td>
+            <td th:text="${bill.currency}"></td>
+            <td th:text="${bill.status}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-
 <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

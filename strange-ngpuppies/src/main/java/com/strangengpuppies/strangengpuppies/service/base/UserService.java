@@ -10,4 +10,5 @@ public interface UserService {
   void deleteUserById(int id);
   void createClient(String username,String password,String eik);
   void createAdministrator(String username,String password,String email);
+  List<User> listAllBanks();
 }

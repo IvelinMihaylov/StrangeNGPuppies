@@ -1,20 +1,28 @@
 package com.strangengpuppies.strangengpuppies.web.RestContrllers;
 
 import com.strangengpuppies.strangengpuppies.model.Subscriber;
+import com.strangengpuppies.strangengpuppies.model.User;
+import com.strangengpuppies.strangengpuppies.model.formControl.FormCommand;
 import com.strangengpuppies.strangengpuppies.service.base.SubscriberService;
+import com.strangengpuppies.strangengpuppies.service.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping ("api/subscriber")
+@RequestMapping (value = "api/subscriber", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SubscriberRestController {
-  
+
+  private final UserService userService;
   private final SubscriberService service;
   
   @Autowired
-  public SubscriberRestController(SubscriberService service) {
+  public SubscriberRestController(UserService userService, SubscriberService service) {
+    this.userService = userService;
     this.service = service;
   }
   
@@ -39,8 +47,12 @@ public class SubscriberRestController {
   }
   
   @PostMapping ("/create")
-  public void createSubscriber(Subscriber subscriber) {
-  service.createSubscriber(subscriber.getPhoneNumber(),subscriber.getFirstName(),subscriber.getLastName(),subscriber.getEgn());
+  public void createSubscriber(@ModelAttribute("command") FormCommand command, HttpServletResponse response) throws IOException {
+    int id = Integer.parseInt(command.getDropdownSelectedValue());
+    User bank = userService.listAllBanks().stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+
+    service.createSubscriber(command.getPhonenumber(),command.getFirstName(),command.getLastName(),command.getEgn(), bank);
+    response.sendRedirect("/admin");
   }
   
   @PostMapping ("/update")
